@@ -1,16 +1,16 @@
 ---
 name: Issue Task Card
 about: Issue Task Card
-title: "[Task] 이슈카드 제목 설정하기"
+title: "[Group] [시간] : 작업내용 "
 labels: ''
 assignees: ''
 
 ---
 
 ### ISSUE
-- Group:  `client`, `server`, `sr`
-- Type: `bug`, `feature`, `delete`
-- Detail: fix actions from client redux
+- Group:  클라이언트, 서버
+- Type:  버그수정, 기능추가, 기능보완, 기능 삭제, 리팩토링
+- Detail: 로그인 화면 구현
 
 ### TODO
 1. [ ] Job1
@@ -25,9 +25,3 @@ assignees: ''
 ### `2h`
 ### `2.5h`
 ### `3h`
-
-### Labels
-- Estimated time: `E: 1h`
-- Group : `client`, `server`
-- Sprint: `Sprint__NUMBER__`
-- Urgency: `High`, `Middle`, `Low`
