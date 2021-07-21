@@ -1,31 +1,24 @@
-import React from 'react';
-import Nav from './components/Nav';
-import Ranking from './components/Ranking';
-import Profile from './components/Profile';
-import GameStart from './pages/GameStart';
-import Game from './components/Game';
+import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Nav />
-      <Switch>
-        <Route path="/gamestart">
-          <GameStart />
-        </Route>
-        <Route path="/ranking">
-          <Ranking />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
-        <Route path="/game">
-          <Game />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 }
 
