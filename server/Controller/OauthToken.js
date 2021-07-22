@@ -4,5 +4,3 @@ module.exports = {
       return res.status(200).send('i"m oauth');
     }
   };
-
-  // push를 위한 문구입니다.
