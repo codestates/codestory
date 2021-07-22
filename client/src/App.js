@@ -4,6 +4,7 @@ import Ranking from './components/Ranking';
 import Profile from './components/Profile';
 import GameStart from './pages/GameStart';
 import Game from './components/Game';
+import Login from './components/Login';
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -12,6 +13,9 @@ function App() {
     <BrowserRouter>
       <Nav />
       <Switch>
+        <Route exact={true} path="/">
+          <Login />
+        </Route>
         <Route path="/gamestart">
           <GameStart />
         </Route>
