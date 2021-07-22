@@ -10,7 +10,7 @@ app.use(
   cors({
     origin: true,
     credentials: true,
-    methods: ["GET", "POST", "PATCH","DELETE"],
+    methods: ["GET", "POST", "PATCH","DELETE","PUT"],
   })
 );
 
@@ -22,7 +22,7 @@ const signInRouter = require('./Router/SignInRouter');
 const signOutRouter = require('./Router/SignOutRouter');
 const signUpRouter= require('./Router/SignUpRouter')
 const userInfoRouter=require('./Router/UserInfoRouter');
-const HTTPS_PORT = process.env.HTTPS_PORT || 80;
+const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
 app.use('/follow', followRouter);
 app.use('/game', gameRouter);

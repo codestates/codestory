@@ -32,18 +32,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'follower_followeds',
   });
-
-  follower_followeds.associate = function(models) {
-    // associations can be defined here
-    url.belongsTo(models.users, {
-      foreignKey: 'followerId',
-    });
-
-    url.belongsTo(models.users, {
-      foreignKey: 'followedId',
-    });
-  };
-
   
   return follower_followeds;
 };
