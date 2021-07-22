@@ -5,7 +5,7 @@ function Nav() {
   return (
     <div id="nav-container">
       <span id="title">
-        <span id="name">Code Story</span>
+        {/* <span id="name">Code Story</span> */}
       </span>
       <div id="menu">
         <div className="btn">
