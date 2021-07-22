@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   scripts.init({
     stage: DataTypes.STRING,
     content: DataTypes.STRING,
-    answer: DataTypes.STRING
+    answer: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'scripts',

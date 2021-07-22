@@ -17,19 +17,11 @@ module.exports = (sequelize, DataTypes) => {
     pictureurl: DataTypes.STRING,
     userId: DataTypes.STRING,
     password: DataTypes.STRING,
-    coin: DataTypes.INTEGER
+    coin: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'users',
   });
-  users.associate=function (models){
-    users.hasMany(models.follower_followeds,{
-      foreignKey : 'followerId'
-    })
-    users.hasMany(models.follower_followeds,{
-      foreignKey : 'followedId'
-    })
-  }
 
   return users;
 };
