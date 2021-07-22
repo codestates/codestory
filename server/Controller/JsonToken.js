@@ -3,7 +3,7 @@ const { sign, verify } = require('jsonwebtoken');
 
 module.exports = {
   generateAccessToken: (data) => {
-    return sign(data, process.env.ACCESS_SECRET, { expiresIn: "400s" });
+    return sign(data, process.env.ACCESS_SECRET, { expiresIn: "3600s" });
   },
   sendAccessToken: (res, accessToken) => {
     // TODO: JWT 토큰을 쿠키로 전달합니다.
