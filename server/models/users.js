@@ -22,14 +22,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'users',
   });
-  users.associate=function (models){
-    users.hasMany(models.follower_followeds,{
-      foreignKey : 'followerId'
-    })
-    users.hasMany(models.follower_followeds,{
-      foreignKey : 'followedId'
-    })
-  }
-
   return users;
 };
