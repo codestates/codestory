@@ -22,7 +22,7 @@ const signInRouter = require('./Router/SignInRouter');
 const signOutRouter = require('./Router/SignOutRouter');
 const signUpRouter= require('./Router/SignUpRouter')
 const userInfoRouter=require('./Router/UserInfoRouter');
-const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
+const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 
 app.use('/follow', followRouter);
 app.use('/game', gameRouter);
