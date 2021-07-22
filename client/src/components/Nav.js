@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Nav() {
+function Nav( isLogin ) {
+
   return (
     <div id="nav-container">
       <span id="title">
@@ -15,7 +16,11 @@ function Nav() {
           <Link to="/ranking">랭킹</Link>
         </div>
         <div className="btn">
-          <Link to="/profile">프로필</Link>
+          { isLogin.props ? (
+            <Link to="/profile">프로필</Link>
+          ) : (
+            <Link to="/login">로그인</Link>
+          )}
         </div>
       </div>
     </div>
