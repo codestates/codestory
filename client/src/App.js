@@ -12,6 +12,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  const [oauthToken, setOauthToken]= useState('');
+  console.log(oauthToken);
 
   const loginClick = () => {
     setIsLogin(true);
@@ -25,7 +27,7 @@ function App() {
           <Landing />
         </Route>
         <Route path="/login">
-          <Login props={()=>loginClick()}/>
+          <Login loginClick={loginClick} setOauthToken={setOauthToken}/>
         </Route>
         <Route path="/gamestart">
           <GameStart />

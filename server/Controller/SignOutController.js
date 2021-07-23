@@ -1,4 +1,4 @@
-const {isAuthorizedJwt,generateAccessToken,sendAccessToken} = require('./JsonToken');
+const {isAuthorizedJwt} = require('./JsonToken');
 
 module.exports = {
   signOut: async (req, res) => {

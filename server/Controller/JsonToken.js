@@ -17,7 +17,7 @@ module.exports = {
       try {
         return verify(jwt, process.env.ACCESS_SECRET);
       } catch (err) {
-        return res.status(500).json({"message":"Sorry Can't process your request"});
+        return null
       }
     }
   }
