@@ -51,6 +51,7 @@ module.exports = {
     }
     catch (error) {
       res.status(500).send({ message: 'Sorry Can\'t process your request' });
+      throw error;
     }
   },
   updateWord: async (req, res) => {
