@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import WOW from 'wowjs';
 import Login from '../components/Login';
+import '../css/landing.css';
 
 function Landing({loginClick,newOauthLocation}) {
   const [isClick, setIsClick] = useState(false);

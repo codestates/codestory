@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // import axios from 'axios';
 import '../css/ranking.css';
 
@@ -23,6 +24,9 @@ function Ranking() {
               <img id="second" src="profile-img.png" alt="2등" />
               <img id="first" src="profile-img.png" alt="1등" />
               <img id="third" src="profile-img.png" alt="3등" />
+              <Link to="/game">
+                <div id="followinglist-out-btn">&times;</div>
+              </Link>
             </div>
             <div className="ranking-mvp-number">
               <span id="number1">1</span>
