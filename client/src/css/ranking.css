@@ -1,0 +1,175 @@
+body {
+	box-sizing: border-box;
+}
+
+#crown {
+	z-index: 20;
+	margin-bottom: -29px;
+	width: 200px;
+}
+
+#ranking-background {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 73vh;
+}
+
+#ranking-container {
+	display: flex;
+	justify-content: center;
+	background-color: #fccb03;
+	max-width: 500px;
+	min-width: 320px;
+	width: 50%;
+	border-radius: 3rem;
+	padding: 40px
+}
+
+.ranking-podium {
+	margin-bottom: 10px;
+}
+
+.ranking-mvp {
+	display: flex;
+	justify-content: space-around;
+	position: relative;
+}
+
+.ranking-mvp-number {
+	position: relative;
+}
+
+.no1,
+.no2,
+.no3 {
+	position: absolute;
+}
+
+.no1 {
+	left: 32%;
+	top: -15%;
+}
+
+.no2 {
+	left: -3%;
+	top: 30%;
+}
+
+.no3 {
+	left: 65.5%;
+	top: 30%;
+}
+
+#first,
+#second,
+#third {
+	position: relative;
+	z-index: 99;
+}
+
+#first {
+	width: 25%;
+	height: 25%;
+	top: 13px;
+}
+
+#second,
+#third {
+	width: 20%;
+	height: 20%;
+	top: 70px;
+}
+
+.btn1,
+.btn2,
+.btn3 {
+	position: absolute;
+}
+
+.btn1 {
+	left: 40.5%;
+	top: 45%
+}
+
+.btn2 {
+	left: 6.5%;
+	top: 67%;
+}
+
+.btn3 {
+	left: 76.5%;
+	top: 67%;
+}
+#number1,
+#number2,
+#number3 {
+	position: absolute;
+	font-size: 1.2rem;
+	font-weight: 700;
+	color: black;
+}
+
+#number1 {
+	left: 47%;
+	top: 25%;
+}
+
+#number2 {
+	left: 13%;
+	top: 50%;
+}
+
+#number3 {
+	left: 83%;
+	top: 50%;
+}
+
+
+#podium {
+	width: 100%;
+}
+
+
+/* list */
+
+#userlist-container {
+	background-color: white;
+	padding: 5px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid black;
+}
+
+.userlist-number {
+	color: black;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.userlist-username {
+	color:black;
+	margin-left: 35px;
+	font-size: 20px;
+	font-weight: 400;
+}
+
+.userlist-follow-btn {
+	background-color: black;
+	color: white;
+	font-weight: 700;
+	border: 2px solid black;
+	border-radius: 3rem;
+	padding: 7px 14px;
+	transition: all 150ms ease-in;
+
+}
+
+.userlist-follow-btn:hover {
+	background-color: #fccb03;
+	color: black;
+	border: 2px solid black
+}
+

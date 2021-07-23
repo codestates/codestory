@@ -10,6 +10,7 @@ function Login(loginClick) {
   const url = new URL(window.location.href);
   const authorizationCode = url.searchParams.get('code');
 
+
   useEffect(()=>{
     console.log(authorizationCode, oauthLocation);
     // const oauthAccessToken=getAccessToken(authorizationCode);
