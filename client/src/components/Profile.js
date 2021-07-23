@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../css/profile.css';
 // import axios from 'axios';
 
 function Profile() {
