@@ -23,5 +23,17 @@ module.exports = {
         res.status(500).json({"message":"sorry Can't process your request"});
       }
     }  
+  },
+  sendUserInfo: async (req, res) => {
+    //sendUserInfo 함수를 채워주세요
+    return res.status(200).send('/user userInfo 라우팅완료');
+  },
+  updateWord: async (req, res) => {
+    //updateWord 함수를 채워주세요
+    return res.status(200).send('/user updateWord 라우팅완료');
+  },
+  unRegister: async (req,res)=>{
+    //unRegister함수를 채워주세요
+    return res.status(200).send('/user unRegister 라우팅완료')
   }
-}
+};
