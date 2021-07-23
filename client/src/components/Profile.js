@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/profile.css';
+import FollowingList from './FollowingList';
 // import axios from 'axios';
 
 function Profile() {
   const [img, setImage] = useState(null);
   const [editmode, setEditmode] = useState(false);
   const [word, setWord] = useState('나의 한 마디');
+  const [showfollow, setfollow] = useState(false);
 
   const onChange = async (e) => {
     setImage(e.target.files[0]);
@@ -30,55 +32,63 @@ function Profile() {
     }
   };
 
+  const showFollowingList = () => {
+    setfollow(true);
+  };
+
   return (
-    <div id="profile-background">
-      <div id="profile-container">
-        <div id="profile-out-btn">
-          <Link to="/game">&times;</Link>
-        </div>
-        <div id="profile-wrapper">
-          <input id="profile-img" type="image" src="profile-img.png" onChange={(e)=>onChange(e)}></input>
-          { editmode ? (
-            <div id="profile-word-edit">
-              <input id="profile-word-input" onChange={(e)=>updateWord(e)}></input>
-              <a id="profile-word-btn" onClick={()=>closeEditMode()}>입력</a>
+    <>
+      { showfollow ? <FollowingList /> :
+        <div id="profile-background">
+          <div id="profile-container">
+            <div id="profile-out-btn">
+              <Link to="/game">&times;</Link>
             </div>
-          ) : (
-            <div id="profile-word">
-              {word}
-              <a id="profile-word-btn" onClick={()=>openEditMode()}>수정</a>
-            </div>
-          )}
-          <div id="profile-info">
-            <div id="profile-follower">
-              <img className="profile-icon-img" src="icon-follower.png" alt="follower"/>
-                팔로워
-              <div id="profile-follower-info">
-                10 명
-              </div>
-                팔로잉
-              <div id="profile-following-info">
-                3 명
-              </div>
-            </div>
-            <div id="profile-coin">
-              <img className="profile-icon-img" src="icon-coin.png" alt="coin"/>
-                코인
-              <div id="profile-coin-info">
-                100
-              </div>
-            </div>
-            <div id="profile-ranking">
-              <img className="profile-icon-img" src="icon-ranking.png" alt="ranking"/>
-                랭킹
-              <div id="profile-ranking-info">
-                1 등
+            <div id="profile-wrapper">
+              <input id="profile-img" type="image" src="profile-img.png" onChange={(e)=>onChange(e)}></input>
+              { editmode ? (
+                <div id="profile-word-edit">
+                  <input id="profile-word-input" onChange={(e)=>updateWord(e)}></input>
+                  <a id="profile-word-btn" onClick={()=>closeEditMode()}>입력</a>
+                </div>
+              ) : (
+                <div id="profile-word">
+                  {word}
+                  <a id="profile-word-btn" onClick={()=>openEditMode()}>수정</a>
+                </div>
+              )} 
+              <div id="profile-info">
+                <div id="profile-follower">
+                  <img className="profile-icon-img" src="icon-follower.png" alt="follower"/>
+                    팔로워
+                  <div id="profile-follower-info">
+                    10 명
+                  </div>
+                    팔로잉
+                  <div id="profile-following-info" onClick={()=>showFollowingList()}>
+                    3 명
+                  </div>
+                </div>
+                <div id="profile-coin">
+                  <img className="profile-icon-img" src="icon-coin.png" alt="coin"/>
+                    코인
+                  <div id="profile-coin-info">
+                    100
+                  </div>
+                </div>
+                <div id="profile-ranking">
+                  <img className="profile-icon-img" src="icon-ranking.png" alt="ranking"/>
+                    랭킹
+                  <div id="profile-ranking-info">
+                    1 등
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      }
+    </>
   );
 }
 

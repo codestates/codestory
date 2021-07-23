@@ -20,9 +20,7 @@ body {
 
 #followinglist-container {
 	background-color: #fccb03;
-	max-width: 500px;
-	min-width: 320px;
-	width: 50%;
+	width: 28rem;
 	border-radius: 3rem;
 	padding: 40px
 }
