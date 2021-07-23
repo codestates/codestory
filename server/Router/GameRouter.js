@@ -3,7 +3,7 @@ const exress = require('express');
 const router = exress.Router();
 
 router.post('/answer',checkAnswer);
-router.put('/coin_update',updateCoin);
+router.patch('/coin',updateCoin);
 
 
 module.exports = router;

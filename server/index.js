@@ -15,22 +15,20 @@ app.use(
 );
 
 
-const followRouter = require('./Router/FollowRouter');
+const followerRouter = require('./Router/FollowerRouter');
 const gameRouter = require('./Router/GameRouter');
 const rankingRouter = require('./Router/RankingRouter');
 const signInRouter = require('./Router/SignInRouter');
 const signOutRouter = require('./Router/SignOutRouter');
-const signUpRouter= require('./Router/SignUpRouter');
-const userInfoRouter=require('./Router/UserInfoRouter');
-const HTTPS_PORT = process.env.HTTPS_PORT || 80;
+const userRouter=require('./Router/UserRouter');
+const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
-app.use('/follow', followRouter);
+app.use('/follower', followerRouter);
 app.use('/game', gameRouter);
 app.use('/ranking', rankingRouter);
 app.use('/signin', signInRouter);
 app.use('/signout', signOutRouter);
-app.use('/signup', signUpRouter);
-app.use('/userinfo',  userInfoRouter);
+app.use('/user',  userRouter);
 app.get('/',(req,res)=>{
   res.json('Hello World!');
 });
