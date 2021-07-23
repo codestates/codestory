@@ -8,13 +8,13 @@ function Login({loginClick,newOauthLocation}) {
   const redirectUri='http://localhost:3000/gamestart';
   const kakaoLoginUrl = `https://Kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${redirectUri}&response_type=code`;
   console.log(newOauthLocation);
-
+  function newLocation(location){
+    newOauthLocation(location);
+  }
   const kakaoLoginHandler= async ()=>{
-    function newLocation(location){
-      newOauthLocation(location);
-    }
-    newLocation('hello');
-    window.location.assign(kakaoLoginUrl);
+    
+    await newLocation('hello');
+    await window.location.assign(kakaoLoginUrl);
   };
   
 
@@ -42,7 +42,7 @@ function Login({loginClick,newOauthLocation}) {
               <input id="login-input-password" placeholder="비밀번호"></input>
               <p id="login-valid">비밀번호를 입력해 주세요</p>
               <button id="login-btn">
-                <Link to="/gamestart" onClick={()=>loginClick();}>로그인</Link>
+                <Link to="/gamestart" onClick={()=>loginClick()}>로그인</Link>
               </button>
               <div id="login-social">
                 <a className="login-social-btn" onClick={kakaoLoginHandler}>
