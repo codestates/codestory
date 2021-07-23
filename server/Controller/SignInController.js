@@ -12,7 +12,7 @@ module.exports = {
       else {
         delete userInfo.dataValues.password;
         const accessToken = jwt.sign(userInfo.dataValues, process.env.ACCESS_SECRET, { expiresIn: '1 day' });
-        res.cookie('accessToken', accessToken, { sameSite: 'none', secure: true, httpOnly: true });
+        res.cookie('jwtAccessToken', accessToken, { sameSite: 'none', secure: true, httpOnly: true });
         res.send({ message: 'ok' });
       }
     }
