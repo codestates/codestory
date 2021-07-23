@@ -4,7 +4,6 @@ import Ranking from './components/Ranking';
 import Profile from './components/Profile';
 import GameStart from './pages/GameStart';
 import Game from './components/Game';
-import Login from './components/Login';
 import Landing from './pages/Landing';
 import Footer from './components/Footer';
 import './App.css';
@@ -22,10 +21,8 @@ function App() {
       <Nav props={isLogin}/>
       <Switch>
         <Route exact={true} path="/">
-          <Landing />
-        </Route>
-        <Route path="/login">
-          <Login props={()=>loginClick()}/>
+          <Landing props={()=>loginClick()}/>
+          <Footer />
         </Route>
         <Route path="/gamestart">
           <GameStart />
@@ -40,7 +37,6 @@ function App() {
           <Game />
         </Route>
       </Switch>
-      <Footer />
     </BrowserRouter>
   );
 }
