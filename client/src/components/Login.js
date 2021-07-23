@@ -42,7 +42,7 @@ function Login({loginClick,newOauthLocation}) {
               <input id="login-input-password" placeholder="비밀번호"></input>
               <p id="login-valid">비밀번호를 입력해 주세요</p>
               <button id="login-btn">
-                <Link to="/gamestart" onClick={()=>loginClick();}>로그인</Link>
+                <Link to="/gamestart" onClick={()=>loginClick()}>로그인</Link>
               </button>
               <div id="login-social">
                 <a className="login-social-btn" onClick={kakaoLoginHandler}>
