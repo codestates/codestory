@@ -1,0 +1,79 @@
+body {
+	box-sizing: border-box;
+}
+
+#followinglist-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	text-align: center;
+	position: relative;
+	top: -10px;
+	padding-bottom: 20px;
+}
+
+#followinglist-background {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 90vh;
+}
+
+#followinglist-container {
+	background-color: #fccb03;
+	max-width: 500px;
+	min-width: 320px;
+	width: 50%;
+	border-radius: 3rem;
+	padding: 40px
+}
+
+.profile-picture {
+	width: 100px;
+}
+
+.followinglist-username {
+	font-size: 2rem;
+	padding : 40px;
+	position: relative;
+	top: -10px;
+}
+
+.followinglist-wrapper {
+	background-color: white;
+	padding: 5px;
+}
+
+.userlist-wrapper {
+	border-bottom: 1px solid black;
+	padding: 5px;
+}
+
+.followinglist-number {
+	padding-left: 5px;
+	color: black;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.followinglist-listname {
+	color:black;
+	position: relative;
+	left: 40px;
+	font-size: 20px;
+	font-weight: 400;
+}
+
+#followinglist-out-btn {
+	position: relative;
+	left: 93%;
+	margin-right: 1.5rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: #ffffff;
+  align-self: flex-end;
+  border-radius: 2rem;
+  text-align: center;
+  font-size: 40px;
+  line-height: 25px;
+  color: #232321;
+}
