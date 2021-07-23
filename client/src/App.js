@@ -13,10 +13,25 @@ import MobileError from './pages/MobileError';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  const [oauthToken, setOauthToken]= useState('초기토근');
+  const [oauthLocation, setOauthLocation]=useState('초기위치');
+
+  console.log(oauthToken);
+  console.log(oauthLocation);
+
+  const newOauthLocation=(location)=>{
+    setOauthLocation(location);
+  };
 
   const loginClick = () => {
     setIsLogin(true);
   };
+
+  const newOauthToken= (accessToken)=>{
+    setOauthToken(accessToken);
+  };
+
+
 
   return (
     <>
@@ -28,11 +43,11 @@ function App() {
           <Nav props={isLogin}/>
           <Switch>
             <Route exact={true} path="/">
-              <Landing props={()=>loginClick()}/>
+              <Landing loginClick={loginClick} newOauthLocation={newOauthLocation}/>
               <Footer />
             </Route>
             <Route path="/gamestart">
-              <GameStart />
+              <GameStart oauthLocation={oauthLocation} loginClick={loginClick} newOauthToken={newOauthToken} />
             </Route>
             <Route path="/ranking">
               <Ranking />

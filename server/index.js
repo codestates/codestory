@@ -12,7 +12,7 @@ app.use(
   cors({
     origin: true,
     credentials: true,
-    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   })
 );
 
@@ -23,6 +23,7 @@ const rankingRouter = require('./Router/RankingRouter');
 const signInRouter = require('./Router/SignInRouter');
 const signOutRouter = require('./Router/SignOutRouter');
 const userRouter=require('./Router/UserRouter');
+const oauthRouter=require('./Router/OauthRouter');
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 
 app.use('/follower', followerRouter);
@@ -31,6 +32,7 @@ app.use('/ranking', rankingRouter);
 app.use('/signin', signInRouter);
 app.use('/signout', signOutRouter);
 app.use('/user',  userRouter);
+app.use('/oauth', oauthRouter);
 app.get('/',(req,res)=>{
   res.json('Hello World!');
 });

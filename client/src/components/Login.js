@@ -3,7 +3,20 @@ import { Link } from 'react-router-dom';
 import SignUp from './SignUp';
 import '../css/login.css';
 
-function Login( loginClick ) {
+function Login({loginClick,newOauthLocation}) {
+  const kakaoClientId='ce992090812c730f2178949e1baac586';
+  const redirectUri='http://localhost:3000/gamestart';
+  const kakaoLoginUrl = `https://Kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${redirectUri}&response_type=code`;
+  console.log(newOauthLocation);
+
+  const kakaoLoginHandler= async ()=>{
+    function newLocation(location){
+      newOauthLocation(location);
+    }
+    newLocation('hello');
+    window.location.assign(kakaoLoginUrl);
+  };
+  
 
   const [isSignup, setIsSignup] = useState(false);
 
@@ -29,13 +42,13 @@ function Login( loginClick ) {
               <input id="login-input-password" placeholder="비밀번호"></input>
               <p id="login-valid">비밀번호를 입력해 주세요</p>
               <button id="login-btn">
-                <Link to="/gamestart" onClick={()=>loginClick.props()}>로그인</Link>
+                <Link to="/gamestart" onClick={()=>loginClick();}>로그인</Link>
               </button>
               <div id="login-social">
-                <a className="login-social-btn" href="">
+                <a className="login-social-btn" onClick={kakaoLoginHandler}>
                   <img className="login-social-image" src="login-google.png" alt="google"/>
                 </a>
-                <a className="login-social-btn" href="">
+                <a className="login-social-btn" href={kakaoLoginUrl}>
                   <img className="login-social-image" src="login-kakao.png" alt="kakao"/>
                 </a>
               </div>
