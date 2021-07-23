@@ -21,7 +21,7 @@ const rankingRouter = require('./Router/RankingRouter');
 const signInRouter = require('./Router/SignInRouter');
 const signOutRouter = require('./Router/SignOutRouter');
 const userRouter=require('./Router/UserRouter');
-const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
+const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 
 app.use('/follower', followerRouter);
 app.use('/game', gameRouter);
