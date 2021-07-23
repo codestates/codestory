@@ -1,7 +1,11 @@
+const {isAuthorizedJwt,generateAccessToken,sendAccessToken} = require('./JsonToken');
 
 module.exports = {
   signOut: async (req, res) => {
-    //signOut 함수를 채워주세요.
-    return res.status(200).send('/signOut 라우팅완료');
+    if(isAuthorizedJwt(req)){
+      res.cookie("jwtAccessToken","invalid Token").status(200).json({"message":"ok"});
+    }else{
+      res.status(400).json({"message":"InvalidToken"})
+    }
   }
-};
+}

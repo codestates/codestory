@@ -1,6 +1,24 @@
+require('dotenv').config();
+const { sign, verify } = require('jsonwebtoken');
+
 module.exports = {
-    jwtFunctionOne: async (req, res) => {
-      //jwtFunction 함수를 채워주세요. 함수명 변경할 수 있습니다.
-      return res.status(200).send('jwt');
+  generateAccessToken: (data) => {
+    return sign(data, process.env.ACCESS_SECRET, { expiresIn: "3600s" });
+  },
+  sendAccessToken: (res, accessToken) => {
+    res.cookie('jwtAccessToken',accessToken).status(200).json({message: "ok" });
+  },
+  isAuthorizedJwt: (req) => {
+    if(req.cookies){
+      const jwt = req.cookies.jwtAccessToken;
+      if (!jwt) {
+        return null;
+      }
+      try {
+        return verify(jwt, process.env.ACCESS_SECRET);
+      } catch (err) {
+        return res.status(500).json({"message":"Sorry Can't process your request"});
+      }
     }
-  };
+  }
+};
