@@ -326,6 +326,12 @@ a {
   line-height: 30px;
 }
 
+#profile-following-info:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
 #profile-coin {
   display: flex;
   align-items: center;

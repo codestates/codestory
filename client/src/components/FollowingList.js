@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../css/follow.css';
+import '../css/followinglist.css';
 
-function FollowList() {
+function FollowingList() {
 	
   return (
     <div id="followinglist-background">
       <div id="followinglist-container">
-        <div id="followinglist-out-btn">
-          <Link to="/game">&times;</Link>
-        </div>
+        <Link to="/game">
+          <div id="followinglist-out-btn">&times;</div>
+        </Link>
         <div id="followinglist-title">
           Following List
         </div>
@@ -49,4 +49,4 @@ function FollowList() {
   );
 }
 
-export default FollowList ;
+export default FollowingList ;
