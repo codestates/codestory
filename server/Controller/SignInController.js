@@ -1,7 +1,24 @@
-
+const jwt = require('jsonwebtoken');
+const db = require('../models');
 module.exports = {
   signIn: async (req, res) => {
-    //signIn 함수를 채워주세요.
-    return res.status(200).send('/signIn 라우팅완료');
+    try {
+      const userInfo = await db.users.findOne({
+        where: { userId: req.body.username, password: req.body.password }
+      });
+      if (!userInfo) {
+        res.status(400).send({ message: 'badrequest' });
+      }
+      else {
+        delete userInfo.dataValues.password;
+        const accessToken = jwt.sign(userInfo.dataValues, process.env.ACCESS_SECRET, { expiresIn: '1 day' });
+        res.cookie('accessToken', accessToken, { sameSite: 'none', secure: true, httpOnly: true });
+        res.send({ message: 'ok' });
+      }
+    }
+    catch (error) {
+      res.status(500).send({ message: 'Sorry Can\'t process your request' });
+      throw error;
+    }
   }
 };
