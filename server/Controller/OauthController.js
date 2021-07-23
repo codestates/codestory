@@ -14,11 +14,11 @@ module.exports = {
       throw error;
     }
   },
-  kakaoLogin: async(req,res) => {
+  oauthLogin: async(req,res) => {
     try {
         console.log(req.body);   
-        getKaKatoToken(req)
-        res.status(200).send("kako login 라우팅")
+        // getKaKatoToken(req)
+        res.status(200).json({"oauthAccessToken":"hi new token"})
     }
     catch (error) {
       res.status(500).send({ message: 'Sorry Can\'t process your request' });

@@ -1,36 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-// import axios from 'axios';
 
-function Login(loginClick) {
-  const [oauthLocation,setOauthLocation]=useState('kakao');
+function Login({loginClick,newOauthLocation}) {
   const kakaoClientId='ce992090812c730f2178949e1baac586';
-  const redirectUri='http://localhost:3000/login';
+  const redirectUri='http://localhost:3000/gamestart';
   const kakaoLoginUrl = `https://Kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${redirectUri}&response_type=code`;
-  const url = new URL(window.location.href);
-  const authorizationCode = url.searchParams.get('code');
+  console.log(newOauthLocation);
 
-
-  useEffect(()=>{
-    console.log(authorizationCode, oauthLocation);
-    // const oauthAccessToken=getAccessToken(authorizationCode);
-    if(authorizationCode){
-      window.location.assign('http://localhost:3000/gamestart');
+  const kakaoLoginHandler= async ()=>{
+    function newLocation(location){
+      newOauthLocation(location);
     }
-  });
-
-  function kakaoLoginHandler(){
-    setOauthLocation('kakao');
+    newLocation('hello');
     window.location.assign(kakaoLoginUrl);
-  }
-  // const getAccessToken = async (authorizationCode)=> {
-  //   // let res = await axios.post('http://localhost:4000/oauth', {authorizationCode: authorizationCode, oauthLocation: oauthLocation });
-  //   loginClick();
-  //   setOauthToken('hi, hello');
-  //   window.location.assign('http://localhost:3000/gamestart');
-  // };
+  };
+  
 
   return (
+    
     <div id="login-background">
       <object id="login-logo" type="image/svg+xml" data="logo.svg" aria-label="logo"></object>
       <div id="login-container">
@@ -40,12 +27,11 @@ function Login(loginClick) {
           <input id="login-input-password" placeholder="비밀번호"></input>
           <p id="login-valid">비밀번호를 입력해 주세요</p>
           <button id="login-btn">
-            <Link to="/gamestart" onClick={()=>loginClick.props()}>로그인</Link>
+            <Link to="/gamestart" onClick={()=>{loginClick();}}>로그인</Link>
           </button>
           <div id="login-social">
             <a className="login-social-btn" onClick={kakaoLoginHandler}>
               <img className="login-social-image" src="login-google.png" alt="google"/>
-              {authorizationCode}
             </a>
             <a className="login-social-btn" href={kakaoLoginUrl}>
               <img className="login-social-image" src="login-kakao.png" alt="kakao"/>

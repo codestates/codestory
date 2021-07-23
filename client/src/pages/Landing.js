@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import WOW from 'wowjs';
 import Login from '../components/Login';
 
-function Landing( loginClick ) {
-
+function Landing({loginClick,newOauthLocation}) {
   const [isClick, setIsClick] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [y, setY] = useState(null);
@@ -71,7 +70,7 @@ function Landing( loginClick ) {
         <span className="wow pulse">스토리로 배우는 코딩! CodeStory와 함께하세요</span>
       </div>
       <div id="landing-page-5"></div>
-      <Login props={()=>loginClick.props()}/>
+      <Login loginClick={loginClick} newOauthLocation={newOauthLocation}/>
     </div>
   );
 }

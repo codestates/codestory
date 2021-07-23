@@ -16,13 +16,8 @@ module.exports = {
       }
       try {
         return verify(jwt, process.env.ACCESS_SECRET);
-<<<<<<< HEAD
-      } catch (err) {
-        return null
-=======
       } catch {
         return null;
->>>>>>> 1ca8ca3233e20d4f7afeb9584cfb9d1918f1d0ba
       }
     }
   }
