@@ -1,6 +1,6 @@
 import React from 'react';
 // import axios from 'axios';
-// import '../css/ranking.css';
+import '../css/ranking.css';
 
 function Ranking() {
 
