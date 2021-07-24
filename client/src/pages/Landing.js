@@ -3,7 +3,7 @@ import WOW from 'wowjs';
 import Login from '../components/Login';
 import '../css/landing.css';
 
-function Landing({loginClick,newOauthLocation}) {
+function Landing({loginClick}) {
   const [isClick, setIsClick] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [y, setY] = useState(null);
@@ -73,6 +73,8 @@ function Landing({loginClick,newOauthLocation}) {
       <div id="landing-page-5">
         <Login loginClick={loginClick} newOauthLocation={newOauthLocation}/>
       </div>
+      <div id="landing-page-5"></div>
+      <Login loginClick={loginClick}/>
     </div>
   );
 }
