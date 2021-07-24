@@ -11,30 +11,26 @@ function Nav( isLogin ) {
       <span id="title">
         {/* <span id="name">Code Story</span> */}
       </span>
-      <div id="menu">
-        { isLogin.props ? (
+      { isLogin.props ? (
+        <div id="menu">  
           <div className="btn">
             <Link to="/gamestart">게임</Link>
           </div>
-        ) : (
-          null
-        )}
-        { isLogin.props ? (
           <div className="btn">
             <Link to="/ranking">랭킹</Link>
           </div>
-        ) : (
-          null
-        )}
-        <div className="btn">
-          { isLogin.props ? (
+          <div className="btn">
             <Link to="/profile">프로필</Link>
-          ) : (
-            <div onClick={()=>scrollToBottom()}>로그인</div>
-          )}
+          </div> 
         </div>
-      </div>
-    </div>
+      ) : (
+        <div id="menu">  
+          <div className="btn">
+            <div onClick={()=>scrollToBottom()}>로그인</div>
+          </div> 
+        </div>
+      )}
+    </div> 
   );
 }
 

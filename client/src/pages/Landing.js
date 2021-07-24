@@ -10,7 +10,7 @@ function Landing({loginClick}) {
 
   const handleNavigation = (e) => {
     const window = e.currentTarget.scrollY;
-    if (window >= 680 && window < 2200) {
+    if (window >= 650 && window < 2000) {
       setIsClick(false);
       setIsVisible(true);
     } else {
@@ -52,7 +52,7 @@ function Landing({loginClick}) {
         <object id="landing-logo" className="wow pulse animate__slower" type="image/svg+xml" data="logo.svg" aria-label="logo"></object>
       </div>
       <div id="landing-page-2">
-        <span id="landing-word" className="wow pulse">아직도 코딩을 공부하고 계신가요?</span>
+        <div id="landing-word" className="wow pulse">아직도 코딩을 공부하고 계신가요?</div>
         { isClick ? ( 
           <button className='landing-btn' onClick={()=>scrollToBottom()}>
             <span className="material-icons" id="landing-btn-arrow">expand_more</span>
@@ -65,10 +65,13 @@ function Landing({loginClick}) {
         )}
       </div>
       <div id="landing-page-3">
-        <span className="wow pulse">혹시 코딩 공부를 더 재미있게 하고 싶진 않으신가요?</span>
+        <div id="landing-word" className="wow pulse">혹시 코딩 공부를 더 재미있게 하고 싶진 않으신가요?</div>
       </div>
       <div id="landing-page-4">
-        <span className="wow pulse">스토리로 배우는 코딩! CodeStory와 함께하세요</span>
+        <div id="landing-word" className="wow pulse">스토리로 배우는 코딩! CodeStory와 함께하세요</div>
+      </div>
+      <div id="landing-page-5">
+        <Login loginClick={loginClick} newOauthLocation={newOauthLocation}/>
       </div>
       <div id="landing-page-5"></div>
       <Login loginClick={loginClick}/>
