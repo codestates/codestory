@@ -5,10 +5,9 @@ module.exports = {
     try {
       const jwt = isAuthorizedJwt(req);
       if (jwt) {
-        const follower = await db.users.findOne({ where: { userId: jwt.userId } });
         const followed = await db.users.findOne({ where: { userId: req.body.username } });
         await db.follower_followeds.create({
-          followerId: follower.dataValues.id,
+          followerId: jwt.id,
           followedId: followed.dataValues.id
         });
         res.send({ result: true });
