@@ -1,6 +1,8 @@
 import React,{useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Footer from '../components/Footer';
+import '../css/gamestart.css';
 
 function GameStart({loginClick,newOauthToken}) {
   
@@ -17,11 +19,22 @@ function GameStart({loginClick,newOauthToken}) {
   },[]);
 
   return (
-    <div id="gamestart-container">
-      <div id="game-btn">
-        <Link to="/game">게임시작</Link>
+    <>
+      <div id="gamestart-container">
+        <Link to="/game">
+          <div className="gamestart-btn">
+            <span className="gamestart-btn-word">GUI로 배우는 <br />  리눅스 CLI</span>
+          </div>
+        </Link>
+        <div className="gamestart-btn">
+          <span className="gamestart-btn-word">그리면서 배우는 <br /> 모던 CSS</span> <span className="hidden">(오픈예정)</span>
+        </div>
+        <div className="gamestart-btn">
+          <span className="gamestart-btn-word">보면서 확인하는 <br /> ES6+ JS <br /></span><spna className="hidden">(오픈예정)</spna>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

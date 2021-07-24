@@ -5,10 +5,9 @@ module.exports = {
     try {
       const jwt = isAuthorizedJwt(req);
       if (jwt) {
-        const follower = await db.users.findOne({ where: { userId: jwt.userId } });
         const followed = await db.users.findOne({ where: { userId: req.body.username } });
         await db.follower_followeds.create({
-          followerId: follower.dataValues.id,
+          followerId: jwt.id,
           followedId: followed.dataValues.id
         });
         res.send({ result: true });
@@ -23,8 +22,24 @@ module.exports = {
     }
   },
   unFollow: async (req, res) => {
-    //unFollow 함수를 채워주세요.
-    return res.status(200).send('/unFollow 라우팅완료');
+    try {
+      const jwt = isAuthorizedJwt(req);
+      if (jwt) {
+        const followed = await db.users.findOne({ where: { userId: req.body.username } });
+        await db.follower_followeds.destroy({ where: {
+          followerId: jwt.id,
+          followedId: followed.dataValues.id
+        } });
+        res.send({ message: 'ok' });
+      }
+      else {
+        res.status(400).send({ message: 'InvalidToken' });
+      }
+    }
+    catch (error) {
+      res.status(500).send({ message : 'Sorry Can\'t process your request' });
+      throw error;
+    }
   },
   sendFollowingList: async (req, res) => {
     //sendFollowingList 함수를 채워주세요.

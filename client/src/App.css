@@ -63,27 +63,6 @@ a {
   background-color: #232321;
 }
 
-/* GameStart */
-
-#gamestart-container {
-  height: 38rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#gamestart-container > #game-btn {
-  background-color: #000000;
-  color: #ffffff;
-  width: 14rem;
-  height: 4rem;
-  border-radius: 3rem;
-  text-align: center;
-  line-height: 60px;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
 /* Footer */
 
 #Footer-container {
@@ -103,6 +82,7 @@ a {
 #MobileError-container {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #ffdc48;
@@ -110,14 +90,12 @@ a {
 
 #MobileError-word {
   color: #232321;
-  font-size: 1.5rem;
+  font-size: 6vw;
   font-weight: 700;
   text-align: center;
 }
 
 #MobileError-logo {
-  position: absolute;
-  top: 10rem;
-  width: 23rem;
+  width: 50vh;
   z-index: 1;
 }
