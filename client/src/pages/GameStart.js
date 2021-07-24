@@ -15,7 +15,7 @@ function GameStart({loginClick,newOauthToken}) {
       loginClick();
       newOauthToken(res.data.oauthAccessToken);
     }
-  });
+  },[]);
 
   return (
     <>
