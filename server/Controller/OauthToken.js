@@ -29,7 +29,6 @@ module.exports = {
       console.log(e);
       return null;
     })
-
     return response;
   },
   getGoogleToken: async (req) => {
@@ -54,7 +53,6 @@ module.exports = {
       console.log(e);
       return null;
     })
-
     return response;
   }
 };

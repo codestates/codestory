@@ -13,6 +13,7 @@ function GameStart({loginClick,newOauthToken}) {
     if(authorizationCode){
       let res = await axios.post('http://localhost:4000/oauth', { authorizationCode: authorizationCode});
       loginClick();
+      console.log(res.data);
       newOauthToken(res.data.oauthAccessToken);
     }
   },[]);
