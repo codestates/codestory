@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import SignUp from './SignUp';
 import '../css/login.css';
+import axios from 'axios';
 
 function Login({loginClick}) {
 
@@ -20,6 +21,33 @@ function Login({loginClick}) {
   };
   
   const [isSignup, setIsSignup] = useState(false);
+  const [loginInfo, setLoginInfo] = useState({
+    username: '',
+    password: ''
+  });
+
+  const history = useHistory();
+  
+  const inputValueHandler = (key) => (e) => {
+    setLoginInfo({ ...loginInfo, [key]: e.target.value });
+  };
+
+  const { username, password } = loginInfo;
+
+  const loginHandler = async () => {
+    axios.post('https://api.codestory.academy/signin', {
+      username: username,
+      password: password
+    }, {
+      'content-type': 'application/json',
+      withCredentials: true
+    }).then(() => {
+      loginClick();
+      history.push('/gamestart');
+    }).catch(() => {
+      console.log('에러는 여기에');
+    });
+  };
 
   const signupHandler = () => {
     setIsSignup(!isSignup);
@@ -34,12 +62,12 @@ function Login({loginClick}) {
           <object id="login-logo" type="image/svg+xml" data="logo.svg" aria-label="logo"></object>
           <div id="login-container">
             <div id="login-wrapper">
-              <input id="login-input-id" placeholder="아이디"></input>
+              <input id="login-input-id" placeholder="아이디" onChange={inputValueHandler('username')}></input>
               <p id="login-valid">아이디를 입력해 주세요</p>
-              <input id="login-input-password" placeholder="비밀번호"></input>
+              <input id="login-input-password" placeholder="비밀번호" onChange={inputValueHandler('password')}></input>
               <p id="login-valid">비밀번호를 입력해 주세요</p>
-              <button id="login-btn">
-                <Link to="/gamestart" onClick={()=>loginClick()}>로그인</Link>
+              <button id="login-btn" onClick={loginHandler}>
+                로그인
               </button>
               <div id="login-social">
                 <a className="login-social-btn" onClick={googleLoginHandler}>
