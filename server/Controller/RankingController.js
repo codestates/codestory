@@ -1,7 +1,31 @@
+const { isAuthorizedJwt } = require('./JsonToken');
+const db = require('../models');
 
 module.exports = {
   sendRanking: async (req, res) => {
-    //ranking 함수를 채워주세요.
-    return res.status(200).send('/ranking 라우팅완료');
+    try {
+      const jwt = isAuthorizedJwt(req);
+      if (jwt) {
+        const rankingArr = await db.users.findAll({ order: [['coin', 'DESC'], ['id', 'ASC']] });
+        const followedArr = await db.follower_followeds.findAll({ where: { followerId: jwt.id } });
+        const isFollowed = [];
+        for (let record of followedArr) {
+          isFollowed[record.dataValues.followedId] = true;
+        }
+        res.send({ data: rankingArr.map((record) => ({
+          username: record.dataValues.userId,
+          photourl: record.dataValues.pictureurl,
+          coin: record.dataValues.coin,
+          following: record.dataValues.id === jwt.id ? 'me' : Boolean(isFollowed[record.dataValues.id])
+        })) });
+      }
+      else {
+        res.status(400).send({ message: 'InvalidToken' });
+      }
+    }
+    catch (error) {
+      res.status(500).send({ 'message': 'Sorry Can\'t process your request' });
+      throw error;
+    }
   },
 };
