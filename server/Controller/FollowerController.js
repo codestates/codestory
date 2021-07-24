@@ -45,16 +45,13 @@ module.exports = {
     try {
       const jwt = isAuthorizedJwt(req);
       if (jwt) {
-        const result = await db.follower_followeds.findAll({ where: { followerId: jwt.id }, order: [['id', 'DESC']] });
-        const followingArr = [];
-        for (let record of result) {
-          const followed = await db.users.findOne({ where: { id: record.dataValues.followedId } });
-          followingArr.push({
-            username: followed.dataValues.userId,
-            photourl: followed.dataValues.pictureurl
-          });
+        const followingArr = await db.follower_followeds.findAll({ where: { followerId: jwt.id }, order: [['id', 'DESC']] });
+        const userArr = await db.users.findAll();
+        const userinfoArr = [];
+        for (let record of userArr) {
+          userinfoArr[record.dataValues.id] = { username: record.dataValues.userId, photourl: record.dataValues.pictureurl };
         }
-        res.send({ data: followingArr });
+        res.send({ data: followingArr.map((record) => userinfoArr[record.dataValues.followedId]) });
       }
       else {
         res.status(400).send({ message: 'InvalidToken' });
