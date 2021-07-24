@@ -21,6 +21,7 @@ function Login({loginClick}) {
   };
   
   const [isSignup, setIsSignup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [loginInfo, setLoginInfo] = useState({
     username: '',
     password: ''
@@ -30,23 +31,30 @@ function Login({loginClick}) {
   
   const inputValueHandler = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
+    if (loginInfo.username !== '' && loginInfo.password !== '') {
+      setErrorMessage('');
+    }
   };
-
+  
   const { username, password } = loginInfo;
 
   const loginHandler = async () => {
-    axios.post('https://api.codestory.academy/signin', {
-      username: username,
-      password: password
-    }, {
-      'content-type': 'application/json',
-      withCredentials: true
-    }).then(() => {
-      loginClick();
-      history.push('/gamestart');
-    }).catch(() => {
-      console.log('에러는 여기에');
-    });
+    if (username === '' || password === '') {
+      setErrorMessage('아이디와 비밀번호 모두 입력해주세요');
+    } else {
+      await axios.post('https://api.codestory.academy/signin', {
+        username: username,
+        password: password
+      }, {
+        'content-type': 'application/json',
+        withCredentials: true
+      }).then(() => {
+        loginClick();
+        history.push('/gamestart');
+      }).catch(() => {
+        setErrorMessage('회원정보가 존재하지 않습니다');
+      });
+    }
   };
 
   const signupHandler = () => {
@@ -67,8 +75,11 @@ function Login({loginClick}) {
               <input id="login-input-password" placeholder="비밀번호" onChange={inputValueHandler('password')}></input>
               <p id="login-valid">비밀번호를 입력해 주세요</p>
               <button id="login-btn" onClick={loginHandler}>
-                로그인
+                  로그인
               </button>
+              {errorMessage === '' ? null :
+                <div className="warn-box">{errorMessage}
+                </div>}
               <div id="login-social">
                 <a className="login-social-btn" onClick={googleLoginHandler}>
                   <img className="login-social-image" src="login-google.png" alt="google"/>
