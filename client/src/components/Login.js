@@ -13,7 +13,6 @@ function Login({loginClick}) {
   
   const kakaoLoginHandler= async ()=>{
     window.location.assign(`${kakaoLoginUrl}`);
-
   };
 
   const googleLoginHandler= async ()=>{
@@ -22,18 +21,14 @@ function Login({loginClick}) {
   
   const [isSignup, setIsSignup] = useState(false);
 
-  const onClick = () => {
-    setIsSignup(true);
-  };
-
-  const onLoginClick = () => {
-    setIsSignup(false);
+  const signupHandler = () => {
+    setIsSignup(!isSignup);
   };
 
   return (
     <>
       { isSignup ? (
-        <SignUp props={onLoginClick}/>
+        <SignUp signupHandler={signupHandler}/>
       ) : (
         <div id="login-background">
           <object id="login-logo" type="image/svg+xml" data="logo.svg" aria-label="logo"></object>
@@ -54,7 +49,7 @@ function Login({loginClick}) {
                   <img className="login-social-image" src="login-kakao.png" alt="kakao"/>
                 </a>
               </div>
-              <a id="login-signin" style={{ cursor: 'pointer' }} onClick={()=>onClick()}>아직 아이디가 없으신가요?</a>
+              <a id="login-signin" style={{ cursor: 'pointer' }} onClick={signupHandler}>아직 아이디가 없으신가요?</a>
             </div>  
           </div>
         </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/signup.css';
 
-function SignUp( onLoginClick ) {
+function SignUp( { signupHandler } ) {
 
   const [currentId, setCurrentId] = useState({ value: '', valid: false });
   const [currentPassword, setCurrentPassword] = useState({ value: '', valid: false });
@@ -60,7 +60,7 @@ function SignUp( onLoginClick ) {
               회원가입
             </Link>
           </button>
-          <a id="signup-signin" style={{ cursor: 'pointer' }} onClick={()=>onLoginClick.props()}>이미 아이디가 있으신가요?</a>
+          <a id="signup-signin" style={{ cursor: 'pointer' }} onClick={() => signupHandler()}>이미 아이디가 있으신가요?</a>
         </div>  
       </div>
     </div>
