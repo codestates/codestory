@@ -71,7 +71,7 @@ function Landing({loginClick}) {
         <div id="landing-word" className="wow pulse">스토리로 배우는 코딩! CodeStory와 함께하세요</div>
       </div>
       <div id="landing-page-5">
-        <Login loginClick={loginClick} newOauthLocation={newOauthLocation}/>
+        <Login loginClick={loginClick}/>
       </div>
       <div id="landing-page-5"></div>
       <Login loginClick={loginClick}/>
