@@ -14,8 +14,9 @@ module.exports = {
       if (!jwt) {
         return null;
       }
+      const token = jwt.split(" ")[1];
       try {
-        return verify(jwt, process.env.ACCESS_SECRET);
+        return verify(token, process.env.ACCESS_SECRET);
       } catch {
         return null;
       }
