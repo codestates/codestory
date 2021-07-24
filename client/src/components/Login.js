@@ -3,21 +3,16 @@ import { Link } from 'react-router-dom';
 import SignUp from './SignUp';
 import '../css/login.css';
 
-function Login({loginClick,newOauthLocation}) {
+function Login({loginClick}) {
+
   const kakaoClientId='ce992090812c730f2178949e1baac586';
   const redirectUri='http://localhost:3000/gamestart';
   const kakaoLoginUrl = `https://Kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${redirectUri}&response_type=code`;
-  console.log(newOauthLocation);
 
   const kakaoLoginHandler= async ()=>{
-    function newLocation(location){
-      newOauthLocation(location);
-    }
-    newLocation('hello');
-    window.location.assign(kakaoLoginUrl);
+    window.location.assign(`${kakaoLoginUrl}`);
   };
   
-
   const [isSignup, setIsSignup] = useState(false);
 
   const onClick = () => {
@@ -48,7 +43,7 @@ function Login({loginClick,newOauthLocation}) {
                 <a className="login-social-btn" onClick={kakaoLoginHandler}>
                   <img className="login-social-image" src="login-google.png" alt="google"/>
                 </a>
-                <a className="login-social-btn" href={kakaoLoginUrl}>
+                <a className="login-social-btn"  onClick={kakaoLoginHandler}>
                   <img className="login-social-image" src="login-kakao.png" alt="kakao"/>
                 </a>
               </div>
