@@ -30,7 +30,7 @@
 }
 
 .gamestart-btn:nth-child(1) {
-  background-color: #f7a62e;
+  background-color: #fccb03;
 }
 
 .gamestart-btn:hover {
@@ -39,7 +39,7 @@
 }
 
 .gamestart-btn:nth-child(1):hover {
-  background-color: #ffdc48;
+  background-color: #fca503;
   color: #232321;
 }
 

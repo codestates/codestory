@@ -73,8 +73,6 @@ function Landing({loginClick}) {
       <div id="landing-page-5">
         <Login loginClick={loginClick}/>
       </div>
-      <div id="landing-page-5"></div>
-      <Login loginClick={loginClick}/>
     </div>
   );
 }

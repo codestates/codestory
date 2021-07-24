@@ -4,7 +4,7 @@ import '../css/gamecli.css';
 
 function GameCli() {
   return (
-    <div id="GameCli-background">
+    <>
       <div id="GameCli-container">
         <div className="GameCli-titlebar">
           <div className="GameCli-button">
@@ -21,7 +21,6 @@ function GameCli() {
               <div className="GameCli-command4 command">mv</div>
               <div className="GameCli-command5 command">rm</div>
               <div className="GameCli-command6 command">ls -al</div>
-              <div className="GameCli-command7 command">rm -rf</div>
               <div className="GameCli-inputwrapper">
                 ~
                 <input
@@ -35,7 +34,7 @@ function GameCli() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
