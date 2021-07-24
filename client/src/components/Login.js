@@ -6,11 +6,18 @@ import '../css/login.css';
 function Login({loginClick}) {
 
   const kakaoClientId='ce992090812c730f2178949e1baac586';
+  const googleClientId='308904347249-t3ilrgtua2unljo0jgfv50iqihm4buja.apps.googleusercontent.com';
   const redirectUri='http://localhost:3000/gamestart';
   const kakaoLoginUrl = `https://Kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${redirectUri}&response_type=code`;
-
+  const googleLoginUrl=`https://accounts.google.com/o/oauth2/auth?client_id=${googleClientId}&redirect_uri=${redirectUri}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email&approval_prompt=force&access_type=offline`;
+  
   const kakaoLoginHandler= async ()=>{
     window.location.assign(`${kakaoLoginUrl}`);
+
+  };
+
+  const googleLoginHandler= async ()=>{
+    window.location.assign(`${googleLoginUrl}`);
   };
   
   const [isSignup, setIsSignup] = useState(false);
@@ -40,7 +47,7 @@ function Login({loginClick}) {
                 <Link to="/gamestart" onClick={()=>loginClick()}>로그인</Link>
               </button>
               <div id="login-social">
-                <a className="login-social-btn" onClick={kakaoLoginHandler}>
+                <a className="login-social-btn" onClick={googleLoginHandler}>
                   <img className="login-social-image" src="login-google.png" alt="google"/>
                 </a>
                 <a className="login-social-btn"  onClick={kakaoLoginHandler}>
