@@ -1,8 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../css/gamecli.css';
 // import axios from 'axios';
 
-function GameCli() {
+function GameCli({ props, checker }) {
+
+  const [command, setCommand] = useState('');
+  const [firstCommand, setFirstCommand] = useState('');
+  const [secondCommand, setsecondCommand] = useState('');
+  const [currentCli, setCurrentCli] = useState('');
+  const [currentLine, setCurrentLine] = useState(1);
+
+  const inputText = (e) => {
+    setCommand(e.target.value);
+  };
+
+  const onKeyPress = (e) => {
+    if(e.charCode === 13) {
+      checker(command);
+      setCurrentCli(command);
+      setCurrentLine(currentLine + 1);
+      if (currentLine === 1) {
+        setFirstCommand(command);
+      } else if (currentLine === 2) {
+        setsecondCommand(command);
+      }
+      setCommand('');
+    }
+  };
+
   return (
     <>
       <div id="GameCli-container">
@@ -15,20 +40,79 @@ function GameCli() {
           <div className="GameCli-displaywrapper">
             <div className="GameCli-display">
               <div>Last login: Fri Jul 23 18:06:34 on ttys004</div>
-              <div className="GameCli-command1 command">ls</div>
-              <div className="GameCli-command2 command">mkdir</div>
-              <div className="GameCli-command3 command">cd</div>
-              <div className="GameCli-command4 command">mv</div>
-              <div className="GameCli-command5 command">rm</div>
-              <div className="GameCli-command6 command">ls -al</div>
-              <div className="GameCli-inputwrapper">
-                ~
-                <input
-                  className="input-command"
-                  type="text"
-                  placeholder="명령어를 입력하세요"
-                ></input>
-              </div>
+              <div className="GameCli-command command">current stage: { props }</div>
+              {currentLine === 1 ? (
+                <div className="GameCli-inputwrapper">
+                  ~
+                  <input
+                    className="input-command"
+                    type="text"
+                    placeholder="명령어를 입력하세요"
+                    value={command}
+                    onChange={inputText}
+                    onKeyPress={onKeyPress}
+                  ></input>
+                </div>
+              ) : (
+                null
+              )}
+              {currentLine === 2 ? (
+                <>
+                  <div className="GameCli-command command">command not found: {currentCli}</div> 
+                  <div className="GameCli-inputwrapper">
+                    ~
+                    <input
+                      className="input-command"
+                      type="text"
+                      placeholder="명령어를 입력하세요"
+                      value={command}
+                      onChange={inputText}
+                      onKeyPress={onKeyPress}
+                    ></input>
+                  </div>
+                </>
+              ) : (
+                null
+              )}
+              {currentLine === 3 ? (
+                <>
+                  <div className="GameCli-command command">command not found: {firstCommand}</div> 
+                  <div className="GameCli-command command">command not found: {currentCli}</div> 
+                  <div className="GameCli-inputwrapper">
+                    ~
+                    <input
+                      className="input-command"
+                      type="text"
+                      placeholder="명령어를 입력하세요"
+                      value={command}
+                      onChange={inputText}
+                      onKeyPress={onKeyPress}
+                    ></input>
+                  </div>
+                </>
+              ) : (
+                null
+              )}
+              {currentLine === 4 ? (
+                <>
+                  <div className="GameCli-command command">command not found: {firstCommand}</div> 
+                  <div className="GameCli-command command">command not found: {secondCommand}</div> 
+                  <div className="GameCli-command command">command not found: {currentCli}</div> 
+                  <div className="GameCli-inputwrapper">
+                    ~
+                    <input
+                      className="input-command"
+                      type="text"
+                      placeholder="명령어를 입력하세요"
+                      value={command}
+                      onChange={inputText}
+                      onKeyPress={onKeyPress}
+                    ></input>
+                  </div>
+                </>
+              ) : (
+                null
+              )}
             </div>
             <div className="GameCli-scroll"></div>
           </div>

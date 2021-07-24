@@ -138,6 +138,12 @@
   background-color: #ffffff;
   text-align: center;
   line-height: 30px;
+  cursor: pointer;
+}
+
+#profile-following-info:hover {
+  color:#ffffff;
+  background-color: #000000;
 }
 
 #profile-coin {

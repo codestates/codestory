@@ -21,6 +21,7 @@ function Login({loginClick}) {
   };
   
   const [isSignup, setIsSignup] = useState(false);
+  const [isHover, setIsHover] = useState(false);
 
   const onClick = () => {
     setIsSignup(true);
@@ -28,6 +29,14 @@ function Login({loginClick}) {
 
   const onLoginClick = () => {
     setIsSignup(false);
+  };
+
+  const onMouseOver = () => {
+    setIsHover(true);
+  };
+
+  const onMouseOut = () => {
+    setIsHover(false);
   };
 
   return (
@@ -43,9 +52,9 @@ function Login({loginClick}) {
               <p id="login-valid">아이디를 입력해 주세요</p>
               <input id="login-input-password" placeholder="비밀번호"></input>
               <p id="login-valid">비밀번호를 입력해 주세요</p>
-              <button id="login-btn">
-                <Link to="/gamestart" onClick={()=>loginClick()}>로그인</Link>
-              </button>
+              <Link to="/gamestart" onClick={()=>loginClick()}>
+                <div id="login-btn">로그인</div>
+              </Link>
               <div id="login-social">
                 <a className="login-social-btn" onClick={googleLoginHandler}>
                   <img className="login-social-image" src="login-google.png" alt="google"/>
@@ -54,7 +63,12 @@ function Login({loginClick}) {
                   <img className="login-social-image" src="login-kakao.png" alt="kakao"/>
                 </a>
               </div>
-              <a id="login-signin" style={{ cursor: 'pointer' }} onClick={()=>onClick()}>아직 아이디가 없으신가요?</a>
+              <a id="login-signin" 
+                onMouseOver={()=>onMouseOver()}
+                onMouseOut={()=>onMouseOut()}
+                onClick={()=>onClick()}>
+                {isHover ? '회원가입 하러가기' : '아직 아이디가 없으신가요?'}
+              </a>
             </div>  
           </div>
         </div>
