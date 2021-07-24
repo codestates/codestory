@@ -42,7 +42,24 @@ module.exports = {
     }
   },
   sendFollowingList: async (req, res) => {
-    //sendFollowingList 함수를 채워주세요.
-    return res.status(200).send('/sendFollowingList 라우팅완료');
+    try {
+      const jwt = isAuthorizedJwt(req);
+      if (jwt) {
+        const followingArr = await db.follower_followeds.findAll({ where: { followerId: jwt.id }, order: [['id', 'DESC']] });
+        const userArr = await db.users.findAll();
+        const userinfoArr = [];
+        for (let record of userArr) {
+          userinfoArr[record.dataValues.id] = { username: record.dataValues.userId, photourl: record.dataValues.pictureurl };
+        }
+        res.send({ data: followingArr.map((record) => userinfoArr[record.dataValues.followedId]) });
+      }
+      else {
+        res.status(400).send({ message: 'InvalidToken' });
+      }
+    }
+    catch (error) {
+      res.status(500).send({ message : 'Sorry Can\'t process your request' });
+      throw error;
+    }
   },
 };

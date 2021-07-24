@@ -1,0 +1,17 @@
+/* Game Script */
+
+#gamescipt-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#gamescript-box {
+  width: 35vw;
+  min-width: 20rem;
+  max-width: 27rem;
+  min-height: 10rem;
+  border-radius: 2rem;
+  text-align: center;
+  background-color: #ffffff;
+}

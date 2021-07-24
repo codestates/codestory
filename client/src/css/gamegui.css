@@ -1,0 +1,16 @@
+/* Game Gui */
+
+#gamegui-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#gamegui-box {
+  width: 35vw;
+  min-width: 20rem;
+  max-width: 27rem;
+  height: 27rem;
+  text-align: center;
+  background-color: #ffffff;
+}
