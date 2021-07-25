@@ -28,7 +28,7 @@ function Landing({loginClick}) {
   }, [y]);
 
   useEffect(() => {
-    new WOW.WOW().init();
+    new WOW.WOW({ live: false }).init();
   }, []);
 
   const scrollToBottom = () => {

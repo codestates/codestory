@@ -1,15 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../css/followinglist.css';
 
-function FollowingList() {
+function FollowingList(showProfile) {
 	
   return (
     <div id="followinglist-background">
       <div id="followinglist-container">
-        <Link to="/game">
-          <div id="followinglist-out-btn">&times;</div>
-        </Link>
+        <div id="followinglist-out-btn" onClick={()=>showProfile.props()}>&times;</div>
         <div id="followinglist-title">
           Following List
         </div>

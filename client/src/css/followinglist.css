@@ -15,13 +15,16 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 90vh;
+	width: 100%;
+  height: 38rem;
 }
 
 #followinglist-container {
+	position: absolute;
 	background-color: #fccb03;
+	top: 8rem;
 	width: 28rem;
-	border-radius: 3rem;
+	border-radius: 2rem;
 	padding: 40px
 }
 
@@ -63,7 +66,8 @@ body {
 
 #followinglist-out-btn {
 	position: relative;
-	left: 93%;
+	top: -1rem;
+	left: 22rem;
 	margin-right: 1.5rem;
   width: 2rem;
   height: 2rem;
@@ -74,4 +78,5 @@ body {
   font-size: 40px;
   line-height: 25px;
   color: #232321;
+	cursor: pointer;
 }

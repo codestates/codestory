@@ -36,13 +36,17 @@ function Profile() {
     setfollow(true);
   };
 
+  const showProfile = () => {
+    setfollow(false);
+  };
+
   return (
     <>
-      { showfollow ? <FollowingList /> :
+      { showfollow ? <FollowingList props={showProfile}/> :
         <div id="profile-background">
           <div id="profile-container">
             <div id="profile-out-btn">
-              <Link to="/game">&times;</Link>
+              <Link to="/gamestart">&times;</Link>
             </div>
             <div id="profile-wrapper">
               <input id="profile-img" type="image" src="profile-img.png" onChange={(e)=>onChange(e)}></input>

@@ -4,6 +4,7 @@
   position: relative;
   display: flex;
   bottom: 11rem;
+  z-index: 5;
 }
 
 #GameCli-close {
@@ -92,11 +93,20 @@
 }
 
 .input-command {
+  position: relative;
+  margin-top: 5px;
+  margin-left: 5px;
   width: 27vw;
-  min-width: 19.5rem;
+  min-width: 18rem;
   max-width: 27rem;
-  background-color: black;
+  background-color: rgb(37, 37, 37);
   color: white;
+  font-size: 17px;
+  border: none;
+}
+
+.input-command:focus {
+  outline: none;
 }
 
 .command {

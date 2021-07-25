@@ -10,7 +10,7 @@
 
 #game-container  {
   position: absolute;
-  width: 90vw;
+  width: 85vw;
   height: 32rem;
   top: 15vh;
   min-width: 50rem;
@@ -25,7 +25,7 @@
 #game-leftside {
   display: flex;
   height: 27rem;
-  width: 26rem;
+  width: 25rem;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -34,8 +34,31 @@
 #game-rightside {
   display: flex;
   height: 27rem;
-  width: 26rem;
+  width: 25rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+#game-man-img {
+  height: 10rem;
+  position: relative;
+  top: -8rem;
+  left: 9vw;
+  z-index: 1;
+}
+
+#game-tail-img {
+  height: 3rem;
+  position: absolute;
+  top: 12rem;
+  left: 16vw;
+}
+
+#game-arrow {
+  position: absolute;
+  bottom: 8.5rem;
+  margin: -2rem;
+  font-size: 5rem;
+  color: #e48202;
+} 
