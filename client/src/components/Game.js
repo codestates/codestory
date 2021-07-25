@@ -24,9 +24,11 @@ function Game() {
     })();
   }, []);
 
-  const handleStageChange = (script) => {
-    setStageIndex(stageIndex + 1);
-    setScript(script);
+  const handleStageChange = (script, isSuccess) => {
+    setStageIndex(stageIndex + (isSuccess ? 1 : -1));
+    if (script) {
+      setScript(script);
+    }
   };
 
   const handleWaiting = () => {

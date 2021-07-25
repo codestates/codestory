@@ -14,7 +14,7 @@ function GameCli({ stage, handleStageChange, isWaiting, handleWaiting }) {
     (async () => {
       const result = await axios.post('https://api.codestory.academy/game/answer', { stage, command }, { withCredentials: true });
       if (result.data.result) {
-        handleStageChange(result.data.script);
+        handleStageChange(result.data.script, true);
         const commandArr = command.match(/\S+/g) || [];
         switch (commandArr[0]) {
         case 'cd':
@@ -28,10 +28,16 @@ function GameCli({ stage, handleStageChange, isWaiting, handleWaiting }) {
         }
       }
       else {
+        if (isPassword) {
+          handleStageChange(null, false);
+        }
         setCli([...cli, isPassword ? 'ERROR: Permission denied' : `command not found: ${command}`]);
       }
       setCommand('');
       handleWaiting();
+      if (isPassword) {
+        setIsPassword(false);
+      }
     })();
   }, [enterCount]);
 
