@@ -48,7 +48,7 @@
   font-weight: 700;
 }
 
-#signup-input-password {
+.signup-input-password {
   padding: 1rem;
   width: 14rem;
   height: 2.5rem;
@@ -88,4 +88,13 @@
   font-size: 15px;
   font-weight: 700;
   align-self: center;
+}
+
+.warn-box {
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+  color: red;
 }
