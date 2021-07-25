@@ -1,5 +1,6 @@
 const { isAuthorizedJwt } = require('./JsonToken');
 const models = require('../models/index.js');
+const { Op } = require('sequelize');
 
 module.exports = {
   signUp: async (req, res) => {
@@ -74,8 +75,7 @@ module.exports = {
     try {
       const jwt = isAuthorizedJwt(req);
       if (jwt) {
-        await models.follower_followeds.destroy({ where: { followerId: jwt.id } });
-        await models.follower_followeds.destroy({ where: { followedId: jwt.id } });
+        await models.follower_followeds.destroy({ where: { [Op.or]: [{ followerId: jwt.id }, { followedId: jwt.id }] } });
         await models.users.destroy({ where: { id: jwt.id } });
         res.cookie('jwtAccessToken', 'invalid Token');
         res.status(200).send({ message: 'ok' });
