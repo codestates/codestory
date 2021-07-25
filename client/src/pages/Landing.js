@@ -4,14 +4,12 @@ import Login from '../components/Login';
 import '../css/landing.css';
 
 function Landing({loginClick}) {
-  const [isClick, setIsClick] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [y, setY] = useState(null);
 
   const handleNavigation = (e) => {
     const window = e.currentTarget.scrollY;
     if (window >= 650 && window < 2000) {
-      setIsClick(false);
       setIsVisible(true);
     } else {
       setIsVisible(false);
@@ -28,11 +26,10 @@ function Landing({loginClick}) {
   }, [y]);
 
   useEffect(() => {
-    new WOW.WOW().init();
+    new WOW.WOW({ live: false }).init();
   }, []);
 
   const scrollToBottom = () => {
-    setIsClick(true);
     document.getElementById('root').scrollIntoView({ behavior: 'smooth', block: 'end' });
   };
 
@@ -53,16 +50,10 @@ function Landing({loginClick}) {
       </div>
       <div id="landing-page-2">
         <div id="landing-word" className="wow pulse">아직도 코딩을 공부하고 계신가요?</div>
-        { isClick ? ( 
-          <button className='landing-btn' onClick={()=>scrollToBottom()}>
-            <span className="material-icons" id="landing-btn-arrow">expand_more</span>
-          </button>
-        ) : ( 
-          <button className='landing-btn' style={isVisible ? fadeIn : fadeOut} onClick={()=>scrollToBottom()}>
-            로그인 하러가기
-            <span className="material-icons" id="landing-btn-arrow">expand_more</span>
-          </button>
-        )}
+        <button className='landing-btn' style={isVisible ? fadeIn : fadeOut} onClick={()=>scrollToBottom()}>
+          로그인 하러가기
+          <span className="material-icons" id="landing-btn-arrow">expand_more</span>
+        </button>
       </div>
       <div id="landing-page-3">
         <div id="landing-word" className="wow pulse">혹시 코딩 공부를 더 재미있게 하고 싶진 않으신가요?</div>

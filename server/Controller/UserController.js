@@ -1,5 +1,6 @@
 const { isAuthorizedJwt } = require('./JsonToken');
 const models = require('../models/index.js');
+const { Op } = require('sequelize');
 
 module.exports = {
   signUp: async (req, res) => {
@@ -55,15 +56,26 @@ module.exports = {
     }
   },
   updateWord: async (req, res) => {
-    //updateWord 함수를 채워주세요
-    return res.status(200).send('/user updateWord 라우팅완료');
+    try {
+      const jwt = isAuthorizedJwt(req);
+      if (jwt) {
+        await models.users.update({ word: req.body.word }, { where: { id: jwt.id } });
+        res.send({ message: 'ok' });
+      }
+      else {
+        res.status(400).send({ message: 'InvalidToken' });
+      }
+    }
+    catch (error) {
+      res.status(500).send({ 'message': 'Sorry Can\'t process your request' });
+      throw error;
+    }
   },
   unRegister: async (req,res)=>{
     try {
       const jwt = isAuthorizedJwt(req);
       if (jwt) {
-        await models.follower_followeds.destroy({ where: { followerId: jwt.id } });
-        await models.follower_followeds.destroy({ where: { followedId: jwt.id } });
+        await models.follower_followeds.destroy({ where: { [Op.or]: [{ followerId: jwt.id }, { followedId: jwt.id }] } });
         await models.users.destroy({ where: { id: jwt.id } });
         res.cookie('jwtAccessToken', 'invalid Token');
         res.status(200).send({ message: 'ok' });
