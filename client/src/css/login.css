@@ -125,3 +125,12 @@
   text-align: center;
   color: red;
 }
+
+.warn-box {
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+  color: red;
+}
