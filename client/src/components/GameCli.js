@@ -45,7 +45,7 @@ function GameCli({ stage, handleStageChange, isWaiting, handleWaiting }) {
     setCommand((isPassword ? command : '') + e.target.value);
   };
 
-  const onKeyPress = async (e) => {
+  const onKeyPress = (e) => {
     if(e.charCode === 13) {
       setCli([...cli, isPassword ? 'Password:' : `${wd} $ ${command}`]);
       handleWaiting();
