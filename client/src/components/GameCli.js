@@ -23,6 +23,8 @@ function GameCli({ props, checker }) {
         setFirstCommand(command);
       } else if (currentLine === 2) {
         setsecondCommand(command);
+      } else if (currentLine === 3) {
+        setCurrentLine(1);
       }
       setCommand('');
     }
