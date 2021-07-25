@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import SignUp from './SignUp';
 import '../css/login.css';
+import axios from 'axios';
 
 function Login({loginClick}) {
 
@@ -13,7 +14,6 @@ function Login({loginClick}) {
   
   const kakaoLoginHandler= async ()=>{
     window.location.assign(`${kakaoLoginUrl}`);
-
   };
 
   const googleLoginHandler= async ()=>{
@@ -21,14 +21,48 @@ function Login({loginClick}) {
   };
   
   const [isSignup, setIsSignup] = useState(false);
+
   const [isHover, setIsHover] = useState(false);
 
-  const onClick = () => {
-    setIsSignup(true);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loginInfo, setLoginInfo] = useState({
+    username: '',
+    password: ''
+  });
+
+  const history = useHistory();
+  
+  const inputValueHandler = (key) => (e) => {
+    setLoginInfo({ ...loginInfo, [key]: e.target.value });
+    if (loginInfo.username !== '' && loginInfo.password !== '') {
+      setErrorMessage('');
+    }
+  };
+  
+  const { username, password } = loginInfo;
+
+
+  const loginHandler = async () => {
+    if (username === '' || password === '') {
+      setErrorMessage('아이디와 비밀번호 모두 입력해주세요');
+    } else {
+      await axios.post('https://api.codestory.academy/signin', {
+        username: username,
+        password: password
+      }, {
+        'content-type': 'application/json',
+        withCredentials: true
+      }).then(() => {
+        loginClick();
+        history.push('/gamestart');
+      }).catch(() => {
+        setErrorMessage('회원정보가 존재하지 않습니다');
+      });
+    }
   };
 
-  const onLoginClick = () => {
-    setIsSignup(false);
+  const signupHandler = () => {
+    setIsSignup(!isSignup);
   };
 
   const onMouseOver = () => {
@@ -42,19 +76,24 @@ function Login({loginClick}) {
   return (
     <>
       { isSignup ? (
-        <SignUp props={onLoginClick}/>
+        <SignUp signupHandler={signupHandler}/>
       ) : (
         <div id="login-background">
           <object id="login-logo" type="image/svg+xml" data="logo.svg" aria-label="logo"></object>
           <div id="login-container">
             <div id="login-wrapper">
-              <input id="login-input-id" placeholder="아이디"></input>
+              <input id="login-input-id" placeholder="아이디" onChange={inputValueHandler('username')}></input>
               <p id="login-valid">아이디를 입력해 주세요</p>
-              <input id="login-input-password" placeholder="비밀번호"></input>
+              <input id="login-input-password" placeholder="비밀번호" onChange={inputValueHandler('password')}></input>
               <p id="login-valid">비밀번호를 입력해 주세요</p>
-              <Link to="/gamestart" onClick={()=>loginClick()}>
-                <div id="login-btn">로그인</div>
-              </Link>
+              <button id="login-btn" onClick={loginHandler}>
+                  로그인
+              </button>
+              {
+                errorMessage === '' ? null :
+                <div className="warn-box">{errorMessage}
+                </div>
+              }
               <div id="login-social">
                 <a className="login-social-btn" onClick={googleLoginHandler}>
                   <img className="login-social-image" src="login-google.png" alt="google"/>
@@ -63,12 +102,14 @@ function Login({loginClick}) {
                   <img className="login-social-image" src="login-kakao.png" alt="kakao"/>
                 </a>
               </div>
+
               <a id="login-signin" 
                 onMouseOver={()=>onMouseOver()}
                 onMouseOut={()=>onMouseOut()}
-                onClick={()=>onClick()}>
+                onClick={signupHandler}>
                 {isHover ? '회원가입 하러가기' : '아직 아이디가 없으신가요?'}
               </a>
+
             </div>  
           </div>
         </div>
