@@ -23,7 +23,27 @@ module.exports = {
     }
   },
   updateCoin: async (req,res)=>{
-    //updateCoin 함수를 채워주세요.
-    return res.status(200).send('/game/updatecoin 라우팅완료');
+    try {
+      let accessTokenData=isAuthorizedJwt(req);
+      if (accessTokenData) {
+        const result = db.user.update(
+          {
+            coin:req.body.newCoin
+          },
+          {
+            where : { id : accessTokenData.id}
+          })
+        
+          if(result){
+            res.status(200).json({"message":"ok"});
+          }
+      }else {
+        res.status(400).send({ message: 'InvalidToken' });
+      }
+    }
+    catch (error) {
+      res.status(500).send({ message: 'Sorry Can\'t process your request' });
+      throw error;
+    }
   }
 };
