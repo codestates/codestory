@@ -24,8 +24,8 @@
 }
 
 .gamestart-btn-word{
-  position: relative;
-  top: 6.5rem;
+  position: absolute;
+  top: 16rem;
   text-align: center;
   font-size: 1.5rem;
   font-weight: 700;
@@ -41,6 +41,10 @@
 
 .gamestart-btn:nth-child(1) {
   background-color: #fccb03;
+}
+
+.gamestart-btn:nth-child(1):active {
+  border: inset 4px #ffb350;
 }
 
 .gamestart-btn:hover {
@@ -64,6 +68,13 @@
 #gamestart-cli-img {
   position: relative;
   top: 5rem;
+  width: 11rem;
+  pointer-events: none;
+}
+
+#gamestart-cli-img-hover {
+  position: relative;
+  top: 4rem;
   width: 11rem;
   pointer-events: none;
 }
