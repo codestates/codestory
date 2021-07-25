@@ -91,8 +91,8 @@ function Login({loginClick}) {
               </button>
               {
                 errorMessage === '' ? null :
-                <div className="warn-box">{errorMessage}
-                </div>
+                  <div className="warn-box">{errorMessage}
+                  </div>
               }
               <div id="login-social">
                 <a className="login-social-btn" onClick={googleLoginHandler}>
