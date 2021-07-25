@@ -30,7 +30,7 @@ function GameStart({loginClick,newOauthToken}) {
           <span className="gamestart-btn-word">그리면서 배우는 <br /> 모던 CSS</span> <span className="hidden">(오픈예정)</span>
         </div>
         <div className="gamestart-btn">
-          <span className="gamestart-btn-word">보면서 확인하는 <br /> ES6+ JS <br /></span><spna className="hidden">(오픈예정)</spna>
+          <span className="gamestart-btn-word">보면서 확인하는 <br /> ES6+ JS <br /></span><span className="hidden">(오픈예정)</span>
         </div>
       </div>
       <Footer />
