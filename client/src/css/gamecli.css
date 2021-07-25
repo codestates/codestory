@@ -79,6 +79,7 @@
   border-radius: 0 0 0 5px;
   color: white;
   padding: 5px;
+  overflow: auto;
 }
 
 .GameCli-scroll {
@@ -96,9 +97,9 @@
   position: relative;
   margin-top: 5px;
   margin-left: 5px;
-  width: 27vw;
-  min-width: 18rem;
-  max-width: 27rem;
+  width: 18vw;
+  min-width: 12rem;
+  max-width: 18rem;
   background-color: rgb(37, 37, 37);
   color: white;
   font-size: 17px;

@@ -1,32 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../css/gamecli.css';
-// import axios from 'axios';
+import axios from 'axios';
 
-function GameCli({ props, checker }) {
+function GameCli({ stage, handleStageChange, isWaiting, handleWaiting }) {
 
   const [command, setCommand] = useState('');
-  const [firstCommand, setFirstCommand] = useState('');
-  const [secondCommand, setsecondCommand] = useState('');
-  const [currentCli, setCurrentCli] = useState('');
-  const [currentLine, setCurrentLine] = useState(1);
+  const [cli, setCli] = useState(['Last login: Fri Jul 23 18:06:34 on ttys004']);
+  const [wd, setWd] = useState('Desktop');
+  const [enterCount, setEnterCount] = useState(0);
+  const [isPassword, setIsPassword] = useState(false);
 
-  const inputText = (e) => {
-    setCommand(e.target.value);
-  };
-
-  const onKeyPress = (e) => {
-    if(e.charCode === 13) {
-      checker(command);
-      setCurrentCli(command);
-      setCurrentLine(currentLine + 1);
-      if (currentLine === 1) {
-        setFirstCommand(command);
-      } else if (currentLine === 2) {
-        setsecondCommand(command);
-      } else if (currentLine === 3) {
-        setCurrentLine(1);
+  useEffect(() => {
+    (async () => {
+      const result = await axios.post('https://api.codestory.academy/game/answer', { stage, command }, { withCredentials: true });
+      if (result.data.result) {
+        handleStageChange(result.data.script);
+        const commandArr = command.match(/\S+/g) || [];
+        switch (commandArr[0]) {
+        case 'cd':
+          setWd(commandArr[1].match(/([^/]+)$/)[1]); break;
+        case 'ls':
+          setCli([...cli, '.password']); break;
+        case 'cat':
+          setCli([...cli, 'password: 1234', 'path: ~/Desktop/.hidden']); break;
+        case 'sudo':
+          setIsPassword(true); break;
+        }
+      }
+      else {
+        setCli([...cli, isPassword ? 'ERROR: Permission denied' : `command not found: ${command}`]);
       }
       setCommand('');
+      handleWaiting();
+    })();
+  }, [enterCount]);
+
+  const inputText = (e) => {
+    setCommand((isPassword ? command : '') + e.target.value);
+  };
+
+  const onKeyPress = async (e) => {
+    if(e.charCode === 13) {
+      setCli([...cli, isPassword ? 'Password:' : `${wd} $ ${command}`]);
+      handleWaiting();
+      setEnterCount(enterCount + 1);
     }
   };
 
@@ -41,80 +58,21 @@ function GameCli({ props, checker }) {
           </div>
           <div className="GameCli-displaywrapper">
             <div className="GameCli-display">
-              <div>Last login: Fri Jul 23 18:06:34 on ttys004</div>
-              <div className="GameCli-command command">current stage: { props }</div>
-              {currentLine === 1 ? (
-                <div className="GameCli-inputwrapper">
-                  ~
+              {cli.map((line, i) => <div key={i}>{line}</div>)}
+              {isWaiting
+                ? <div>잠시 기다려주세요</div>
+                : <div className="GameCli-inputwrapper">
+                  {isPassword ? 'Password:' : `${wd} $`}
                   <input
                     className="input-command"
                     type="text"
-                    placeholder="명령어를 입력하세요"
-                    value={command}
+                    placeholder={isPassword ? '' : '명령어를 입력하세요'}
+                    value={isPassword ? '' : command}
                     onChange={inputText}
                     onKeyPress={onKeyPress}
+                    autoFocus
                   ></input>
-                </div>
-              ) : (
-                null
-              )}
-              {currentLine === 2 ? (
-                <>
-                  <div className="GameCli-command command">command not found: {currentCli}</div> 
-                  <div className="GameCli-inputwrapper">
-                    ~
-                    <input
-                      className="input-command"
-                      type="text"
-                      placeholder="명령어를 입력하세요"
-                      value={command}
-                      onChange={inputText}
-                      onKeyPress={onKeyPress}
-                    ></input>
-                  </div>
-                </>
-              ) : (
-                null
-              )}
-              {currentLine === 3 ? (
-                <>
-                  <div className="GameCli-command command">command not found: {firstCommand}</div> 
-                  <div className="GameCli-command command">command not found: {currentCli}</div> 
-                  <div className="GameCli-inputwrapper">
-                    ~
-                    <input
-                      className="input-command"
-                      type="text"
-                      placeholder="명령어를 입력하세요"
-                      value={command}
-                      onChange={inputText}
-                      onKeyPress={onKeyPress}
-                    ></input>
-                  </div>
-                </>
-              ) : (
-                null
-              )}
-              {currentLine === 4 ? (
-                <>
-                  <div className="GameCli-command command">command not found: {firstCommand}</div> 
-                  <div className="GameCli-command command">command not found: {secondCommand}</div> 
-                  <div className="GameCli-command command">command not found: {currentCli}</div> 
-                  <div className="GameCli-inputwrapper">
-                    ~
-                    <input
-                      className="input-command"
-                      type="text"
-                      placeholder="명령어를 입력하세요"
-                      value={command}
-                      onChange={inputText}
-                      onKeyPress={onKeyPress}
-                    ></input>
-                  </div>
-                </>
-              ) : (
-                null
-              )}
+                </div>}
             </div>
             <div className="GameCli-scroll"></div>
           </div>
