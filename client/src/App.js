@@ -13,7 +13,16 @@ import MobileError from './pages/MobileError';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  const [oauthToken, setOauthToken]= useState('초기토근');
+  const [oauthToken, setOauthToken] = useState('초기 토큰');
+  const [userInfo, setUserInfo] = useState({
+    username: '',
+    photourl: '',
+    coin: 0,
+    intro: '',
+    ranking: 0,
+    follower: 0,
+    following: 0
+  });
 
   console.log(oauthToken);
 
@@ -23,6 +32,20 @@ function App() {
 
   const newOauthToken= (accessToken)=>{
     setOauthToken(accessToken);
+  };
+
+  const userView = (user) => {
+    console.log('app.js user', user);
+    setUserInfo({
+      ...userInfo,
+      username: user.username,
+      photourl: user.photourl,
+      coin: user.coin,
+      intro: user.intro,
+      ranking: user.ranking,
+      follower: user.follower,
+      following: user.following
+    });
   };
 
   return (
@@ -45,7 +68,7 @@ function App() {
               <Ranking />
             </Route>
             <Route path="/profile">
-              <Profile />
+              <Profile userInfo={userInfo} userView={userView} />
             </Route>
             <Route path="/game">
               <Game />
