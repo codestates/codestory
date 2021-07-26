@@ -3,7 +3,6 @@ const {isAuthorizedOauth} = require('./OauthToken.js');
 
 module.exports = {
   signOut: async (req, res) => {
-    console.log('signOut작동')
     try{
       const jwt=await isAuthorizedJwt(req);
       const oauth=await isAuthorizedOauth(req);
