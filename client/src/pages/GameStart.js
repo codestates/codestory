@@ -11,7 +11,6 @@ function GameStart({loginClick}) {
   const authorizationCode = url.searchParams.get('code'); 
   const [isHover, setIsHover] = useState(false);
 
-  console.log('clientAuthorizationCode',authorizationCode);
   useEffect(async ()=>{
     if(authorizationCode){
       const res= await axios.post('https://api.codestory.academy/oauth',
