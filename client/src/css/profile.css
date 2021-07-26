@@ -2,7 +2,7 @@
 
 #profile-background {
   width: 100%;
-  height: 38rem;
+  height: 93vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,7 +11,8 @@
 }
 
 #profile-container {
-  margin-top: 6rem;
+  position: absolute;
+  top: 22%;
   width: 28rem;
   height: 28rem;
   background-color: #fccb03;
