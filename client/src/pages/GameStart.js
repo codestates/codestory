@@ -14,7 +14,7 @@ function GameStart({loginClick}) {
   console.log('clientAuthorizationCode',authorizationCode);
   useEffect(async ()=>{
     if(authorizationCode){
-      const res= await axios.post('https://api.codestory.academy/oauth',
+      const res= await axios.post('http://localhost:4000/oauth',
         { authorizationCode: authorizationCode}, {
           'content-type': 'application/json',
           withCredentials: true
