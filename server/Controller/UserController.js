@@ -8,7 +8,7 @@ module.exports = {
     try{
       const username=req.body.username;
       const password=req.body.password;
-      const data=await models.users.findOne({where : {userId:username}});
+      const data=await models.users.findOne({where : {[Op.or] : [{userId:username}, {password}]}});
       if(data){
         res.status(400).json({message:'Bad Request'});
       }else{
@@ -98,7 +98,7 @@ module.exports = {
       if (jwt) {
         await models.follower_followeds.destroy({ where: { [Op.or]: [{ followerId: jwt.id }, { followedId: jwt.id }] } });
         await models.users.destroy({ where: { id: jwt.id } });
-        res.cookie('jwtAccessToken', 'invalid Token');
+        res.cookie('accessToken', 'invalid Token');
         res.status(200).send({ message: 'ok' });
       }else if(oauth){
         res.status(200).send({message:'ok'})
