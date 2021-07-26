@@ -2,7 +2,6 @@ const { generateAccessToken, sendAccessToken } = require('./JsonToken');
 const db = require('../models');
 module.exports = {
   signIn: async (req, res) => {
-    console.log('signIn작동')
     try {
       const userInfo = await db.users.findOne({
         where: { userId: req.body.username, password: req.body.password }
