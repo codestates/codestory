@@ -11,7 +11,7 @@ function GameCli({ stage, handleStageChange, isWaiting, handleWaiting, wd, handl
 
   useEffect(() => {
     (async () => {
-      const result = await axios.post('http://localhost:4000/game/answer', { stage, command }, { withCredentials: true });
+      const result = await axios.post('http://localhost:3000/game/answer', { stage, command }, { withCredentials: true });
       if (result.data.result) {
         handleStageChange(result.data.script, true);
         const commandArr = command.match(/\S+/g) || [];
