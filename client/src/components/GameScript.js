@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../css/gamescript.css';
+import WOW from 'wowjs';
 
 function GameScript({ script, stage }) {
+
+  useEffect(() => {
+    new WOW.WOW({ live: false }).init();
+  }, []);
 
   const lines = script.split('\n');
 
@@ -11,10 +16,10 @@ function GameScript({ script, stage }) {
         <div id="gamescript-wordbox">
           {lines.map((line, i) => <span className="gamescript-script" key={i}>{line}</span>)}
           { stage <= 2 ?
-            <img id="gamescript-man-img" src="man.png" alt="man"/>
+            <img className="wow pulse infinite" id="gamescript-man-img" src="man.png" alt="man"/>
             : ( stage >= 10 ? 
-              <img id="gamescript-tux-img" src="tux.png" alt="tux"/>
-              : <img id="gamescript-qman-img" src="question_man.png" alt="man"/>
+              <img className="wow pulse infinite" id="gamescript-tux-img" src="tux.png" alt="tux"/>
+              : <img className="wow pulse infinite" id="gamescript-qman-img" src="question_man.png" alt="man"/>
             )
           }
         </div>

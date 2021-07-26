@@ -37,12 +37,13 @@
 }
 
 #gamescript-qman-img {
+  transition: 1s;
   position: absolute;
   height: 7rem;
   margin: 1rem;
   top: 9rem;
-  left: 25%;
-  transform: translateX(45%);
+  left: 30%;
+  transform: translateX(30%);
   z-index: 5;
 }
 
@@ -61,8 +62,8 @@
   height: 9rem;
   margin: 1rem;
   top: 8rem;
-  left: 25%;
-  transform: translateX(25%);
+  left: 28%;
+  transform: translateX(28%);
   z-index: 5;
 }
 
