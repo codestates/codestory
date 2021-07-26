@@ -40,11 +40,10 @@ function Game() {
       <div id="game-background">
         <div id="game-container">
           <div id="game-leftside">
-            <GameScript script={script}/>
-            <div id="game-images">
-              <img id="game-man-img" src="question_man.png" alt="man"/>
-              <img id="game-tail-img" src="wordcloud_tail_right.png" alt="wordcloud tail"/>
-            </div>
+            <GameScript 
+              script={script}
+              stage={stageIndex}
+            />
             <GameCli
               stage={stageArr[stageIndex]}
               handleStageChange={handleStageChange}
