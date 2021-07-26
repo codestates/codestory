@@ -6,6 +6,7 @@ module.exports = {
     try{
       const jwt=isAuthorizedJwt(req);
       const oauth=isAuthorizedOauth(req);
+      console.log(jwt,oauth);
       if(jwt || oauth){
         sendAccessToken(req,'invalid Token');
       }else{

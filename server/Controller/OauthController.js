@@ -1,6 +1,6 @@
 const { TokenExpiredError } = require('jsonwebtoken');
 const db = require('../models');
-const {getKakaoToken,getGoogleToken,sendAccessToken,isAuthorizedOauth} = require('./OauthToken');
+const {getKakaoToken,getGoogleToken,sendAccessToken} = require('./OauthToken');
 
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
     try {
       let kakaoData= await getKakaoToken(req);
       let googleData= await getGoogleToken(req);
-     
+      console.log('oauthToken 작동')
       if(kakaoData){
         let oauthAccessToken=kakaoData.access_token;
         sendAccessToken(res,'kakao',oauthAccessToken)
@@ -24,19 +24,4 @@ module.exports = {
       throw error;
     }
   },
-  oauthAuthorization: async(req,res)=>{
-    try{
-      const isAuthorization=await isAuthorizedOauth(req)
-      console.log(isAuthorization.data);
-      if(isAuthorization){
-        res.status(200).send({"message":"ok"})
-      }else{
-        res.status(400).send({"message":"invalid Token"});
-      }
-    }
-    catch(error){
-      console.log(error);
-      res.status(500).send({message: 'Sorry Can\'t procss your request'})
-    }
-  }
 };

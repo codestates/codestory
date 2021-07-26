@@ -1,13 +1,12 @@
 const dotenv=require('dotenv')
 const axios=require('axios');
 const qs=require('querystring');
-const { response } = require('express');
+dotenv.config();
+
 const kakaoClientId = process.env.KAKAO_CLIENTID;
 const kakaoClientSecret = process.env.KAKAO_CLIENT_SECRET;
 const googleClientId = process.env.GOOGLE_CLIENTID;
-const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET
-
-dotenv.config();
+const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
 
 module.exports = {
   getKakaoToken: async (req) => {
@@ -26,6 +25,7 @@ module.exports = {
       })
     })
     .then((res) => {
+      console.log('kakao Token Data',res.data);
       return res.data;
     })
     .catch(err => {
@@ -47,16 +47,18 @@ module.exports = {
       })
     })
     .then((res) => {
+      console.log('google Token Data',res.data);
       return res.data;
     })
     .catch((err) =>{
-      console.log('google get token err');
+      console.log('google get token error');
       return null
     });
     return response;
   },
   sendAccessToken: (res, cookieName,accessToken) => {
     let oauthAccessToken=cookieName+' '+accessToken
+    console.log('oauthAccessToken',oauthAccessToken);
     res.cookie('accessToken',oauthAccessToken,{ sameSite:'none',secure:true,httpOnly:true}).status(200).json({message: 'ok'});
   },
   isAuthorizedOauth: async (req) => {
@@ -65,12 +67,14 @@ module.exports = {
       let accessToken=req.cookies.accessToken.split(' ')[1];
       if(oauthLocation==='kakao'){
         const response=await axios({
-          url :'https://kauth.kakao.com/v1/user/access_token_info',
+          url :'https://kapi.kakao.com//v2/user/me',
           metohod : 'get',
           headers: { 
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
             "Authorization": `Bearer ${accessToken}`
           }
+
+          
         })
         .then(res =>{
           return res;
@@ -80,7 +84,7 @@ module.exports = {
           return null;
         })
         return response;
-      }else if(oauthLocation='google'){
+      }else if(oauthLocation==='google'){
         const response=await axios({
           url : 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
           method : 'get',

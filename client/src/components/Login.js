@@ -46,7 +46,7 @@ function Login({loginClick}) {
     if (username === '' || password === '') {
       setErrorMessage('아이디와 비밀번호 모두 입력해주세요');
     } else {
-      await axios.post('https://api.codestory.academy/signin', {
+      await axios.post('http://localhost:4000/signin', {
         username: username,
         password: password
       }, {

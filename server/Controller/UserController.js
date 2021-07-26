@@ -35,8 +35,9 @@ module.exports = {
   },
   sendUserInfo: async (req, res) => {
     try {
-      const jwt = isAuthorizedJwt(req);
-      const oauth = isAuthorizedOauth(req);
+      console.log('userinfo실행')
+      const jwt = await isAuthorizedJwt(req);
+      const oauth = await isAuthorizedOauth(req);
       if (jwt) {
         const result = await models.users.findOne({ where: { id: jwt.id } });
         const follower = await models.follower_followeds.count({ where: { followedId: jwt.id } });
@@ -54,9 +55,18 @@ module.exports = {
           following
         });
       }else if(oauth){
+        console.log(oauth.data);
+        let username,photourl;
+        if(oauth.data.kakao_account){
+          username=oauth.data.properties.nickname;
+          photourl=oauth.data.properties.profile_image;
+        }else{
+          username=oauth.data.name;
+          photourl=oauth.data.picture;
+        }
         res.send({
-          username: 'unkown user',
-          photourl: 'http://',
+          username:username,
+          photourl:photourl,
           coin: 0,
           intro: '반갑습니다.',
           ranking:10000,

@@ -37,7 +37,7 @@ function Profile( {userInfo, userView} ) {
 
   const closeEditMode = async () => {
     if (word.length > 0) {
-      await axios.patch('https://api.codestory.academy/user', {
+      await axios.patch('http://localhost:4000/user', {
         word: word
       }, {
         'content-type': 'application/json',
@@ -64,11 +64,6 @@ function Profile( {userInfo, userView} ) {
   };
 
   const showFollowingList = async () => {
-    const authorization=await axios.get('https://api.codestory.academy/oauth',{
-      'content-type':'application/json',
-      withCredentials : true
-    });
-    console.log(authorization);
     setfollow(true);
   };
 
