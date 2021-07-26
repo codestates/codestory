@@ -5,7 +5,7 @@ import FollowingList from './FollowingList';
 import Footer from '../components/Footer';
 import axios from 'axios';
 
-function Profile( {userInfo, userView} ) {
+function Profile( {userInfo, userView, followingList} ) {
   const [img, setImage] = useState(null);
   const [editmode, setEditmode] = useState(false);
   const [word, setWord] = useState('나의 한마디');
@@ -65,11 +65,11 @@ function Profile( {userInfo, userView} ) {
   };
 
   const showFollowingList = async () => {
-    const authorization=await axios.get('https://api.codestory.academy/oauth',{
-      'content-type':'application/json',
-      withCredentials : true
-    });
-    console.log(authorization);
+    // const authorization=await axios.get('https://api.codestory.academy/oauth',{
+    //   'content-type':'application/json',
+    //   withCredentials : true
+    // });
+    // console.log(authorization);
     setfollow(true);
   };
 
@@ -95,7 +95,7 @@ function Profile( {userInfo, userView} ) {
     <>
       { isLoading ?
         <h1 id="profile-loading">로딩중 입니다...</h1> :
-        showfollow ? <FollowingList props={showProfile} /> :
+        showfollow ? <FollowingList showProfile={showProfile} followingList={followingList} userInfo={userInfo}/> :
           <div id="profile-background">
             <div id="profile-container">
               <div id="profile-out-btn">

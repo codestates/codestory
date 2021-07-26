@@ -89,7 +89,7 @@ function App() {
               <Ranking />
             </Route>
             <Route path="/profile">
-              <Profile userInfo={userInfo} userView={userView} />
+              <Profile userInfo={userInfo} userView={userView} followingList={followingList}/>
             </Route>
             <Route path="/game">
               <Game />
