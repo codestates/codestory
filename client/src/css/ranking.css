@@ -76,8 +76,8 @@ body {
 }
 
 .number3 {
-	left: 115px;
-	top: -69px;
+	left: 98px;
+	top: -63px;
 }
 
 
@@ -99,7 +99,7 @@ body {
 #no2 {
 	width: 20%;
 	height: 20%;
-	left: -235px;
+	left: -237px;
 	top: 65px;
 }
 
@@ -190,25 +190,49 @@ body {
 }
 
 .userlist-follow-btn {
-	width: 75px;
+	width: 80px;
 	background-color: white;
 	color: black;
 	font-weight: 700;
 	border: none;
 	border-radius: 3rem;
-	padding: 5px 14px;
-	transition: all 150ms ease-in;
+	padding: 5px;
 	cursor: pointer;
 }
 
 .userlist-follow-btn:hover {
 	background-color: black;
 	color: white;
-	/* border: 2px solid black */
+	/* font-size: 0.5rem; */
+	font-weight: 700;
+	padding: 5px;
 }
 
 #ranking-loading {
   position: absolute;
   left: 45%;
   top: 45%;
+}
+
+
+.Follow:hover span,
+.Unfollow:hover span,
+.me:hover span {
+	display: none;
+}
+
+.Follow:hover::before {
+	content: "Follow"
+}
+
+.me:hover::before {
+	content: "나?"
+}
+
+.Unfollow:hover:before {
+	content:"Unfollow"
+}
+
+.follow-state {
+	font-size: 0.5rem;
 }
