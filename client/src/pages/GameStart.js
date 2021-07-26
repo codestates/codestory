@@ -5,8 +5,8 @@ import Footer from '../components/Footer';
 import '../css/gamestart.css';
 
 
-function GameStart({loginClick}) {
-  
+function GameStart({loginClick, setIsLogin}) {
+
   const url = new URL(window.location.href);
   const authorizationCode = url.searchParams.get('code'); 
   const [isHover, setIsHover] = useState(false);
@@ -24,9 +24,15 @@ function GameStart({loginClick}) {
     }
   },[]);
   
-
+  useEffect(()=> {
+    axios.get('https://api.codestory.academy/user', {
+      'content-type': 'application/json',
+      withCredentials: true
+    }).then(()=>{
+      setIsLogin(true);
+    });
+  });
   
-
   const onMouseOver = () => {
     setIsHover(true);
   };

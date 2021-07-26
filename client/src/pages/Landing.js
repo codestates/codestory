@@ -3,7 +3,8 @@ import WOW from 'wowjs';
 import Login from '../components/Login';
 import '../css/landing.css';
 
-function Landing({loginClick}) {
+function Landing({loginClick, setIsLogin}) {
+
   const [isVisible, setIsVisible] = useState(false);
   const [y, setY] = useState(null);
 
@@ -16,6 +17,10 @@ function Landing({loginClick}) {
     }
     setY(window.scrollY);
   };
+
+  useEffect(() => {
+    setIsLogin(false);
+  });
 
   useEffect(() => {
     window.addEventListener('scroll', (e) => handleNavigation(e));

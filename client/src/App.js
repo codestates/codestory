@@ -44,7 +44,7 @@ function App() {
         console.log('로그인하세요');
       }
     })();
-  }, []);
+  });
 
   const loginClick = () => {
     setIsLogin(true);
@@ -79,11 +79,11 @@ function App() {
           <Nav isLogin={isLogin} userInfo={userInfo} logoutClick={logoutClick}/>
           <Switch>
             <Route exact={true} path="/">
-              <Landing loginClick={loginClick}/>
+              <Landing loginClick={loginClick} setIsLogin={setIsLogin}/>
               <Footer />
             </Route>
             <Route path="/gamestart">
-              <GameStart loginClick={loginClick} />
+              <GameStart loginClick={loginClick} setIsLogin={setIsLogin}/>
             </Route>
             <Route path="/ranking">
               <Ranking />
