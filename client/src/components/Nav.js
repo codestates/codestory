@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Nav( isLogin ) {
+function Nav({ isLogin, userInfo, logoutClick }) {
   const scrollToBottom = () => {
     document.getElementById('root').scrollIntoView({ block: 'end' });
   };
@@ -9,9 +9,9 @@ function Nav( isLogin ) {
   return (
     <div id="nav-container">
       <span id="title">
-        {/* <span id="name">Code Story</span> */}
+        <span id="name">{`반갑습니다 ${userInfo.username}님!`}</span>
       </span>
-      { isLogin.props ? (
+      { isLogin ? (
         <div id="menu">  
           <div className="btn">
             <Link to="/gamestart">게임</Link>
@@ -21,6 +21,9 @@ function Nav( isLogin ) {
           </div>
           <div className="btn">
             <Link to="/profile">프로필</Link>
+          </div> 
+          <div className="btn">
+            <Link to="/" onClick={()=>logoutClick()}>로그아웃</Link>
           </div> 
         </div>
       ) : (

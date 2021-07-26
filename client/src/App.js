@@ -50,6 +50,11 @@ function App() {
     setIsLogin(true);
   };
 
+  const logoutClick = () => {
+    axios.get('https://api.codestory.academy/signout', { withCredentials: true });
+    setIsLogin(false);
+  };
+
   const userView = (user) => {
     console.log('app.js user', user);
     setUserInfo({
@@ -71,7 +76,7 @@ function App() {
       </MobileView>
       <BrowserRouter>
         <BrowserView>
-          <Nav props={isLogin}/>
+          <Nav isLogin={isLogin} userInfo={userInfo} logoutClick={logoutClick}/>
           <Switch>
             <Route exact={true} path="/">
               <Landing loginClick={loginClick}/>
