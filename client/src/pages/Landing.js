@@ -15,7 +15,6 @@ function Landing({loginClick}) {
       setIsVisible(false);
     }
     setY(window.scrollY);
-    console.log(window);
   };
 
   useEffect(() => {

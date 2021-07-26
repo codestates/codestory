@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/profile.css';
 import FollowingList from './FollowingList';
+import Footer from '../components/Footer';
 import axios from 'axios';
 
 function Profile( {userInfo, userView} ) {
@@ -144,6 +145,7 @@ function Profile( {userInfo, userView} ) {
             </div>
           </div>
       }
+      <Footer />
     </>
   );
 }

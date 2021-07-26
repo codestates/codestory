@@ -76,7 +76,7 @@ function GameGui({ stage, wd }) {
                   if (idx < 9) {
                     return (
                       <div className="gamegui-filebox" key={idx}>
-                        <img id="gamegui-file-img" src={{ folder: 'file_icon.png', file: 'file_icon.png' }[type]} alt="file icon"/>
+                        <img id="gamegui-file-img" src={{ folder: 'folder_icon.png', file: 'file_icon.png' }[type]} alt="file icon"/>
                         <div id="gamegui-filename">{fileName}</div>
                       </div>
                     );
