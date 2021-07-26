@@ -14,7 +14,6 @@ import axios from 'axios';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  const [oauthToken, setOauthToken] = useState('초기 토큰');
   const [userInfo, setUserInfo] = useState({
     username: '',
     photourl: '',
@@ -29,7 +28,6 @@ function App() {
 
   ranking;
   followingList;
-  console.log(oauthToken);
 
   useEffect(() => {
     (async () => {
@@ -50,10 +48,6 @@ function App() {
 
   const loginClick = () => {
     setIsLogin(true);
-  };
-
-  const newOauthToken= (accessToken)=>{
-    setOauthToken(accessToken);
   };
 
   const userView = (user) => {
@@ -84,7 +78,7 @@ function App() {
               <Footer />
             </Route>
             <Route path="/gamestart">
-              <GameStart loginClick={loginClick} newOauthToken={newOauthToken} />
+              <GameStart loginClick={loginClick} />
             </Route>
             <Route path="/ranking">
               <Ranking />

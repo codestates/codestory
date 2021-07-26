@@ -4,21 +4,28 @@ import axios from 'axios';
 import Footer from '../components/Footer';
 import '../css/gamestart.css';
 
-function GameStart({loginClick,newOauthToken}) {
+
+function GameStart({loginClick}) {
   
   const url = new URL(window.location.href);
-  const authorizationCode = url.searchParams.get('code');
-
+  const authorizationCode = url.searchParams.get('code'); 
   const [isHover, setIsHover] = useState(false);
 
   useEffect(async ()=>{
     if(authorizationCode){
-      let res = await axios.post('http://localhost:4000/oauth', { authorizationCode: authorizationCode});
-      loginClick();
-      console.log(res.data);
-      newOauthToken(res.data.oauthAccessToken);
+      const res= await axios.post('https://api.codestory.academy/oauth',
+        { authorizationCode: authorizationCode}, {
+          'content-type': 'application/json',
+          withCredentials: true
+        });
+      if(res.data.message==='ok'){
+        loginClick();
+      }
     }
   },[]);
+  
+
+  
 
   const onMouseOver = () => {
     setIsHover(true);

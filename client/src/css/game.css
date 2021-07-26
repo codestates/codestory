@@ -40,21 +40,6 @@
   align-items: center;
 }
 
-#game-man-img {
-  height: 10rem;
-  position: relative;
-  top: -8rem;
-  left: 9vw;
-  z-index: 1;
-}
-
-#game-tail-img {
-  height: 3rem;
-  position: absolute;
-  top: 12rem;
-  left: 16vw;
-}
-
 #game-arrow {
   position: absolute;
   bottom: 8.5rem;
