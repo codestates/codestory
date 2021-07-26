@@ -51,7 +51,6 @@ module.exports = {
     })
     .catch((err) =>{
       console.log('google get token err');
-      throw err;
       return null
     });
     return response;
