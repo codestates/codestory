@@ -4,6 +4,7 @@ const db = require('../models');
 
 module.exports = {
   sendRanking: async (req, res) => {
+    console.log('sendRanking작동');
     try {
       const jwt = await isAuthorizedJwt(req);
       const oauth = await isAuthorizedOauth(req);
@@ -14,7 +15,7 @@ module.exports = {
         for (let record of followedArr) {
           isFollowed[record.dataValues.followedId] = true;
         }
-        res.send({ data: rankingArr.map((record) => ({
+        res.status(200).json({ data: rankingArr.map((record) => ({
           username: record.dataValues.userId,
           photourl: record.dataValues.pictureurl,
           coin: record.dataValues.coin,
@@ -22,11 +23,11 @@ module.exports = {
         })) });
       }
       else {
-        res.status(400).send({ message: 'InvalidToken' });
+        res.status(400).json({ message: 'InvalidToken' });
       }
     }
     catch (error) {
-      res.status(500).send({ 'message': 'Sorry Can\'t process your request' });
+      res.status(500).json({ 'message': 'Sorry Can\'t process your request' });
       throw error;
     }
   },

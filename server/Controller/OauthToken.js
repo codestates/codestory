@@ -24,7 +24,6 @@ module.exports = {
       })
     })
     .then((res) => {
-      console.log('kakao Token Data',res.data);
       return res.data;
     })
     .catch(err => {
@@ -46,7 +45,6 @@ module.exports = {
       })
     })
     .then((res) => {
-      console.log('google Token Data',res.data);
       return res.data;
     })
     .catch((err) =>{
@@ -57,7 +55,6 @@ module.exports = {
   },
   sendAccessToken: (res, cookieName,accessToken) => {
     let oauthAccessToken=cookieName+' '+accessToken
-    console.log('oauthAccessToken',oauthAccessToken);
     res.cookie('accessToken',oauthAccessToken,{ sameSite:'none',secure:true,httpOnly:true}).status(200).json({message: 'ok'});
   },
   isAuthorizedOauth: async (req) => {

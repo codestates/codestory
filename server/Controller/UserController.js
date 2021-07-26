@@ -5,6 +5,7 @@ const { Op } = require('sequelize');
 
 module.exports = {
   signUp: async (req, res) => {
+    console.log('signUp작동')
     try{
       const username=req.body.username;
       const password=req.body.password;
@@ -13,7 +14,7 @@ module.exports = {
         res.status(400).json({message:'Bad Request'});
       }else{
         const time=Date.now();
-        const result=await models.users.create({
+        await models.users.create({
           pictureurl: '../?',
           userId : username,
           password : password,
@@ -21,11 +22,7 @@ module.exports = {
           createdAt : time,
           updatedAt : time
         });
-        if(result){
-          res.status(200).json({message:'ok'});
-        }else{
-          res.status(500).send({ message: 'Sorry Can\'t process your request' })
-        }
+        res.status(200).json({message:'ok'});
       }  
     }
     catch(error){
@@ -45,7 +42,7 @@ module.exports = {
         const rankingArr = await models.users.findAll({ order: [['coin', 'DESC'], ['id', 'ASC']] });
         const idArr = rankingArr.map((user) => user.dataValues.id);
         const ranking = idArr.indexOf(jwt.id) + 1;
-        res.send({
+        res.status(200).json({
           username: result.userId,
           photourl: result.pictureurl,
           coin: result.coin,
@@ -64,7 +61,7 @@ module.exports = {
           username=oauth.data.name;
           photourl=oauth.data.picture;
         }
-        res.send({
+        res.status(200).json({
           username:username,
           photourl:photourl,
           coin: 0,
@@ -75,11 +72,11 @@ module.exports = {
         })
       }
       else {
-        res.status(400).send({ message: 'InvalidToken' });
+        res.status(400).json({ message: 'InvalidToken' });
       }
     }
     catch (error) {
-      res.status(500).send({ message: 'Sorry Can\'t process your request' });
+      res.status(500).json({ message: 'Sorry Can\'t process your request' });
       throw error;
     }
   },
@@ -89,15 +86,15 @@ module.exports = {
       const oauth=isAuthorizedOauth(req);
       if (jwt) {
         await models.users.update({ word: req.body.word }, { where: { id: jwt.id } });
-        res.send({ message: 'ok' });
+        res.status(200).json({ message: 'ok' });
       }else if(oauth){
-        res.send({message:'ok'});
+        res.status(200).json({message:'ok'});
       }else {
-        res.status(400).send({ message: 'InvalidToken' });
+        res.status(400).json({ message: 'InvalidToken' });
       }
     }
     catch (error) {
-      res.status(500).send({ 'message': 'Sorry Can\'t process your request' });
+      res.status(500).json({ 'message': 'Sorry Can\'t process your request' });
       throw error;
     }
   },
@@ -109,16 +106,16 @@ module.exports = {
         await models.follower_followeds.destroy({ where: { [Op.or]: [{ followerId: jwt.id }, { followedId: jwt.id }] } });
         await models.users.destroy({ where: { id: jwt.id } });
         res.cookie('jwtAccessToken', 'invalid Token');
-        res.status(200).send({ message: 'ok' });
+        res.status(200).json({ message: 'ok' });
       }else if(oauth){
-        res.status(200).send({message:'ok'})
+        res.status(200).json({message:'ok'})
       }
       else {
-        res.status(400).send({ message: 'InvalidToken' });
+        res.status(400).json({ message: 'InvalidToken' });
       }
     }
     catch (error) {
-      res.status(500).send({ 'message': 'Sorry Can\'t process your request' });
+      res.status(500).json({ 'message': 'Sorry Can\'t process your request' });
       throw error;
     }
   }
