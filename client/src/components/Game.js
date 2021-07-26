@@ -18,7 +18,7 @@ function Game() {
   useEffect(() => {
     new WOW.WOW({ live: false }).init();
     (async () => {
-      const result = await axios.post('http://loaclhost:4000/game/answer', { stage: '0', command: '' }, { withCredentials: true });
+      const result = await axios.post('https://api.codestory.academy/game/answer', { stage: '0', command: '' }, { withCredentials: true });
       setStageIndex(stageIndex + 1);
       setScript(result.data.script);
       setIsWaiting(false);

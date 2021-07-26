@@ -38,7 +38,7 @@ function Profile( {userInfo, userView} ) {
 
   const closeEditMode = async () => {
     if (word.length > 0) {
-      await axios.patch('http://localhost:4000/user', {
+      await axios.patch('https://api.codestory.academy/user', {
         word: word
       }, {
         'content-type': 'application/json',

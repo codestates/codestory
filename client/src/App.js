@@ -51,7 +51,7 @@ function App() {
   };
 
   const logoutClick = () => {
-    axios.get('https://api.codestory.academy/signout', { withCredentials: true });
+    axios.get('http://localhost:4000/signout', { withCredentials: true });
     setIsLogin(false);
   };
 

@@ -8,7 +8,7 @@ function Login({loginClick}) {
 
   const kakaoClientId='ce992090812c730f2178949e1baac586';
   const googleClientId='308904347249-t3ilrgtua2unljo0jgfv50iqihm4buja.apps.googleusercontent.com';
-  const redirectUri='http://localhost:3000/gamestart';
+  const redirectUri='https://www.codestory.academy/gamestart';
   const kakaoLoginUrl = `https://Kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${redirectUri}&response_type=code`;
   const googleLoginUrl=`https://accounts.google.com/o/oauth2/auth?client_id=${googleClientId}&redirect_uri=${redirectUri}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile`;
   
@@ -46,7 +46,7 @@ function Login({loginClick}) {
     if (username === '' || password === '') {
       setErrorMessage('아이디와 비밀번호 모두 입력해주세요');
     } else {
-      await axios.post('http://localhost:4000/signin', {
+      await axios.post('https://api.codestory.academy/signin', {
         username: username,
         password: password
       }, {
