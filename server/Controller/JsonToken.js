@@ -10,7 +10,7 @@ module.exports = {
     res.cookie('accessToken',jwtAccessToken,{ sameSite: 'none', secure: true, httpOnly: true }).status(200).json({message: 'ok' });
   },
   isAuthorizedJwt: (req) => {
-    if(req.cookies){
+    if(req.cookies && req.cookies.accessToken){
       const jwt = req.cookies.accessToken.split(' ')[1];
       if (!jwt) {
         return null;
@@ -20,6 +20,8 @@ module.exports = {
       } catch {
         return null;
       }
+    }else{
+      return null;
     }
   }
 };

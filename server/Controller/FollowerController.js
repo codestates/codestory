@@ -4,8 +4,8 @@ const db = require('../models');
 module.exports = {
   follow: async (req, res) => {
     try {
-      const jwt = isAuthorizedJwt(req);
-      const oauth = isAuthorizedOauth(req);
+      const jwt = await isAuthorizedJwt(req);
+      const oauth = await isAuthorizedOauth(req);
       
       if (jwt) {
         const followed = await db.users.findOne({ where: { userId: req.body.username } });
@@ -28,7 +28,7 @@ module.exports = {
   },
   unFollow: async (req, res) => {
     try {
-      const jwt = isAuthorizedJwt(req);
+      const jwt = await isAuthorizedJwt(req);
       if (jwt) {
         const followed = await db.users.findOne({ where: { userId: req.body.username } });
         await db.follower_followeds.destroy({ where: {

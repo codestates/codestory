@@ -1,8 +1,7 @@
 const dotenv=require('dotenv')
 const axios=require('axios');
-const qs=require('querystring');
 dotenv.config();
-
+const qs=require('querystring');
 const kakaoClientId = process.env.KAKAO_CLIENTID;
 const kakaoClientSecret = process.env.KAKAO_CLIENT_SECRET;
 const googleClientId = process.env.GOOGLE_CLIENTID;
@@ -62,7 +61,7 @@ module.exports = {
     res.cookie('accessToken',oauthAccessToken,{ sameSite:'none',secure:true,httpOnly:true}).status(200).json({message: 'ok'});
   },
   isAuthorizedOauth: async (req) => {
-    if(req.cookies){
+    if(req.cookies && req.cookies.accessToken){
       let oauthLocation=req.cookies.accessToken.split(' ')[0];
       let accessToken=req.cookies.accessToken.split(' ')[1];
       if(oauthLocation==='kakao'){
@@ -73,14 +72,12 @@ module.exports = {
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
             "Authorization": `Bearer ${accessToken}`
           }
-
-          
         })
         .then(res =>{
           return res;
         })
         .catch((err)=>{
-          console.log(err);
+          console.log('kakao AuthorizedOauth error');
           return null;
         })
         return response;
@@ -96,13 +93,15 @@ module.exports = {
           return res;
         })
         .catch((err)=>{
-          console.log(err);
+          console.log('google AuthorizedOauth error');
           return null;
         })
         return response;
       }else{
         return null;
       }
+    }else{
+      return null;
     }
   }
 };

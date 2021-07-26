@@ -5,8 +5,8 @@ const db = require('../models');
 module.exports = {
   sendRanking: async (req, res) => {
     try {
-      const jwt = isAuthorizedJwt(req);
-      const oauth = isAuthorizedOauth(req);
+      const jwt = await isAuthorizedJwt(req);
+      const oauth = await isAuthorizedOauth(req);
       if (jwt || oauth) {
         const rankingArr = await db.users.findAll({ order: [['coin', 'DESC'], ['id', 'ASC']] });
         const followedArr = await db.follower_followeds.findAll({ where: { followerId: jwt.id } });

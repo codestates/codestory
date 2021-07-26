@@ -4,8 +4,8 @@ const db = require('../models');
 module.exports = {
   checkAnswer: async (req, res) => {
     try {
-      const jwt = isAuthorizedJwt(req);
-      const oauth = isAuthorizedOauth(req);
+      const jwt = await isAuthorizedJwt(req);
+      const oauth = await isAuthorizedOauth(req);
       if (jwt || oauth) {
         const result = await db.scripts.findOne({ where: { stage: req.body.stage } });
         const { answer, content } = result.dataValues;
@@ -26,8 +26,8 @@ module.exports = {
   },
   updateCoin: async (req,res)=>{
     try {
-      let accessTokenData=isAuthorizedJwt(req);
-      let oauth=isAuthorizedOauth(req);
+      let accessTokenData=await isAuthorizedJwt(req);
+      let oauth=await isAuthorizedOauth(req);
       if (accessTokenData) {
         const result = db.user.update(
           {

@@ -3,7 +3,6 @@ const db = require('../models');
 module.exports = {
   signIn: async (req, res) => {
     try {
-      console.log('signIN routing!');
       const userInfo = await db.users.findOne({
         where: { userId: req.body.username, password: req.body.password }
       });

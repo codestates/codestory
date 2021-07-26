@@ -103,8 +103,8 @@ module.exports = {
   },
   unRegister: async (req,res)=>{
     try {
-      const jwt = isAuthorizedJwt(req);
-      const oauth= isAuthorizedOauth(req);
+      const jwt = await isAuthorizedJwt(req);
+      const oauth= await isAuthorizedOauth(req);
       if (jwt) {
         await models.follower_followeds.destroy({ where: { [Op.or]: [{ followerId: jwt.id }, { followedId: jwt.id }] } });
         await models.users.destroy({ where: { id: jwt.id } });
