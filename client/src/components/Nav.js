@@ -8,30 +8,35 @@ function Nav({ isLogin, userInfo, logoutClick }) {
 
   return (
     <div id="nav-container">
-      <span id="title">
-        <span id="name">{`반갑습니다 ${userInfo.username}님!`}</span>
-      </span>
       { isLogin ? (
-        <div id="menu">  
-          <div className="btn">
-            <Link to="/gamestart">게임</Link>
+        <>
+          <span id="title">
+            <span id="name">{`반갑습니다 ${userInfo.username}님!`}</span>
+          </span>
+          <div id="menu">  
+            <div className="btn">
+              <Link to="/gamestart">게임</Link>
+            </div>
+            <div className="btn">
+              <Link to="/ranking">랭킹</Link>
+            </div>
+            <div className="btn">
+              <Link to="/profile">프로필</Link>
+            </div> 
+            <div className="btn">
+              <Link to="/" onClick={()=>logoutClick()}>로그아웃</Link>
+            </div> 
           </div>
-          <div className="btn">
-            <Link to="/ranking">랭킹</Link>
-          </div>
-          <div className="btn">
-            <Link to="/profile">프로필</Link>
-          </div> 
-          <div className="btn">
-            <Link to="/" onClick={()=>logoutClick()}>로그아웃</Link>
-          </div> 
-        </div>
+        </>
       ) : (
-        <div id="menu">  
-          <div className="btn">
-            <div onClick={()=>scrollToBottom()}>로그인</div>
-          </div> 
-        </div>
+        <>
+          <span id="title"></span>
+          <div id="menu">  
+            <div className="btn">
+              <div onClick={()=>scrollToBottom()}>로그인</div>
+            </div> 
+          </div>
+        </>
       )}
     </div> 
   );
