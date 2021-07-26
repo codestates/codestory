@@ -86,7 +86,7 @@ function App() {
               <GameStart loginClick={loginClick} />
             </Route>
             <Route path="/ranking">
-              <Ranking />
+              <Ranking ranking={ranking}/>
             </Route>
             <Route path="/profile">
               <Profile userInfo={userInfo} userView={userView} />

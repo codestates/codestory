@@ -2,44 +2,45 @@ body {
 	box-sizing: border-box;
 }
 
+#crown {
+	position: relative;
+	top: 8rem;
+	z-index: 20;
+	width: 180px;
+}
+
 #ranking-background {
 	width: 100%;
-	height: 93vh;
+	height: 38rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-}
-
-#crown {
-	position: absolute;
-	top: 8%;
-	width: 120px;
-	z-index: 1;
+	height: 73vh;
 }
 
 #ranking-container {
-	position: absolute;
-  top: 6%;
+	position: relative;
 	margin-top: 6rem;
   width: 28rem;
   height: 28rem;
 	display: flex;
 	justify-content: center;
 	background-color: #fccb03;
-	border-radius: 2rem;
-	padding: 40px;
+	border-radius: 3rem;
+	padding: 40px
 }
 
 #ranking-out-btn {
-	position: relative;
+	position: absolute;
 	margin-right: 1.5rem;
-	top: -1rem;
-	right: -3rem;
+	z-index: 990;
+	top: -3%;
+	right: -11%;
   width: 2rem;
   height: 2rem;
   background-color: #ffffff;
-  align-self: flex-end;
+  /* align-self: flex-end; */
   border-radius: 2rem;
   text-align: center;
   font-size: 40px;
@@ -49,16 +50,13 @@ body {
 
 .ranking-podium {
 	margin-bottom: 10px;
+	position: relative;
+	/* border: 1px solid black; */
 }
 
 .ranking-mvp {
 	display: flex;
 	justify-content: space-around;
-	position: relative;
-}
-
-.ranking-mvp-number {
-	position: relative;
 }
 
 .no1,
@@ -67,48 +65,49 @@ body {
 	position: absolute;
 }
 
-.no1 {
-	left: 27%;
-	top: -15%;
+.number1 {
+	left: -5%;
+	top: -10px;
 }
 
-.no2 {
-	left: -6%;
-	top: 30%;
+.number2 {
+	left: -65px;
+	top: 20px;
 }
 
-.no3 {
-	left: 62%;
-	top: 30%;
+.number3 {
+	left: 115px;
+	top: -69px;
 }
 
-#first,
-#second,
-#third {
+
+#no1,
+#no2,
+#no3 {
 	position: relative;
 	z-index: 99;
 }
 
-#first {
+#no1 {
+	position: absolute;
 	width: 25%;
-	height: 25%;
-	left: 33px;
-	top: 13px;
+	left: 138px;
+	top: 36px;
 
 }
 
-#second {
+#no2 {
 	width: 20%;
 	height: 20%;
-	left: 12px;
+	left: -235px;
 	top: 65px;
 }
 
-#third {
+#no3 {
+	position: absolute;
 	width: 20%;
-	height: 20%;
-	left: 60px;
-	top: 65px;
+	left: 270px;
+	top: 90px;
 }
 
 .btn1,
@@ -118,22 +117,24 @@ body {
 }
 
 .btn1 {
-	left: 40.5%;
-	top: 45%
+	left: 40%;
+	top: 73%
 }
 
 .btn2 {
-	left: 6.5%;
-	top: 70%;
+	left: 4%;
+	top: 85%;
 }
 
 .btn3 {
-	left: 76.5%;
-	top: 70%;
+	left: 75%;
+	top: 85%;
 }
+
 #number1,
 #number2,
 #number3 {
+	z-index: 999;
 	position: absolute;
 	font-size: 1.2rem;
 	font-weight: 700;
@@ -141,18 +142,18 @@ body {
 }
 
 #number1 {
-	left: 47%;
-	top: 25%;
+	left: 48.5%;
+	top: 63%;
 }
 
 #number2 {
 	left: 13%;
-	top: 50%;
+	top: 75%;
 }
 
 #number3 {
 	left: 83%;
-	top: 50%;
+	top: 75%;
 }
 
 
@@ -170,6 +171,7 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 1px solid black;
+	
 }
 
 .userlist-number {
@@ -179,6 +181,8 @@ body {
 }
 
 .userlist-username {
+	text-align: center;
+	position: relative;
 	color:black;
 	margin-left: 35px;
 	font-size: 20px;
@@ -186,10 +190,10 @@ body {
 }
 
 .userlist-follow-btn {
+	width: 75px;
 	background-color: white;
 	color: black;
 	font-weight: 700;
-	/* border: 2px solid black; */
 	border: none;
 	border-radius: 3rem;
 	padding: 5px 14px;
@@ -203,3 +207,8 @@ body {
 	/* border: 2px solid black */
 }
 
+#ranking-loading {
+  position: absolute;
+  left: 45%;
+  top: 45%;
+}
