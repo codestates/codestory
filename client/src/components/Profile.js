@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../css/profile.css';
-import FollowingList from './FollowingList';
 import axios from 'axios';
+import FollowingList from './FollowingList';
+import Footer from './Footer';
+import '../css/profile.css';
 
 function Profile( {userInfo, userView} ) {
   const [img, setImage] = useState(null);
@@ -144,6 +145,7 @@ function Profile( {userInfo, userView} ) {
             </div>
           </div>
       }
+      <Footer />
     </>
   );
 }
