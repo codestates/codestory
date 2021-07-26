@@ -5,7 +5,6 @@ const { Op } = require('sequelize');
 
 module.exports = {
   signUp: async (req, res) => {
-    console.log('signUp작동')
     try{
       const username=req.body.username;
       const password=req.body.password;
@@ -32,7 +31,6 @@ module.exports = {
   },
   sendUserInfo: async (req, res) => {
     try {
-      console.log('userinfo실행')
       const jwt = await isAuthorizedJwt(req);
       const oauth = await isAuthorizedOauth(req);
       if (jwt) {
