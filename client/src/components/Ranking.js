@@ -32,8 +32,8 @@ function Ranking({ ranking, rankingHandler }) {
       await axios.delete('https://api.codestory.academy/follower', {
         username: e.username
       }, {
-        'content-type': 'application/json',
-        withCredentials: true
+        'content-type': 'application/json'
+        // withCredentials: true
       }).then(() => {
         rankingList = rankingList.map((rank) => {
           if (rank.username === e.username) {
