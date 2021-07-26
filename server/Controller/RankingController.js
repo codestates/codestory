@@ -4,7 +4,6 @@ const db = require('../models');
 
 module.exports = {
   sendRanking: async (req, res) => {
-    console.log('sendRanking작동');
     try {
       const jwt = await isAuthorizedJwt(req);
       const oauth = await isAuthorizedOauth(req);
