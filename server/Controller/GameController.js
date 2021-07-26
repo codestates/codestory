@@ -3,7 +3,6 @@ const {isAuthorizedOauth} = require('./OauthToken.js');
 const db = require('../models');
 module.exports = {
   checkAnswer: async (req, res) => {
-    console.log('checkAnswer작동')
     try {
       const jwt = await isAuthorizedJwt(req);
       const oauth = await isAuthorizedOauth(req);
@@ -26,7 +25,6 @@ module.exports = {
     }
   },
   updateCoin: async (req,res)=>{
-    console.log('updateCoin작동')
     try {
       let accessTokenData=await isAuthorizedJwt(req);
       let oauth=await isAuthorizedOauth(req);
