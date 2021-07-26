@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Nav from './components/Nav';
 import Ranking from './components/Ranking';
 import Profile from './components/Profile';
@@ -10,6 +10,7 @@ import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { BrowserView, MobileView } from 'react-device-detect';
 import MobileError from './pages/MobileError';
+import axios from 'axios';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -22,6 +23,28 @@ function App() {
     follower: 0,
     following: 0
   });
+  const [ranking, setRanking] = useState({ data: [] });
+  const [followingList, setFollowingList] = useState({ data: [] });
+
+  ranking;
+  followingList;
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const userInfo = await axios.get('https://api.codestory.academy/user', { withCredentials: true });
+        const ranking = await axios.get('https://api.codestory.academy/ranking', { withCredentials: true });
+        const followingList = await axios.get('https://api.codestory.academy/follower', { withCredentials: true });
+        setUserInfo(userInfo.data);
+        setRanking(ranking.data);
+        setFollowingList(followingList.data);
+        setIsLogin(true);
+      }
+      catch {
+        console.log('로그인하세요');
+      }
+    })();
+  }, []);
 
   const loginClick = () => {
     setIsLogin(true);
