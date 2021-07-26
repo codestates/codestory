@@ -19,7 +19,7 @@ module.exports = {
         grant_type: 'authorization_code', 
         client_id: kakaoClientId,
         client_secret: kakaoClientSecret,
-        redirect_uri : 'http://localhost:3000/gamestart',
+        redirect_uri : 'https://www.codestory.academy/gamestart',
         code: req.body.authorizationCode
       })
     })
@@ -40,7 +40,7 @@ module.exports = {
         code: req.body.authorizationCode,
         client_id: googleClientId,
         client_secret: googleClientSecret,
-        redirect_uri: 'http://localhost:3000/gamestart',
+        redirect_uri: 'https://www.codestory.academy/gamestart',
         grant_type: 'authorization_code',
       })
     })
