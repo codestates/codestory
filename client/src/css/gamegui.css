@@ -35,6 +35,22 @@
   color: #ffffff;
 }
 
+#gamegui-test-add {
+  
+  font-size: 13px;
+  width: 10rem;
+  height: 1.2rem;
+  background-color: #ffffff;
+}
+
+#gamegui-test-delete {
+  font-size: 12px;
+  width: 3rem;
+  height: 1.2rem;
+  background-color: #ffffff;
+  font-weight: 700;
+}
+
 #gamegui-close {
   margin-right: 0.5rem;
   width: 20px;
