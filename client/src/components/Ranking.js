@@ -18,7 +18,6 @@ function Ranking({ ranking, rankingHandler }) {
         'content-type': 'application/json',
         withCredentials: true
       }).then((result) => {
-        console.log(result.data.result);
         rankingList = rankingList.map((rank) => {
           if (rank.username === e.username) {
             rank.following = result.data.result;
@@ -30,10 +29,10 @@ function Ranking({ ranking, rankingHandler }) {
       });
     } else if (e.following === true) {
       await axios.delete('https://api.codestory.academy/follower', {
-        username: e.username
-      }, {
-        'content-type': 'application/json'
-        // withCredentials: true
+        data: {
+          username: e.username
+        },'content-type': 'application/json',
+        withCredentials: true
       }).then(() => {
         rankingList = rankingList.map((rank) => {
           if (rank.username === e.username) {
