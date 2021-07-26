@@ -3,7 +3,6 @@ const {isAuthorizedOauth} = require('./OauthToken.js');
 const db = require('../models');
 module.exports = {
   follow: async (req, res) => {
-    console.log('follow작동');
     try {
       const jwt = await isAuthorizedJwt(req);
       const oauth = await isAuthorizedOauth(req);
@@ -27,7 +26,6 @@ module.exports = {
     }
   },
   unFollow: async (req, res) => {
-    console.log('unfollow작동');
     try {
       const jwt = await isAuthorizedJwt(req);
       const oauth = await isAuthorizedOauth(req);
@@ -51,7 +49,6 @@ module.exports = {
     }
   },
   sendFollowingList: async (req, res) => {
-    console.log('sendFollowingList작동')
     try {
       const jwt = await isAuthorizedJwt(req);
       const oauth = await isAuthorizedOauth(req);
