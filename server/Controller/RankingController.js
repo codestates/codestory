@@ -1,11 +1,13 @@
 const { isAuthorizedJwt } = require('./JsonToken');
+const {isAuthorizedOauth} = require('./OauthToken.js');
 const db = require('../models');
 
 module.exports = {
   sendRanking: async (req, res) => {
     try {
       const jwt = isAuthorizedJwt(req);
-      if (jwt) {
+      const oauth = isAuthorizedOauth(req);
+      if (jwt || oauth) {
         const rankingArr = await db.users.findAll({ order: [['coin', 'DESC'], ['id', 'ASC']] });
         const followedArr = await db.follower_followeds.findAll({ where: { followerId: jwt.id } });
         const isFollowed = [];
