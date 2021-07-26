@@ -70,6 +70,7 @@
 #landing-word {
   font-size: 3.5vw;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .landing-btn {
