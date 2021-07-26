@@ -13,7 +13,6 @@ import MobileError from './pages/MobileError';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  const [oauthToken, setOauthToken] = useState('초기 토큰');
   const [userInfo, setUserInfo] = useState({
     username: '',
     photourl: '',
@@ -24,14 +23,8 @@ function App() {
     following: 0
   });
 
-  console.log(oauthToken);
-
   const loginClick = () => {
     setIsLogin(true);
-  };
-
-  const newOauthToken= (accessToken)=>{
-    setOauthToken(accessToken);
   };
 
   const userView = (user) => {
@@ -62,7 +55,7 @@ function App() {
               <Footer />
             </Route>
             <Route path="/gamestart">
-              <GameStart loginClick={loginClick} newOauthToken={newOauthToken} />
+              <GameStart loginClick={loginClick} />
             </Route>
             <Route path="/ranking">
               <Ranking />

@@ -1,9 +1,12 @@
 const { isAuthorizedJwt } = require('./JsonToken.js');
+const {isAuthorizedOauth} = require('./OauthToken.js');
 const db = require('../models');
 module.exports = {
   follow: async (req, res) => {
     try {
       const jwt = isAuthorizedJwt(req);
+      const oauth = isAuthorizedOauth(req);
+      
       if (jwt) {
         const followed = await db.users.findOne({ where: { userId: req.body.username } });
         await db.follower_followeds.create({
@@ -11,6 +14,8 @@ module.exports = {
           followedId: followed.dataValues.id
         });
         res.send({ result: true });
+      }else if(oauth){
+        res.send({ result: false});
       }
       else {
         res.status(400).send({ message: 'InvalidToken' });
@@ -31,6 +36,8 @@ module.exports = {
           followedId: followed.dataValues.id
         } });
         res.send({ message: 'ok' });
+      }else if(oauth){
+        res.send({message:'ok'})
       }
       else {
         res.status(400).send({ message: 'InvalidToken' });
@@ -44,6 +51,7 @@ module.exports = {
   sendFollowingList: async (req, res) => {
     try {
       const jwt = isAuthorizedJwt(req);
+      const oauth = isAuthorizedOauth(req);
       if (jwt) {
         const followingArr = await db.follower_followeds.findAll({ where: { followerId: jwt.id }, order: [['id', 'DESC']] });
         const userArr = await db.users.findAll();
@@ -52,6 +60,8 @@ module.exports = {
           userinfoArr[record.dataValues.id] = { username: record.dataValues.userId, photourl: record.dataValues.pictureurl };
         }
         res.send({ data: followingArr.map((record) => userinfoArr[record.dataValues.followedId]) });
+      }else if(oauth){
+        res.send({data : []});
       }
       else {
         res.status(400).send({ message: 'InvalidToken' });

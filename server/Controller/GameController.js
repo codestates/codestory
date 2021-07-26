@@ -1,10 +1,12 @@
 const { isAuthorizedJwt } = require('./JsonToken');
+const {isAuthorizedOauth} = require('./OauthToken.js');
 const db = require('../models');
 module.exports = {
   checkAnswer: async (req, res) => {
     try {
       const jwt = isAuthorizedJwt(req);
-      if (jwt) {
+      const oauth = isAuthorizedOauth(req);
+      if (jwt || oauth) {
         const result = await db.scripts.findOne({ where: { stage: req.body.stage } });
         const { answer, content } = result.dataValues;
         const isCorrect = answer ? answer.split('  ').includes(req.body.command.trim().replace(/\s+/g, ' ')) : true;
@@ -25,6 +27,7 @@ module.exports = {
   updateCoin: async (req,res)=>{
     try {
       let accessTokenData=isAuthorizedJwt(req);
+      let oauth=isAuthorizedOauth(req);
       if (accessTokenData) {
         const result = db.user.update(
           {
@@ -37,6 +40,8 @@ module.exports = {
           if(result){
             res.status(200).json({"message":"ok"});
           }
+      }else if(oauth){
+        res.status(200).json({"message":"ok"});
       }else {
         res.status(400).send({ message: 'InvalidToken' });
       }

@@ -1,10 +1,13 @@
-const {isAuthorizedJwt} = require('./JsonToken');
+const {isAuthorizedJwt,sendAccessToken} = require('./JsonToken');
+const {isAuthorizedOauth} = require('./OauthToken.js');
 
 module.exports = {
   signOut: async (req, res) => {
     try{
-      if(isAuthorizedJwt(req)){
-        res.cookie("jwtAccessToken","invalid Token").status(200).json({"message":"ok"});
+      const jwt=isAuthorizedJwt(req);
+      const oauth=isAuthorizedOauth(req);
+      if(jwt || oauth){
+        sendAccessToken(req,'invalid Token');
       }else{
         res.status(400).json({"message":"InvalidToken"})
       }
