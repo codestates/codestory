@@ -11,6 +11,7 @@ function Game() {
 
   const [script, setScript] = useState('Now loading...');
   const [isWaiting, setIsWaiting] = useState(true);
+  const [wd, setWd] = useState('Desktop');
   const [stageIndex, setStageIndex] = useState(0);
   const stageArr = ['0', '1', '2', '3', '4', '5-1', '5-2', '6-1', '6-2', '6-3', '7-1', '7-2'];
 
@@ -35,6 +36,10 @@ function Game() {
     setIsWaiting(!isWaiting);
   };
 
+  const handleWdChange = (wd) => {
+    setWd(wd);
+  };
+
   return (
     <>
       <div id="game-background">
@@ -50,11 +55,13 @@ function Game() {
               handleStageChange={handleStageChange}
               isWaiting={isWaiting}
               handleWaiting={handleWaiting}
+              wd={wd}
+              handleWdChange={handleWdChange}
             />
           </div>
           <span className="material-icons" id="game-arrow">double_arrow</span>
           <div id="game-rightside">
-            <GameGui props={stageArr[stageIndex]}/>
+            <GameGui stage={stageArr[stageIndex]} wd={wd} />
           </div>
         </div>
       </div>

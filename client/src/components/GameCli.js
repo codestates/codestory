@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import '../css/gamecli.css';
 import axios from 'axios';
 
-function GameCli({ stage, handleStageChange, isWaiting, handleWaiting }) {
+function GameCli({ stage, handleStageChange, isWaiting, handleWaiting, wd, handleWdChange }) {
 
   const [command, setCommand] = useState('');
   const [cli, setCli] = useState(['Last login: Fri Jul 23 18:06:34 on ttys004']);
-  const [wd, setWd] = useState('Desktop');
   const [enterCount, setEnterCount] = useState(0);
   const [isPassword, setIsPassword] = useState(false);
 
@@ -18,7 +17,7 @@ function GameCli({ stage, handleStageChange, isWaiting, handleWaiting }) {
         const commandArr = command.match(/\S+/g) || [];
         switch (commandArr[0]) {
         case 'cd':
-          setWd(commandArr[1].match(/([^/]+)$/)[1]); break;
+          handleWdChange(commandArr[1].match(/([^/]+)$/)[1]); break;
         case 'ls':
           setCli([...cli, '.password']); break;
         case 'cat':
