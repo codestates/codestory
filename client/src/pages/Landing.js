@@ -43,10 +43,16 @@ function Landing({loginClick}) {
     transition: '.5s'
   };
 
+  const move = () => {
+    document.getElementById('root').scrollTo(0, 800);
+  };
+
   return (
     <div id="landing-container">
       <div id="landing-page-1">
-        <object id="landing-logo" className="wow pulse animate__slower" type="image/svg+xml" data="logo.svg" aria-label="logo"></object>
+        <div id="landing-logo-box" onClick={move}>
+          <object id="landing-logo" className="wow pulse animate__slower" type="image/svg+xml" data="logo.svg" aria-label="logo"></object>
+        </div>
       </div>
       <div id="landing-page-2">
         <div id="landing-word" className="wow pulse">아직도 코딩을 공부하고 계신가요?</div>
