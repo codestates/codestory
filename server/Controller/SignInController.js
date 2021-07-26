@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+const { generateAccessToken, sendAccessToken } = require('./JsonToken');
 const db = require('../models');
 module.exports = {
   signIn: async (req, res) => {
@@ -11,9 +11,8 @@ module.exports = {
       }
       else {
         delete userInfo.dataValues.password;
-        const accessToken = jwt.sign(userInfo.dataValues, process.env.ACCESS_SECRET, { expiresIn: '1 day' });
-        res.cookie('jwtAccessToken', accessToken, { sameSite: 'none', secure: true, httpOnly: true });
-        res.send({ message: 'ok' });
+        const accessToken = generateAccessToken(userInfo.dataValues);
+        sendAccessToken(res, accessToken);
       }
     }
     catch (error) {

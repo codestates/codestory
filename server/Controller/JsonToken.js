@@ -6,7 +6,7 @@ module.exports = {
     return sign(data, process.env.ACCESS_SECRET, { expiresIn: '3600s' });
   },
   sendAccessToken: (res, accessToken) => {
-    res.cookie('jwtAccessToken',accessToken).status(200).json({message: 'ok' });
+    res.cookie('jwtAccessToken',accessToken, { sameSite: 'none', secure: true, httpOnly: true }).status(200).json({message: 'ok' });
   },
   isAuthorizedJwt: (req) => {
     if(req.cookies){
