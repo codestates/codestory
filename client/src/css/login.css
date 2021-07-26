@@ -82,6 +82,7 @@
   font-weight: 700;
   text-align: center;
   line-height: 35px;
+  cursor: pointer;
 }
 
 #login-btn:active {
