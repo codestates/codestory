@@ -3,7 +3,8 @@ import WOW from 'wowjs';
 import Login from '../components/Login';
 import '../css/landing.css';
 
-function Landing({loginClick}) {
+function Landing({loginClick, setIsLogin}) {
+
   const [isVisible, setIsVisible] = useState(false);
   const [y, setY] = useState(null);
 
@@ -16,6 +17,10 @@ function Landing({loginClick}) {
     }
     setY(window.scrollY);
   };
+
+  useEffect(() => {
+    setIsLogin(false);
+  });
 
   useEffect(() => {
     window.addEventListener('scroll', (e) => handleNavigation(e));
@@ -42,23 +47,46 @@ function Landing({loginClick}) {
     transition: '.5s'
   };
 
+  const move1 = () => {
+    window.scrollTo({
+      top: 670,
+      behavior: 'smooth'
+    });
+  };
+
+  const move2 = () => {
+    window.scrollTo({
+      top: 1350,
+      behavior: 'smooth'
+    });
+  };
+
+  const move3 = () => {
+    window.scrollTo({
+      top: 2030,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <div id="landing-container">
       <div id="landing-page-1">
-        <object id="landing-logo" className="wow pulse animate__slower" type="image/svg+xml" data="logo.svg" aria-label="logo"></object>
+        <div id="landing-logo-box" onClick={move1}>
+          <object id="landing-logo" className="wow pulse animate__slower" type="image/svg+xml" data="logo.svg" aria-label="logo"></object>
+        </div>
       </div>
       <div id="landing-page-2">
-        <div id="landing-word" className="wow pulse">아직도 코딩을 공부하고 계신가요?</div>
+        <div id="landing-word" className="wow pulse" onClick={move2}>아직도 코딩을 공부하고 계신가요?</div>
         <button className='landing-btn' style={isVisible ? fadeIn : fadeOut} onClick={()=>scrollToBottom()}>
           로그인 하러가기
           <span className="material-icons" id="landing-btn-arrow">expand_more</span>
         </button>
       </div>
       <div id="landing-page-3">
-        <div id="landing-word" className="wow pulse">혹시 코딩 공부를 더 재미있게 하고 싶진 않으신가요?</div>
+        <div id="landing-word" className="wow pulse" onClick={move3}>혹시 코딩 공부를 더 재미있게 하고 싶진 않으신가요?</div>
       </div>
       <div id="landing-page-4">
-        <div id="landing-word" className="wow pulse">스토리로 배우는 코딩! CodeStory와 함께하세요</div>
+        <div id="landing-word" className="wow pulse" onClick={scrollToBottom}>스토리로 배우는 코딩! CodeStory와 함께하세요</div>
       </div>
       <div id="landing-page-5">
         <Login loginClick={loginClick}/>
