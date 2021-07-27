@@ -30,21 +30,23 @@ function App() {
   followingList;
 
   useEffect(() => {
-    (async () => {
-      try {
-        const userInfo = await axios.get('https://api.codestory.academy/user', { withCredentials: true });
-        const ranking = await axios.get('https://api.codestory.academy/ranking', { withCredentials: true });
-        const followingList = await axios.get('https://api.codestory.academy/follower', { withCredentials: true });
-        setUserInfo(userInfo.data);
-        setRanking(ranking.data);
-        setFollowingList(followingList.data);
-        setIsLogin(true);
-      }
-      catch {
-        console.log('로그인하세요');
-      }
-    })();
-  });
+    if (isLogin === false) {
+      (async () => {
+        try {
+          const userInfo = await axios.get('https://api.codestory.academy/user', { withCredentials: true });
+          const ranking = await axios.get('https://api.codestory.academy/ranking', { withCredentials: true });
+          const followingList = await axios.get('https://api.codestory.academy/follower', { withCredentials: true });
+          setUserInfo(userInfo.data);
+          setRanking(ranking.data);
+          setFollowingList(followingList.data);
+          setIsLogin(true);
+        }
+        catch {
+          console.log('로그인하세요');
+        }
+      })();
+    }
+  },[isLogin]);
 
   const loginClick = () => {
     setIsLogin(true);
