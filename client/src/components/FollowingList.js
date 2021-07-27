@@ -17,7 +17,7 @@ function FollowingList({ showProfile, followingList, userInfo }) {
               Following List
             </div>
             <div className="followinglist-userinfo">
-              <img className="profile-picture" src="profile-img.png" />
+              <img className="profile-picture" src={userInfo.photourl ? userInfo.photourl : 'profile-img.png'} />
               <span className="followinglist-username">{userInfo.username}</span>
             </div>
             <div className="followinglist-wrapper">
