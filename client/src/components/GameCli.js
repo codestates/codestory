@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 import '../css/gamecli.css';
 import axios from 'axios';
 
-function GameCli({ stage, handleStageChange, isWaiting, handleWaiting, wd, handleWdChange }) {
+function GameCli({ stage, handleStageChange, isWaiting, handleWaiting, wd, handleWdChange, handleFinish }) {
 
   const [command, setCommand] = useState('');
   const [cli, setCli] = useState(['Last login: Fri Jul 23 18:06:34 on ttys004']);
   const [enterCount, setEnterCount] = useState(0);
   const [isPassword, setIsPassword] = useState(false);
+  const serverUrl=process.env.REACT_APP_SERVER_URL || 'https://api.codestory.academy';
 
   useEffect(() => {
     (async () => {
-      const result = await axios.post('https://api.codestory.academy/game/answer', { stage, command }, { withCredentials: true });
+      const result = await axios.post(serverUrl+'/game/answer', { stage, command }, { withCredentials: true });
       if (result.data.result) {
         handleStageChange(result.data.script, true);
         const commandArr = command.match(/\S+/g) || [];
@@ -46,6 +47,9 @@ function GameCli({ stage, handleStageChange, isWaiting, handleWaiting, wd, handl
 
   const onKeyPress = (e) => {
     if(e.charCode === 13) {
+      if(stage === '8') {
+        handleFinish();
+      }
       setCli([...cli, isPassword ? 'Password:' : `${wd} $ ${command}`]);
       handleWaiting();
       setEnterCount(enterCount + 1);

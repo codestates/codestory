@@ -1,4 +1,4 @@
-const { isAuthorizedJwt } = require('./JsonToken');
+const { isAuthorizedJwt,generateAccessToken,sendAccessToken} = require('./JsonToken');
 const {isAuthorizedOauth} = require('./OauthToken.js');
 const models = require('../models/index.js');
 const { Op } = require('sequelize');
@@ -13,7 +13,7 @@ module.exports = {
         res.status(400).json({message:'Bad Request'});
       }else{
         const time=Date.now();
-        const result=await models.users.create({
+        const result = await models.users.create({
           pictureurl: '../?',
           userId : username,
           password : password,
@@ -21,11 +21,9 @@ module.exports = {
           createdAt : time,
           updatedAt : time
         });
-        if(result){
-          res.status(200).json({message:'ok'});
-        }else{
-          res.status(500).send({ message: 'Sorry Can\'t process your request' })
-        }
+        delete result.dataValues.password;
+        const accessToken = generateAccessToken(result.dataValues);
+        sendAccessToken(res,accessToken);
       }  
     }
     catch(error){
@@ -35,8 +33,8 @@ module.exports = {
   },
   sendUserInfo: async (req, res) => {
     try {
-      const jwt = isAuthorizedJwt(req);
-      const oauth = isAuthorizedOauth(req);
+      const jwt = await isAuthorizedJwt(req);
+      const oauth = await isAuthorizedOauth(req);
       if (jwt) {
         const result = await models.users.findOne({ where: { id: jwt.id } });
         const follower = await models.follower_followeds.count({ where: { followedId: jwt.id } });
@@ -44,7 +42,7 @@ module.exports = {
         const rankingArr = await models.users.findAll({ order: [['coin', 'DESC'], ['id', 'ASC']] });
         const idArr = rankingArr.map((user) => user.dataValues.id);
         const ranking = idArr.indexOf(jwt.id) + 1;
-        res.send({
+        res.status(200).json({
           username: result.userId,
           photourl: result.pictureurl,
           coin: result.coin,
@@ -54,9 +52,18 @@ module.exports = {
           following
         });
       }else if(oauth){
-        res.send({
-          username: 'unkown user',
-          photourl: 'http://',
+        console.log(oauth.data);
+        let username,photourl;
+        if(oauth.data.kakao_account){
+          username=oauth.data.properties.nickname;
+          photourl=oauth.data.properties.profile_image;
+        }else{
+          username=oauth.data.name;
+          photourl=oauth.data.picture;
+        }
+        res.status(200).json({
+          username:username,
+          photourl:photourl,
           coin: 0,
           intro: '반갑습니다.',
           ranking:10000,
@@ -65,11 +72,11 @@ module.exports = {
         })
       }
       else {
-        res.status(400).send({ message: 'InvalidToken' });
+        res.status(400).json({ message: 'InvalidToken' });
       }
     }
     catch (error) {
-      res.status(500).send({ message: 'Sorry Can\'t process your request' });
+      res.status(500).json({ message: 'Sorry Can\'t process your request' });
       throw error;
     }
   },
@@ -79,36 +86,36 @@ module.exports = {
       const oauth=isAuthorizedOauth(req);
       if (jwt) {
         await models.users.update({ word: req.body.word }, { where: { id: jwt.id } });
-        res.send({ message: 'ok' });
+        res.status(200).json({ message: 'ok' });
       }else if(oauth){
-        res.send({message:'ok'});
+        res.status(200).json({message:'ok'});
       }else {
-        res.status(400).send({ message: 'InvalidToken' });
+        res.status(400).json({ message: 'InvalidToken' });
       }
     }
     catch (error) {
-      res.status(500).send({ 'message': 'Sorry Can\'t process your request' });
+      res.status(500).json({ 'message': 'Sorry Can\'t process your request' });
       throw error;
     }
   },
   unRegister: async (req,res)=>{
     try {
-      const jwt = isAuthorizedJwt(req);
-      const oauth= isAuthorizedOauth(req);
+      const jwt = await isAuthorizedJwt(req);
+      const oauth= await isAuthorizedOauth(req);
       if (jwt) {
         await models.follower_followeds.destroy({ where: { [Op.or]: [{ followerId: jwt.id }, { followedId: jwt.id }] } });
         await models.users.destroy({ where: { id: jwt.id } });
         res.cookie('accessToken', 'invalid Token');
-        res.status(200).send({ message: 'ok' });
+        res.status(200).json({ message: 'ok' });
       }else if(oauth){
-        res.status(200).send({message:'ok'})
+        res.status(200).json({message:'ok'})
       }
       else {
-        res.status(400).send({ message: 'InvalidToken' });
+        res.status(400).json({ message: 'InvalidToken' });
       }
     }
     catch (error) {
-      res.status(500).send({ 'message': 'Sorry Can\'t process your request' });
+      res.status(500).json({ 'message': 'Sorry Can\'t process your request' });
       throw error;
     }
   }

@@ -4,54 +4,54 @@ const db = require('../models');
 module.exports = {
   follow: async (req, res) => {
     try {
-      const jwt = isAuthorizedJwt(req);
-      const oauth = isAuthorizedOauth(req);
-      
+      const jwt = await isAuthorizedJwt(req);
+      const oauth = await isAuthorizedOauth(req);
       if (jwt) {
         const followed = await db.users.findOne({ where: { userId: req.body.username } });
         await db.follower_followeds.create({
           followerId: jwt.id,
           followedId: followed.dataValues.id
         });
-        res.send({ result: true });
+        res.json({ result: true });
       }else if(oauth){
-        res.send({ result: false});
+        res.json({ result: false});
       }
       else {
-        res.status(400).send({ message: 'InvalidToken' });
+        res.status(400).json({ message: 'InvalidToken' });
       }
     }
     catch (error) {
-      res.status(500).send({ message : 'Sorry Can\'t process your request' });
+      res.status(500).json({ message : 'Sorry Can\'t process your request' });
       throw error;
     }
   },
   unFollow: async (req, res) => {
     try {
-      const jwt = isAuthorizedJwt(req);
+      const jwt = await isAuthorizedJwt(req);
+      const oauth = await isAuthorizedOauth(req);
       if (jwt) {
         const followed = await db.users.findOne({ where: { userId: req.body.username } });
         await db.follower_followeds.destroy({ where: {
           followerId: jwt.id,
           followedId: followed.dataValues.id
         } });
-        res.send({ message: 'ok' });
+        res.json({ message: 'ok' });
       }else if(oauth){
-        res.send({message:'ok'})
+        res.json({message:'ok'})
       }
       else {
-        res.status(400).send({ message: 'InvalidToken' });
+        res.status(400).json({ message: 'InvalidToken' });
       }
     }
     catch (error) {
-      res.status(500).send({ message : 'Sorry Can\'t process your request' });
+      res.status(500).json({ message : 'Sorry Can\'t process your request' });
       throw error;
     }
   },
   sendFollowingList: async (req, res) => {
     try {
-      const jwt = isAuthorizedJwt(req);
-      const oauth = isAuthorizedOauth(req);
+      const jwt = await isAuthorizedJwt(req);
+      const oauth = await isAuthorizedOauth(req);
       if (jwt) {
         const followingArr = await db.follower_followeds.findAll({ where: { followerId: jwt.id }, order: [['id', 'DESC']] });
         const userArr = await db.users.findAll();
@@ -59,16 +59,16 @@ module.exports = {
         for (let record of userArr) {
           userinfoArr[record.dataValues.id] = { username: record.dataValues.userId, photourl: record.dataValues.pictureurl };
         }
-        res.send({ data: followingArr.map((record) => userinfoArr[record.dataValues.followedId]) });
+        res.json({ data: followingArr.map((record) => userinfoArr[record.dataValues.followedId]) });
       }else if(oauth){
-        res.send({data : []});
+        res.json({data : []});
       }
       else {
-        res.status(400).send({ message: 'InvalidToken' });
+        res.status(400).json({ message: 'InvalidToken' });
       }
     }
     catch (error) {
-      res.status(500).send({ message : 'Sorry Can\'t process your request' });
+      res.status(500).json({ message : 'Sorry Can\'t process your request' });
       throw error;
     }
   },

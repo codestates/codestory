@@ -11,6 +11,11 @@
 #landing-logo {
   width: 50vw;
   z-index: 1;
+  pointer-events: none;
+}
+
+#landing-logo-box {
+  cursor: pointer;
 }
 
 #landing-page-1 {
@@ -65,6 +70,7 @@
 #landing-word {
   font-size: 3.5vw;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .landing-btn {

@@ -4,10 +4,11 @@ const {isAuthorizedOauth} = require('./OauthToken.js');
 module.exports = {
   signOut: async (req, res) => {
     try{
-      const jwt=isAuthorizedJwt(req);
-      const oauth=isAuthorizedOauth(req);
+      const jwt=await isAuthorizedJwt(req);
+      const oauth=await isAuthorizedOauth(req);
+      console.log(jwt,oauth);
       if(jwt || oauth){
-        sendAccessToken(req,'invalid Token');
+        res.cookie('accessToken','jwt invalidToken',{ sameSite: 'none', secure: true, httpOnly: true }).status(200).json({message: 'ok' });
       }else{
         res.status(400).json({"message":"InvalidToken"})
       }

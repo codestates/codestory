@@ -3,14 +3,14 @@ import { useHistory } from 'react-router-dom';
 import '../css/signup.css';
 import axios from 'axios';
 
-function SignUp( { signupHandler } ) {
-
+function SignUp( { signupHandler,loginClick } ) {
   const [currentId, setCurrentId] = useState({ value: '', valid: false });
   const [currentPassword, setCurrentPassword] = useState({ value: '', valid: false });
   const [currentPassword2, setCurrentPassword2] = useState({ value: '', valid: false });
   const [validUser, setvalidUser] = useState({ username: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
+  const serverUrl=process.env.REACT_APP_SERVER_URL || 'https://api.codestory.academy';
 
   useEffect(() => {
     if (validUser.username !== '' && validUser.password !== '') {
@@ -55,7 +55,7 @@ function SignUp( { signupHandler } ) {
   
   const createUser = async () => {
     const { username, password } = validUser;
-    await axios.post('https://api.codestory.academy/user', {
+    await axios.post(serverUrl+'/user', {
       username: username,
       password: password
     }, {
@@ -63,6 +63,7 @@ function SignUp( { signupHandler } ) {
       withCredentials: true
     }).then((result) => {
       console.log(result.data);
+      loginClick();
       history.push('/gamestart');
     }).catch((err) => {
       console.log(err);
