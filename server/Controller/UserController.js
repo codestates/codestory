@@ -8,7 +8,7 @@ module.exports = {
     try{
       const username=req.body.username;
       const password=req.body.password;
-      const data=await models.users.findOne({where : {[Op.or] : [{userId:username}, {password}]}});
+      const data=await models.users.findOne({where : {userId:username}});
       if(data){
         res.status(400).json({message:'Bad Request'});
       }else{
