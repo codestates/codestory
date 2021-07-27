@@ -105,7 +105,7 @@ module.exports = {
       if (jwt) {
         await models.follower_followeds.destroy({ where: { [Op.or]: [{ followerId: jwt.id }, { followedId: jwt.id }] } });
         await models.users.destroy({ where: { id: jwt.id } });
-        res.cookie('jwtAccessToken', 'invalid Token');
+        res.cookie('accessToken', 'invalid Token');
         res.status(200).json({ message: 'ok' });
       }else if(oauth){
         res.status(200).json({message:'ok'})
