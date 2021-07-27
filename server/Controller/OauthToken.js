@@ -6,7 +6,7 @@ const kakaoClientId = process.env.KAKAO_CLIENTID;
 const kakaoClientSecret = process.env.KAKAO_CLIENT_SECRET;
 const googleClientId = process.env.GOOGLE_CLIENTID;
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
-
+const redirectUri= process.env.REDIRECT_URI || 'https://www.codestory.academy/gamestart'
 module.exports = {
   getKakaoToken: async (req) => {
     const response=await axios({
@@ -19,7 +19,7 @@ module.exports = {
         grant_type: 'authorization_code', 
         client_id: kakaoClientId,
         client_secret: kakaoClientSecret,
-        redirect_uri : 'https://www.codestory.academy/gamestart',
+        redirect_uri : redirectUri,
         code: req.body.authorizationCode
       })
     })
@@ -40,7 +40,7 @@ module.exports = {
         code: req.body.authorizationCode,
         client_id: googleClientId,
         client_secret: googleClientSecret,
-        redirect_uri: 'https://www.codestory.academy/gamestart',
+        redirect_uri: redirectUri,
         grant_type: 'authorization_code',
       })
     })

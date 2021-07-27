@@ -11,6 +11,7 @@ function Profile( {userInfo, userView} ) {
   const [word, setWord] = useState('나의 한마디');
   const [showfollow, setfollow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const serverUrl=process.env.REACT_APP_SERVER_URL || 'https://api.codestory.academy';
 
   useEffect(() => {
     if (userInfo.username === '') {
@@ -38,7 +39,7 @@ function Profile( {userInfo, userView} ) {
 
   const closeEditMode = async () => {
     if (word.length > 0) {
-      await axios.patch('https://api.codestory.academy/user', {
+      await axios.patch(serverUrl+'user', {
         word: word
       }, {
         'content-type': 'application/json',
@@ -74,7 +75,7 @@ function Profile( {userInfo, userView} ) {
 
   const loadingUserInfo = async () => {
     let user = {};
-    await axios.get('https://api.codestory.academy/user', {
+    await axios.get(serverUrl+'/user', {
       'content-type': 'application/json',
       withCredentials: true
     }).then(result => {

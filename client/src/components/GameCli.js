@@ -8,10 +8,11 @@ function GameCli({ stage, handleStageChange, isWaiting, handleWaiting, wd, handl
   const [cli, setCli] = useState(['Last login: Fri Jul 23 18:06:34 on ttys004']);
   const [enterCount, setEnterCount] = useState(0);
   const [isPassword, setIsPassword] = useState(false);
+  const serverUrl=process.env.REACT_APP_SERVER_URL || 'https://api.codestory.academy';
 
   useEffect(() => {
     (async () => {
-      const result = await axios.post('https://api.codestory.academy/game/answer', { stage, command }, { withCredentials: true });
+      const result = await axios.post(serverUrl+'/game/answer', { stage, command }, { withCredentials: true });
       if (result.data.result) {
         handleStageChange(result.data.script, true);
         const commandArr = command.match(/\S+/g) || [];

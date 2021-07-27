@@ -9,18 +9,19 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 function Game() {
-
   const [script, setScript] = useState('Now loading...');
   const [isWaiting, setIsWaiting] = useState(true);
   const [isFinish, setIsFinish] = useState(false);
   const [wd, setWd] = useState('Desktop');
   const [stageIndex, setStageIndex] = useState(0);
+  const serverUrl = process.env.REACT_APP_SERVER_URL || 'https://api.codestory.academy';
   const stageArr = ['0', '1', '2', '3', '4', '5-1', '5-2', '6-1', '6-2', '6-3', '7-1', '7-2', '8'];
+
 
   useEffect(() => {
     new WOW.WOW({ live: false }).init();
     (async () => {
-      const result = await axios.post('https://api.codestory.academy/game/answer', { stage: '0', command: '' }, { withCredentials: true });
+      const result = await axios.post(serverUrl+'/game/answer', { stage: '0', command: '' }, { withCredentials: true });
       setStageIndex(stageIndex + 1);
       setScript(result.data.script);
       setIsWaiting(false);

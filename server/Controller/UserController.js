@@ -1,4 +1,4 @@
-const { isAuthorizedJwt } = require('./JsonToken');
+const { isAuthorizedJwt,generateAccessToken,sendAccessToken} = require('./JsonToken');
 const {isAuthorizedOauth} = require('./OauthToken.js');
 const models = require('../models/index.js');
 const { Op } = require('sequelize');
@@ -13,7 +13,7 @@ module.exports = {
         res.status(400).json({message:'Bad Request'});
       }else{
         const time=Date.now();
-        await models.users.create({
+        const result = await models.users.create({
           pictureurl: '../?',
           userId : username,
           password : password,
@@ -21,7 +21,9 @@ module.exports = {
           createdAt : time,
           updatedAt : time
         });
-        res.status(200).json({message:'ok'});
+        delete result.dataValues.password;
+        const accessToken = generateAccessToken(result.dataValues);
+        sendAccessToken(res,accessToken);
       }  
     }
     catch(error){
