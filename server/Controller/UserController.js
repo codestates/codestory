@@ -130,8 +130,8 @@ module.exports = {
       const oauth= await isAuthorizedOauth(req);
       if(jwt){
         const s3 = new aws.S3({
-          accessKeyId: process.env.AWS_ACCESSKEY,
-          secretAccessKey: process.env.AWS_SECRETKEY, 
+          accessKeyId: process.env.AW_ACCESSKEY,
+          secretAccessKey: process.env.AW_SECRETKEY, 
           region: 'ap-northeast-2' 
         })
         const storage = multerS3({
