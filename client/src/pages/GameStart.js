@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import '../css/gamestart.css';
 
 
-function GameStart({loginClick}) {
+function GameStart({loginClick, setIsLogin}) {
   
   const url = new URL(window.location.href);
   const authorizationCode = url.searchParams.get('code'); 
@@ -20,6 +20,7 @@ function GameStart({loginClick}) {
         });
       if(res.data.message==='ok'){
         loginClick();
+        setIsLogin(false);
       }
     }
   },[]);
