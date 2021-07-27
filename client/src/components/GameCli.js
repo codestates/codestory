@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../css/gamecli.css';
 import axios from 'axios';
 
-function GameCli({ stage, handleStageChange, isWaiting, handleWaiting, wd, handleWdChange }) {
+function GameCli({ stage, handleStageChange, isWaiting, handleWaiting, wd, handleWdChange, handleFinish }) {
 
   const [command, setCommand] = useState('');
   const [cli, setCli] = useState(['Last login: Fri Jul 23 18:06:34 on ttys004']);
@@ -46,6 +46,9 @@ function GameCli({ stage, handleStageChange, isWaiting, handleWaiting, wd, handl
 
   const onKeyPress = (e) => {
     if(e.charCode === 13) {
+      if(stage === '8') {
+        handleFinish();
+      }
       setCli([...cli, isPassword ? 'Password:' : `${wd} $ ${command}`]);
       handleWaiting();
       setEnterCount(enterCount + 1);

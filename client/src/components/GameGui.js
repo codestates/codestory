@@ -17,6 +17,7 @@ function GameGui({ stage, wd }) {
     '6-3': [],
     '7-1': [['error', 'file']],
     '7-2': [['error', 'file']],
+    '8':[],
     undefined: []
   };
 
