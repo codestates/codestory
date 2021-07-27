@@ -52,8 +52,7 @@ module.exports = {
           following
         });
       }else if(oauth){
-        console.log(oauth.data);
-        let username,photourl;
+           let username,photourl;
         if(oauth.data.kakao_account){
           username=oauth.data.properties.nickname;
           photourl=oauth.data.properties.profile_image;

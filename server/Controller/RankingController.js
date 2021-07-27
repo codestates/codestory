@@ -7,7 +7,8 @@ module.exports = {
     try {
       const jwt = await isAuthorizedJwt(req);
       const oauth = await isAuthorizedOauth(req);
-      if (jwt || oauth) {
+      console.log('ranking page작동');
+      if (jwt) {
         const rankingArr = await db.users.findAll({ order: [['coin', 'DESC'], ['id', 'ASC']] });
         const followedArr = await db.follower_followeds.findAll({ where: { followerId: jwt.id } });
         const isFollowed = [];
@@ -20,6 +21,14 @@ module.exports = {
           coin: record.dataValues.coin,
           following: record.dataValues.id === jwt.id ? 'me' : Boolean(isFollowed[record.dataValues.id])
         })) });
+      }else if(oauth){
+        const rankingArr = await db.users.findAll({ order: [['coin', 'DESC'], ['id', 'ASC']] });
+        res.status(200).json({data: rankingArr.map((record)=>({
+          username : record.dataValues.userId,
+          photourl : record.dataValues.pictureurl,
+          coin : record.dataValues.pictureurl,
+          following : false
+        }))});
       }
       else {
         res.status(400).json({ message: 'InvalidToken' });
