@@ -10,7 +10,6 @@ function SignUp( { signupHandler,loginClick } ) {
   const [validUser, setvalidUser] = useState({ username: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
-  const serverUrl=process.env.REACT_APP_SERVER_URL || 'https://api.codestory.academy';
 
   useEffect(() => {
     if (validUser.username !== '' && validUser.password !== '') {
@@ -64,7 +63,7 @@ function SignUp( { signupHandler,loginClick } ) {
     }).then((result) => {
       console.log(result.data);
       loginClick();
-      history.push('/gamestart');
+      history.push('https://api.codestory.academy/gamestart');
     }).catch((err) => {
       console.log(err);
     });
