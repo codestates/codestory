@@ -69,6 +69,10 @@ function App() {
     });
   };
 
+  const rankingHandler = (rankinglist) => {
+    setRanking({ ...ranking, data: [...rankinglist] });
+  };
+
   return (
     <>
       <MobileView>
@@ -86,7 +90,7 @@ function App() {
               <GameStart loginClick={loginClick} setIsLogin={setIsLogin}/>
             </Route>
             <Route path="/ranking">
-              <Ranking />
+              <Ranking ranking={ranking} rankingHandler={rankingHandler}/>
             </Route>
             <Route path="/profile">
               <Profile userInfo={userInfo} userView={userView} />
