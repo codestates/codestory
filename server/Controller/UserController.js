@@ -128,6 +128,7 @@ module.exports = {
   imageUpload: async(req,res,next)=>{
     try{
       const jwt= await isAuthorizedJwt(req);
+      const oauth= await isAuthorizedOauth(req);
       if(jwt){
         const s3 = new aws.S3({
           accessKeyId: process.env.AWS_ACCESSKEY,
@@ -155,8 +156,12 @@ module.exports = {
             return next(err);
           }
           models.users.update({pictureulr:req.file.location},{where:{id:jwt.id}})
-          return res.json(req.file.location);
+          return res.status(200).json(req.file.location);
         });
+      }else if(oauth){
+        return res.status(200).json('https://codestoryimagecontainor.s3.ap-northeast-2.amazonaws.com/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85+%EA%B6%8C%EC%9C%A0+%EC%9D%B4%EB%AF%B8%EC%A7%80.png');
+      }else{
+        return res.status(400).json({message: 'invalid token'});
       }
     }
     catch(error){
