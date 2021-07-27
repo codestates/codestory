@@ -1,4 +1,4 @@
-const dotenv=require('dotenv')
+const dotenv=require('dotenv');
 const axios=require('axios');
 dotenv.config();
 const qs=require('querystring');
@@ -6,14 +6,14 @@ const kakaoClientId = process.env.KAKAO_CLIENTID;
 const kakaoClientSecret = process.env.KAKAO_CLIENT_SECRET;
 const googleClientId = process.env.GOOGLE_CLIENTID;
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
-const redirectUri= 'https://www.codestory.academy/gamestart'
+const redirectUri= 'https://www.codestory.academy/gamestart';
 module.exports = {
   getKakaoToken: async (req) => {
     const response=await axios({
       method: 'post',
       url: 'https://kauth.kakao.com/oauth/token',
       headers: {
-        "Content-Type" : "application/x-www-form-urlencoded",
+        'Content-Type' : 'application/x-www-form-urlencoded',
       },
       data:qs.stringify({
         grant_type: 'authorization_code', 
@@ -23,13 +23,13 @@ module.exports = {
         code: req.body.authorizationCode
       })
     })
-    .then((res) => {
-      return res.data;
-    })
-    .catch(err => {
-      console.log('kakao get token error');
-      return null;
-    })
+      .then((res) => {
+        return res.data;
+      })
+      .catch(() => {
+        console.log('kakao get token error');
+        return null;
+      });
     return response;
   },
   getGoogleToken: async (req) => {
@@ -44,17 +44,17 @@ module.exports = {
         grant_type: 'authorization_code',
       })
     })
-    .then((res) => {
-      return res.data;
-    })
-    .catch((err) =>{
-      console.log('google get token error');
-      return null
-    });
+      .then((res) => {
+        return res.data;
+      })
+      .catch(() =>{
+        console.log('google get token error');
+        return null;
+      });
     return response;
   },
   sendAccessToken: (res, cookieName,accessToken) => {
-    let oauthAccessToken=cookieName+' '+accessToken
+    let oauthAccessToken=cookieName+' '+accessToken;
     res.cookie('accessToken',oauthAccessToken,{ sameSite:'none',secure:true,httpOnly:true}).status(200).json({message: 'ok'});
   },
   isAuthorizedOauth: async (req) => {
@@ -66,33 +66,33 @@ module.exports = {
           url :'https://kapi.kakao.com//v2/user/me',
           metohod : 'get',
           headers: { 
-            "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-            "Authorization": `Bearer ${accessToken}`
+            'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+            Authorization: `Bearer ${accessToken}`
           }
         })
-        .then(res =>{
-          return res;
-        })
-        .catch((err)=>{
-          console.log('kakao AuthorizedOauth error');
-          return null;
-        })
+          .then(res =>{
+            return res;
+          })
+          .catch(()=>{
+            console.log('kakao AuthorizedOauth error');
+            return null;
+          });
         return response;
       }else if(oauthLocation==='google'){
         const response=await axios({
           url : 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
           method : 'get',
           headers: {
-            "Authorization":`Bearer ${accessToken}`
+            Authorization:`Bearer ${accessToken}`
           }
         })
-        .then(res =>{
-          return res;
-        })
-        .catch((err)=>{
-          console.log('google AuthorizedOauth error');
-          return null;
-        })
+          .then(res =>{
+            return res;
+          })
+          .catch(()=>{
+            console.log('google AuthorizedOauth error');
+            return null;
+          });
         return response;
       }else{
         return null;
