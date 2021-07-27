@@ -66,9 +66,18 @@ function Ranking({ ranking, rankingHandler }) {
                       </div>
                       <img id={`no${index + 1}`} src={rank.photourl === '../?' || rank.photourl === 'img.com' ? 'profile-img.png' : rank.photourl} alt={`${index + 1}등`} />
                       <span id={`number${index + 1}`}>{index + 1}</span>
-                      <button className={`userlist-follow-btn btn${index+1} ${rank.following === 'me' ? 'me' : rank.following === true ? 'Follow' : 'Unfollow'}`} onClick={() => followHandler(rank)} >
-                        <span className="follow-state">{rank.following === 'me' ? 'me' : rank.following === true ? 'Not followed' : 'Following'}</span>
-                      </button>
+                      { rank.following === 'me' ?
+                        <button className={`userlist-follow-btn btn${index + 1} me`} onClick={() => followHandler(rank)}>
+                          <span className="following-state">Me</span>
+                        </button>
+                        : rank.following === true ?
+                          <button className={`userlist-follow-btn btn${index + 1} unfollow`} onClick={() => followHandler(rank)}>
+                            <span className="following-state">Following</span>
+                          </button>
+                          : <button className={`userlist-follow-btn btn${index + 1} follow`} onClick={() => followHandler(rank)}>
+                            <span className="following-state">Follow</span>
+                          </button>
+                      }
                     </div>
                   );
                 })}
@@ -88,9 +97,18 @@ function Ranking({ ranking, rankingHandler }) {
                           {rank.username}
                         </span>
                       </div>
-                      <button className={`userlist-follow-btn ${rank.following === 'me' ? 'me' : rank.following === true ? 'Follow' : 'Unfollow'}`} onClick={() => followHandler(rank)} >
-                        <span className="follow-state">{rank.following === 'me' ? 'me' : rank.following === true ? 'Not followed' : 'Following'}</span>
-                      </button>
+                      { rank.following === 'me' ?
+                        <button className='userlist-follow-btn me' onClick={() => followHandler(rank)}>
+                          <span className="following-state">Me</span>
+                        </button>
+                        : rank.following === true ?
+                          <button className='userlist-follow-btn unfollow' onClick={() => followHandler(rank)}>
+                            <span className="following-state">Following</span>
+                          </button>
+                          : <button className='userlist-follow-btn follow' onClick={() => followHandler(rank)}>
+                            <span className="following-state">Follow</span>
+                          </button>
+                      }
                     </div>
                   );
                 })}
