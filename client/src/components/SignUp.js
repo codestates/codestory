@@ -54,7 +54,7 @@ function SignUp( { signupHandler,loginClick } ) {
   
   const createUser = async () => {
     const { username, password } = validUser;
-    await axios.post(serverUrl+'/user', {
+    await axios.post('https://api.codestory.academy/user', {
       username: username,
       password: password
     }, {
