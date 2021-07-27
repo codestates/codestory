@@ -65,11 +65,6 @@ function Profile( {userInfo, userView} ) {
   };
 
   const showFollowingList = async () => {
-    const authorization=await axios.get('https://api.codestory.academy/oauth',{
-      'content-type':'application/json',
-      withCredentials : true
-    });
-    console.log(authorization);
     setfollow(true);
   };
 

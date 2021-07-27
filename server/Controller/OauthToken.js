@@ -1,13 +1,11 @@
 const dotenv=require('dotenv')
 const axios=require('axios');
+dotenv.config();
 const qs=require('querystring');
-const { response } = require('express');
 const kakaoClientId = process.env.KAKAO_CLIENTID;
 const kakaoClientSecret = process.env.KAKAO_CLIENT_SECRET;
 const googleClientId = process.env.GOOGLE_CLIENTID;
-const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET
-
-dotenv.config();
+const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
 
 module.exports = {
   getKakaoToken: async (req) => {
@@ -21,7 +19,7 @@ module.exports = {
         grant_type: 'authorization_code', 
         client_id: kakaoClientId,
         client_secret: kakaoClientSecret,
-        redirect_uri : 'http://localhost:3000/gamestart',
+        redirect_uri : 'https://www.codestory.academy/gamestart',
         code: req.body.authorizationCode
       })
     })
@@ -42,7 +40,7 @@ module.exports = {
         code: req.body.authorizationCode,
         client_id: googleClientId,
         client_secret: googleClientSecret,
-        redirect_uri: 'http://localhost:3000/gamestart',
+        redirect_uri: 'https://www.codestory.academy/gamestart',
         grant_type: 'authorization_code',
       })
     })
@@ -50,7 +48,7 @@ module.exports = {
       return res.data;
     })
     .catch((err) =>{
-      console.log('google get token err');
+      console.log('google get token error');
       return null
     });
     return response;
@@ -60,12 +58,12 @@ module.exports = {
     res.cookie('accessToken',oauthAccessToken,{ sameSite:'none',secure:true,httpOnly:true}).status(200).json({message: 'ok'});
   },
   isAuthorizedOauth: async (req) => {
-    if(req.cookies){
+    if(req.cookies && req.cookies.accessToken){
       let oauthLocation=req.cookies.accessToken.split(' ')[0];
       let accessToken=req.cookies.accessToken.split(' ')[1];
       if(oauthLocation==='kakao'){
         const response=await axios({
-          url :'https://kauth.kakao.com/v1/user/access_token_info',
+          url :'https://kapi.kakao.com//v2/user/me',
           metohod : 'get',
           headers: { 
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
@@ -76,11 +74,11 @@ module.exports = {
           return res;
         })
         .catch((err)=>{
-          console.log(err);
+          console.log('kakao AuthorizedOauth error');
           return null;
         })
         return response;
-      }else if(oauthLocation='google'){
+      }else if(oauthLocation==='google'){
         const response=await axios({
           url : 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
           method : 'get',
@@ -92,13 +90,15 @@ module.exports = {
           return res;
         })
         .catch((err)=>{
-          console.log(err);
+          console.log('google AuthorizedOauth error');
           return null;
         })
         return response;
       }else{
         return null;
       }
+    }else{
+      return null;
     }
   }
 };

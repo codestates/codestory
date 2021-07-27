@@ -7,7 +7,7 @@ module.exports = {
         where: { userId: req.body.username, password: req.body.password }
       });
       if (!userInfo) {
-        res.status(400).send({ message: 'badrequest' });
+        res.status(400).json({ message: 'badrequest' });
       }
       else {
         delete userInfo.dataValues.password;
@@ -16,7 +16,7 @@ module.exports = {
       }
     }
     catch (error) {
-      res.status(500).send({ message: 'Sorry Can\'t process your request' });
+      res.status(500).json({ message: 'Sorry Can\'t process your request' });
       throw error;
     }
   }
