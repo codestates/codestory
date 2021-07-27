@@ -26,8 +26,9 @@ module.exports = {
   },
   updateCoin: async (req,res)=>{
     try {
-      let accessTokenData=await isAuthorizedJwt(req);
-      let oauth=await isAuthorizedOauth(req);
+      const accessTokenData=await isAuthorizedJwt(req);
+      const oauth=await isAuthorizedOauth(req);
+
       if (accessTokenData) {
         const result = db.user.update(
           {

@@ -61,7 +61,7 @@ module.exports = {
         }
         res.json({ data: followingArr.map((record) => userinfoArr[record.dataValues.followedId]) });
       }else if(oauth){
-        res.json({data : []});
+        res.json({data : [{username : '회원가입 하시면', photourl :'../?'},{username : '이용하실 수 있으십니다', photourl : '../?'}]});
       }
       else {
         res.status(400).json({ message: 'InvalidToken' });

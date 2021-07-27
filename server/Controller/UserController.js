@@ -2,6 +2,12 @@ const { isAuthorizedJwt,generateAccessToken,sendAccessToken} = require('./JsonTo
 const {isAuthorizedOauth} = require('./OauthToken.js');
 const models = require('../models/index.js');
 const { Op } = require('sequelize');
+const multer = require('multer');
+const moment = require('moment');
+const multerS3 =require('multer-s3');
+const aws = require('aws-sdk');
+const dotenv=require('dotenv');
+dotenv.config();
 
 module.exports = {
   signUp: async (req, res) => {
@@ -116,6 +122,49 @@ module.exports = {
     catch (error) {
       res.status(500).json({ 'message': 'Sorry Can\'t process your request' });
       throw error;
+    }
+  },
+  imageUpload: async(req,res,next)=>{
+    try{
+      const jwt= await isAuthorizedJwt(req);
+      const oauth= await isAuthorizedOauth(req);
+      if(jwt){
+        const s3 = new aws.S3({
+          accessKeyId: process.env.AWS_ACCESSKEY,
+          secretAccessKey: process.env.AWS_SECRETKEY, 
+          region: 'ap-northeast-2' 
+        })
+        const storage = multerS3({
+          s3: s3,
+          bucket: 'codestoryimagecontainor',
+          acl: 'public-read',   
+          metadata: function (req, file, cb) {
+            cb(null, {fieldName: file.fieldname}); 
+          },
+          key: function (req, file, cb) {
+            cb(null, moment().format('YYYYMMDDHHmmss') + "_" + file.originalname) 
+          }
+        })
+        
+        const upload = multer({ storage: storage }).single("file");
+
+        upload(req, res, function(err) {
+          if (err instanceof multer.MulterError) {
+            return next(err);
+          } else if (err) {
+            return next(err);
+          }
+          models.users.update({pictureulr:req.file.location},{where:{id:jwt.id}})
+          return res.status(200).json(req.file.location);
+        });
+      }else if(oauth){
+        return res.status(200).json('https://codestoryimagecontainor.s3.ap-northeast-2.amazonaws.com/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85+%EA%B6%8C%EC%9C%A0+%EC%9D%B4%EB%AF%B8%EC%A7%80.png');
+      }else{
+        return res.status(400).json({message: 'invalid token'});
+      }
+    }
+    catch(error){
+      res.status(500).json({'message':'Sorry Can\'t process your request'});
     }
   }
 };

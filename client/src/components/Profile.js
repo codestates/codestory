@@ -6,7 +6,6 @@ import Footer from '../components/Footer';
 import axios from 'axios';
 
 function Profile( {userInfo, userView, followingList} ) {
-  const [img, setImage] = useState(null);
   const [editmode, setEditmode] = useState(false);
   const [word, setWord] = useState('나의 한마디');
   const [showfollow, setfollow] = useState(false);
@@ -23,14 +22,26 @@ function Profile( {userInfo, userView, followingList} ) {
     }
   }, [userInfo]);
 
-  const onChange = async (e) => {
-    console.log(e.target.files);
-    setImage(e.target.files[0]);
+  const sendFile =  async (e) => {
     const formData = new FormData();
-    formData.append('photourl', img);
-    console.log(formData);
-    // 서버의 upload API 호출
-    // const res = await axios.post("/api/upload", formData);
+    formData.append('file', e.target.files[0]);
+    const res = await axios.post(serverUrl+'/user/image', formData,{
+      'content-type' : 'application/json',
+      withCredentials : true
+    });
+    const user = {
+      username : userInfo.username,
+      photourl : res.data,
+      coin : userInfo.coin,
+      ranking : userInfo.ranking,
+      intro : userInfo.intro,
+      follower : userInfo.follower,
+      following : userInfo.following
+    };
+
+    console.log(user);
+    await userView(user);
+    await setEditmode(false);
   };
   
   const openEditMode = () => {
@@ -39,7 +50,7 @@ function Profile( {userInfo, userView, followingList} ) {
 
   const closeEditMode = async () => {
     if (word.length > 0) {
-      await axios.patch(serverUrl+'user', {
+      await axios.patch(serverUrl+'/user', {
         word: word
       }, {
         'content-type': 'application/json',
@@ -98,12 +109,15 @@ function Profile( {userInfo, userView, followingList} ) {
                 <Link to="/gamestart">&times;</Link>
               </div>
               <div id="profile-wrapper">
-                <input id="profile-img" type="image" src={userInfo.photourl !== '../?' ? userInfo.photourl : 'profile-img.png'} onChange={(e) => onChange(e)}></input>
+                <input id="profile-img" type="image" src={userInfo.photourl !== '../?' ? userInfo.photourl : 'profile-img.png'}></input>
                 { editmode ? (
-                  <div id="profile-word-edit">
-                    <input id="profile-word-input" onChange={(e)=>updateWord(e)}></input>
-                    <a className="profile-word-btn" onClick={()=>closeEditMode()}>입력</a>
-                  </div>
+                  <>
+                    <input type="file" name="file" onChange={sendFile}/>
+                    <div id="profile-word-edit">
+                      <input id="profile-word-input" onChange={(e)=>updateWord(e)}></input>
+                      <a className="profile-word-btn" onClick={()=>closeEditMode()}>입력</a>
+                    </div>
+                  </>
                 ) : (
                   <div id="profile-word">
                     {userInfo.intro === '' || userInfo.intro === null ? word : userInfo.intro}
