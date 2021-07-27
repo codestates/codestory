@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/profile.css';
 import FollowingList from './FollowingList';
@@ -9,18 +9,18 @@ function Profile( {userInfo, userView, followingList} ) {
   const [editmode, setEditmode] = useState(false);
   const [word, setWord] = useState('나의 한마디');
   const [showfollow, setfollow] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const serverUrl='https://api.codestory.academy';
 
-  useEffect(() => {
-    if (userInfo.username === '') {
-      setIsLoading(true);
-      loadingUserInfo()
-        .then(() => {
-          setIsLoading(false);
-        });
-    }
-  }, [userInfo]);
+  // useEffect(() => {
+  //   if (userInfo.username === '') {
+  //     setIsLoading(true);
+  //     loadingUserInfo()
+  //       .then(() => {
+  //         setIsLoading(false);
+  //       });
+  //   }
+  // }, [userInfo]);
 
   const sendFile =  async (e) => {
     const formData = new FormData();
@@ -84,23 +84,23 @@ function Profile( {userInfo, userView, followingList} ) {
     setfollow(false);
   };
 
-  const loadingUserInfo = async () => {
-    let user = {};
-    await axios.get(serverUrl+'/user', {
-      'content-type': 'application/json',
-      withCredentials: true
-    }).then(result => {
-      user = Object.assign({}, result.data);
-      console.log(user);
-      userView(user);
-    }).catch(err => {
-      console.log(err);
-    });
-  };
+  // const loadingUserInfo = async () => {
+  //   let user = {};
+  //   await axios.get(serverUrl+'/user', {
+  //     'content-type': 'application/json',
+  //     withCredentials: true
+  //   }).then(result => {
+  //     user = Object.assign({}, result.data);
+  //     console.log(user);
+  //     userView(user);
+  //   }).catch(err => {
+  //     console.log(err);
+  //   });
+  // };
 
   return (
     <>
-      { isLoading ?
+      { !userInfo.username ?
         <h1 id="profile-loading">로딩중 입니다...</h1> :
         showfollow ? <FollowingList showProfile={showProfile} followingList={followingList} userInfo={userInfo}/> :
           <div id="profile-background">
