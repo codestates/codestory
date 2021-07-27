@@ -26,9 +26,6 @@ function App() {
   const [ranking, setRanking] = useState({ data: [] });
   const [followingList, setFollowingList] = useState({ data: [] });
 
-  ranking;
-  followingList;
-
   useEffect(() => {
     if (isLogin === false) {
       (async () => {

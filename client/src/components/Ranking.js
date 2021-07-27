@@ -7,7 +7,6 @@ function Ranking({ ranking, rankingHandler }) {
 
   let rankingList = [...ranking.data];
 
-  console.log(rankingList);
   const followHandler = async (e) => {
     if (e.following === 'me') {
       return;
