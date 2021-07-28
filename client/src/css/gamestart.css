@@ -1,0 +1,80 @@
+/* Gamestart */
+
+#gamestart-container { 
+  width: 100%;
+  height: 93vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gamestart-btn {
+  position: relative;
+  top: 2rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 24rem;
+  min-width: 15rem;
+  background-color: #5a5a5a;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.gamestart-btn-word{
+  position: absolute;
+  top: 16rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.gamestart-btn-word2 {
+  position: relative;
+  top: 16rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.gamestart-btn:nth-child(1) {
+  background-color: #fccb03;
+}
+
+.gamestart-btn:nth-child(1):active {
+  border: inset 4px #ffb350;
+}
+
+.gamestart-btn:hover {
+  background-color: #232321;
+  color: #ffffff;
+}
+
+.gamestart-btn:nth-child(1):hover {
+  background-color: #ef941b;
+  color: #232321;
+}
+
+.hidden {
+  position: relative;
+  top: 4rem;
+  color: #5a5a5a;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+#gamestart-cli-img {
+  position: relative;
+  top: 5rem;
+  width: 11rem;
+  pointer-events: none;
+}
+
+#gamestart-cli-img-hover {
+  position: relative;
+  top: 4rem;
+  width: 11rem;
+  pointer-events: none;
+}

@@ -1,0 +1,88 @@
+/* followinglist */
+
+body {
+	box-sizing: border-box;
+}
+
+#followinglist-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	text-align: center;
+	position: relative;
+	top: -10px;
+	padding-bottom: 20px;
+}
+
+#followinglist-background {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+  height: 38rem;
+}
+
+#followinglist-container {
+	position: absolute;
+	background-color: #fccb03;
+	top: 8rem;
+	width: 28rem;
+	border-radius: 2rem;
+	padding: 40px
+}
+
+.profile-picture {
+	width: 100px;
+}
+
+.followinglist-username {
+	font-size: 2rem;
+	font-weight: 700;
+	padding : 40px;
+	position: relative;
+	top: -10px;
+}
+
+.followinglist-wrapper {
+	margin-top: 30px;
+	overflow: auto;
+	height: 132px;
+	background-color: white;
+	padding: 5px;
+}
+
+.userlist-wrapper {
+	border-bottom: 1px solid black;
+	padding: 5px;
+}
+
+.followinglist-number {
+	padding-left: 5px;
+	color: black;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.followinglist-listname {
+	color:black;
+	position: relative;
+	left: 40px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+#followinglist-out-btn {
+	position: relative;
+	top: -1rem;
+	left: 22rem;
+	margin-right: 1.5rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: #ffffff;
+  align-self: flex-end;
+  border-radius: 2rem;
+  text-align: center;
+  font-size: 40px;
+  line-height: 25px;
+  color: #232321;
+	cursor: pointer;
+}
