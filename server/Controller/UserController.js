@@ -154,11 +154,7 @@ module.exports = {
           } else if (err) {
             return next(err);
           }
-<<<<<<< HEAD
-          models.users.update({pictureurl:req.file.location},{where:{id:jwt.id}})
-=======
           models.users.update({pictureurl:req.file.location},{where:{id:jwt.id}});
->>>>>>> aa2b396b870be34546b1eb0197fceff615dc58bb
           return res.status(200).json(req.file.location);
         });
       }else if(oauth){

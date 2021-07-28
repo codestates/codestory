@@ -5,22 +5,12 @@ import FollowingList from './FollowingList';
 import Footer from '../components/Footer';
 import axios from 'axios';
 
-function Profile( {userInfo, userView, followingList} ) {
+function Profile( {userInfo, userView, followingList, ranking, rankingHandler} ) {
   const [editmode, setEditmode] = useState(false);
   const [word, setWord] = useState('나의 한마디');
   const [showfollow, setfollow] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
-  const serverUrl='https://api.codestory.academy';
 
-  // useEffect(() => {
-  //   if (userInfo.username === '') {
-  //     setIsLoading(true);
-  //     loadingUserInfo()
-  //       .then(() => {
-  //         setIsLoading(false);
-  //       });
-  //   }
-  // }, [userInfo]);
+  const serverUrl='https://api.codestory.academy';
 
   const sendFile =  async (e) => {
     const formData = new FormData();
@@ -38,8 +28,14 @@ function Profile( {userInfo, userView, followingList} ) {
       follower : userInfo.follower,
       following : userInfo.following
     };
+    const rankingList=ranking.data.map(person=>{
+      if(person.username===userInfo.username){
+        person.photourl=res.data;
+      }
+    });
 
     await userView(user);
+    await rankingHandler([...rankingList]);
     await setEditmode(false);
   };
   
@@ -82,21 +78,7 @@ function Profile( {userInfo, userView, followingList} ) {
   const showProfile = () => {
     setfollow(false);
   };
-
-  // const loadingUserInfo = async () => {
-  //   let user = {};
-  //   await axios.get(serverUrl+'/user', {
-  //     'content-type': 'application/json',
-  //     withCredentials: true
-  //   }).then(result => {
-  //     user = Object.assign({}, result.data);
-  //     console.log(user);
-  //     userView(user);
-  //   }).catch(err => {
-  //     console.log(err);
-  //   });
-  // };
-
+  
   return (
     <>
       { !userInfo.username ?
