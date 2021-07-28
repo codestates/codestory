@@ -51,12 +51,12 @@ function Game({ userInfo, userView, rankingHandler }) {
   
   const handleCoin = async () => {
     let sumcoin = userInfo.coin + curcoin;
-    await axios.patch(serverUrl+'/game/coin`, {
+    await axios.patch(serverUrl+'/game/coin', {
       newCoin: sumcoin
     }, {
       withCredentials: true
     });
-    await axios.get(serverUrl+'/ranking`, {
+    await axios.get(serverUrl+'/ranking', {
       withCredentials: true
     }).then((rankinglist) => {
       rankingHandler(rankinglist.data.data);
