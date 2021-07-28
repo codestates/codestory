@@ -10,13 +10,13 @@ import { Link } from 'react-router-dom';
 
 function Game({ userInfo, userView, rankingHandler }) {
   
-  const [script, setScript] = useState('Now loading...');
-  const [isWaiting, setIsWaiting] = useState(true);
-  const [isFinish, setIsFinish] = useState(false);
-  const [wd, setWd] = useState('Desktop');
-  const [stageIndex, setStageIndex] = useState(0);
   const serverUrl = 'https://api.codestory.academy';
   const stageArr = ['0', '1', '2', '3', '4-1', '4-2', '5', '6-1', '6-2', '6-3', '7-1', '7-2', '8'];
+  const [stageIndex, setStageIndex] = useState(0);
+  const [script, setScript] = useState('Now loading...');
+  const [wd, setWd] = useState('Desktop');
+  const [isWaiting, setIsWaiting] = useState(true);
+  const [isFinish, setIsFinish] = useState(false);
   const [curcoin, setCoin] = useState(0);
 
   useEffect(() => {
