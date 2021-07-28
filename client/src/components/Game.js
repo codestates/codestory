@@ -28,16 +28,17 @@ function Game({ userInfo, userView, rankingHandler }) {
       setIsWaiting(false);
     })();
   }, []);
+  
+  const handleWaiting = () => {
+    setIsWaiting(!isWaiting);
+  };
+
 
   const handleStageChange = (script, isSuccess) => {
     setStageIndex(stageIndex + (isSuccess ? 1 : -1));
     if (script) {
       setScript(script);
     }
-  };
-
-  const handleWaiting = () => {
-    setIsWaiting(!isWaiting);
   };
 
   const handleWdChange = (wd) => {
