@@ -110,6 +110,8 @@ function App() {
                 userInfo={userInfo}
                 userView={userView}
                 followingList={followingList}
+                ranking={ranking}
+                rankingHandler={rankingHandler}
               />
             </Route>
             <Route path="/game">

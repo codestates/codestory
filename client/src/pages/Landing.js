@@ -9,6 +9,10 @@ function Landing({loginClick, setIsLogin}) {
   const [y, setY] = useState(null);
 
   useEffect(() => {
+    setIsLogin(false);
+  })
+
+  useEffect(() => {
     window.addEventListener('scroll', (e) => handleNavigation(e));
     return () => { 
       window.removeEventListener('scroll', (e) => handleNavigation(e));
@@ -16,7 +20,6 @@ function Landing({loginClick, setIsLogin}) {
   }, [y]);
   
   useEffect(() => {
-    setIsLogin(false);
     new WOW.WOW({ live: false }).init();
   }, []);
   
