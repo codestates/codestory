@@ -110,7 +110,7 @@ function Game({ userInfo, userView, rankingHandler }) {
           <span className="material-icons" id="game-arrow">double_arrow</span>
           <div id="game-rightside">
             <GameGui 
-              stage={stageArr[stageIndex]} 
+              stage={stageArr[stageIndex]}
               wd={wd} 
              />
           </div>
