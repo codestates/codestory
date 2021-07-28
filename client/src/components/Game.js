@@ -33,7 +33,6 @@ function Game({ userInfo, userView, rankingHandler }) {
     setIsWaiting(!isWaiting);
   };
 
-
   const handleStageChange = (script, isSuccess) => {
     setStageIndex(stageIndex + (isSuccess ? 1 : -1));
     if (script) {
@@ -52,12 +51,12 @@ function Game({ userInfo, userView, rankingHandler }) {
   
   const handleCoin = async () => {
     let sumcoin = userInfo.coin + curcoin;
-    await axios.patch(`${serverUrl}/game/coin`, {
+    await axios.patch(serverUrl+'/game/coin`, {
       newCoin: sumcoin
     }, {
       withCredentials: true
     });
-    await axios.get(`${serverUrl}/ranking`, {
+    await axios.get(serverUrl+'/ranking`, {
       withCredentials: true
     }).then((rankinglist) => {
       rankingHandler(rankinglist.data.data);
@@ -77,8 +76,8 @@ function Game({ userInfo, userView, rankingHandler }) {
   return (
     <>
       <div id="game-background">
-        { isFinish ? 
-          <div id="game-finish-background">
+        { isFinish 
+          ? <div id="game-finish-background">
             <div id="game-finish">
               <img id="game-congrats-img-left" src="congrats_icon_left.png" alt="congrats icon"/>
               <div id="game-finish-wordbox">
@@ -110,7 +109,10 @@ function Game({ userInfo, userView, rankingHandler }) {
           </div>
           <span className="material-icons" id="game-arrow">double_arrow</span>
           <div id="game-rightside">
-            <GameGui stage={stageArr[stageIndex]} wd={wd} />
+            <GameGui 
+              stage={stageArr[stageIndex]} 
+              wd={wd} 
+             />
           </div>
         </div>
       </div>
