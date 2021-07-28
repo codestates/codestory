@@ -10,7 +10,7 @@ function Landing({loginClick, setIsLogin}) {
 
   useEffect(() => {
     setIsLogin(false);
-  })
+  });
 
   useEffect(() => {
     window.addEventListener('scroll', (e) => handleNavigation(e));
