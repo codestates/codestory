@@ -32,7 +32,7 @@ function Game({ userInfo, userView, rankingHandler }) {
   const handleWaiting = () => {
     setIsWaiting(!isWaiting);
   };
-
+  
   const handleStageChange = (script, isSuccess) => {
     setStageIndex(stageIndex + (isSuccess ? 1 : -1));
     if (script) {
@@ -76,7 +76,7 @@ function Game({ userInfo, userView, rankingHandler }) {
   return (
     <>
       <div id="game-background">
-        { isFinish 
+        {isFinish
           ? <div id="game-finish-background">
             <div id="game-finish">
               <img id="game-congrats-img-left" src="congrats_icon_left.png" alt="congrats icon"/>
@@ -109,10 +109,10 @@ function Game({ userInfo, userView, rankingHandler }) {
           </div>
           <span className="material-icons" id="game-arrow">double_arrow</span>
           <div id="game-rightside">
-            <GameGui 
+            <GameGui
               stage={stageArr[stageIndex]}
-              wd={wd} 
-             />
+              wd={wd}
+            />
           </div>
         </div>
       </div>
