@@ -8,7 +8,8 @@ import '../css/game.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-function Game({userInfo, userView, rankingHandler}) {
+function Game({ userInfo, userView, rankingHandler }) {
+  
   const [script, setScript] = useState('Now loading...');
   const [isWaiting, setIsWaiting] = useState(true);
   const [isFinish, setIsFinish] = useState(false);
