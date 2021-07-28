@@ -28,7 +28,7 @@ function Game({ userInfo, userView, rankingHandler }) {
       setIsWaiting(false);
     })();
   }, []);
-  
+
   const handleWaiting = () => {
     setIsWaiting(!isWaiting);
   };
