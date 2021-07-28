@@ -8,7 +8,7 @@ function GameCli({ stage, handleStageChange, isWaiting, handleWaiting, wd, handl
   const [cli, setCli] = useState([`Last login: ${new Date().toUTCString()}`]);
   const [enterCount, setEnterCount] = useState(0);
   const [isPassword, setIsPassword] = useState(false);
-  const serverUrl='https://api.codestory.academy';
+  const serverUrl='http://localhost:4000';
 
   useEffect(() => {
     (async () => {

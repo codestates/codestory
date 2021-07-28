@@ -10,7 +10,7 @@ function Profile( {userInfo, userView, followingList} ) {
   const [word, setWord] = useState('나의 한마디');
   const [showfollow, setfollow] = useState(false);
   // const [isLoading, setIsLoading] = useState(false);
-  const serverUrl='https://api.codestory.academy';
+  const serverUrl='http://localhost:4000';
 
   // useEffect(() => {
   //   if (userInfo.username === '') {

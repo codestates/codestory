@@ -30,9 +30,9 @@ function App() {
     if (isLogin === false) {
       (async () => {
         try {
-          const userInfo = await axios.get('https://api.codestory.academy/user', { withCredentials: true });
-          const ranking = await axios.get('https://api.codestory.academy/ranking', { withCredentials: true });
-          const followingList = await axios.get('https://api.codestory.academy/follower', { withCredentials: true });
+          const userInfo = await axios.get('http://localhost:4000/user', { withCredentials: true });
+          const ranking = await axios.get('http://localhost:4000/ranking', { withCredentials: true });
+          const followingList = await axios.get('http://localhost:4000/follower', { withCredentials: true });
           setUserInfo(userInfo.data);
           setRanking(ranking.data);
           setFollowingList(followingList.data);
@@ -50,12 +50,11 @@ function App() {
   };
 
   const logoutClick = () => {
-    axios.get('https://api.codestory.academy/signout', { withCredentials: true });
+    axios.get('http://localhost:4000/signout', { withCredentials: true });
     setIsLogin(false);
   };
 
   const userView = (user) => {
-    console.log('app.js user', user);
     setUserInfo({
       ...userInfo,
       username: user.username,
@@ -92,7 +91,7 @@ function App() {
               <Ranking ranking={ranking} rankingHandler={rankingHandler}/>
             </Route>
             <Route path="/profile">
-              <Profile userInfo={userInfo} userView={userView} followingList={followingList}/>
+              <Profile userInfo={userInfo} userView={userView} followingList={followingList} ranking={ranking} rankingHandler={rankingHandler}/>
             </Route>
             <Route path="/game">
               <Game userInfo={userInfo} userView={userView} rankingHandler={rankingHandler}/>

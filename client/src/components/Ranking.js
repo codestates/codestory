@@ -11,7 +11,7 @@ function Ranking({ ranking, rankingHandler }) {
     if (e.following === 'me') {
       return;
     } else if (e.following === false) {
-      await axios.post('https://api.codestory.academy/follower', {
+      await axios.post('http://localhost:4000/follower', {
         username: e.username
       }, {
         'content-type': 'application/json',
@@ -27,7 +27,7 @@ function Ranking({ ranking, rankingHandler }) {
         rankingHandler(rankingList);
       });
     } else if (e.following === true) {
-      await axios.delete('https://api.codestory.academy/follower', {
+      await axios.delete('http://localhost:4000/follower', {
         data: {
           username: e.username
         },'content-type': 'application/json',

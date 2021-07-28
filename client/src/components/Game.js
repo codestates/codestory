@@ -14,7 +14,7 @@ function Game({userInfo, userView, rankingHandler}) {
   const [isFinish, setIsFinish] = useState(false);
   const [wd, setWd] = useState('Desktop');
   const [stageIndex, setStageIndex] = useState(0);
-  const serverUrl = 'https://api.codestory.academy';
+  const serverUrl = 'http://localhost:4000';
   const stageArr = ['0', '1', '2', '3', '4-1', '4-2', '5', '6-1', '6-2', '6-3', '7-1', '7-2', '8'];
   const [curcoin, setCoin] = useState(0);
 

@@ -54,7 +54,7 @@ function SignUp( { signupHandler,loginClick } ) {
   
   const createUser = async () => {
     const { username, password } = validUser;
-    await axios.post('https://api.codestory.academy/user', {
+    await axios.post('http://localhost:4000/user', {
       username: username,
       password: password
     }, {
@@ -63,7 +63,7 @@ function SignUp( { signupHandler,loginClick } ) {
     }).then((result) => {
       console.log(result.data);
       loginClick();
-      history.push('https://api.codestory.academy/gamestart');
+      history.push('http://localhost:4000/gamestart');
     }).catch((err) => {
       console.log(err);
     });
