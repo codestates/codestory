@@ -106,15 +106,14 @@ function App() {
               />
             </Route>
             <Route path="/profile">
-<<<<<<< HEAD
-              <Profile userInfo={userInfo} userView={userView} followingList={followingList} ranking={ranking} rankingHandler={rankingHandler}/>
-=======
               <Profile
                 userInfo={userInfo}
                 userView={userView}
                 followingList={followingList}
+                ranking={ranking}
+                rankingHandler={rankingHandler}
+
               />
->>>>>>> cb45cb9a84b6ae5705cc576ed6d279daae024272
             </Route>
             <Route path="/game">
               <Game 

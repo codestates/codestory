@@ -5,7 +5,7 @@ import FollowingList from './FollowingList';
 import Footer from '../components/Footer';
 import axios from 'axios';
 
-function Profile({ userInfo, userView, followingList }) {
+function Profile({ userInfo, userView, followingList,ranking,rankingHandler }) {
   
   const serverUrl = 'https://api.codestory.academy';
   const [editmode, setEditmode] = useState(false);
@@ -56,7 +56,15 @@ function Profile({ userInfo, userView, followingList }) {
         follower: userInfo.follower,
         following: userInfo.following
       };
-      userView(user);
+      
+      const rankingList=ranking.data.map(person=>{
+        if(person.username===userInfo.username){
+          person.photourl=res.data;
+        }
+        return person;
+      });
+      await rankingHandler([...rankingList]);
+      await userView(user);
     }
     setEditmode(false);
   };
