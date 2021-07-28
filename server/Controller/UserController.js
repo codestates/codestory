@@ -58,7 +58,7 @@ module.exports = {
           following
         });
       }else if(oauth){
-           let username,photourl;
+        let username,photourl;
         if(oauth.data.kakao_account){
           username=oauth.data.properties.nickname;
           photourl=oauth.data.properties.profile_image;
@@ -74,7 +74,7 @@ module.exports = {
           ranking:10000,
           follower: 0,
           following:0
-        })
+        });
       }
       else {
         res.status(400).json({ message: 'InvalidToken' });
@@ -113,7 +113,7 @@ module.exports = {
         res.cookie('accessToken', 'invalid Token');
         res.status(200).json({ message: 'ok' });
       }else if(oauth){
-        res.status(200).json({message:'ok'})
+        res.status(200).json({message:'ok'});
       }
       else {
         res.status(400).json({ message: 'InvalidToken' });
@@ -130,10 +130,10 @@ module.exports = {
       const oauth= await isAuthorizedOauth(req);
       if(jwt){
         const s3 = new aws.S3({
-          accessKeyId: process.env.AWS_ACCESSKEY,
-          secretAccessKey: process.env.AWS_SECRETKEY, 
+          accessKeyId: process.env.AW_ACCESSKEY,
+          secretAccessKey: process.env.AW_SECRETKEY, 
           region: 'ap-northeast-2' 
-        })
+        });
         const storage = multerS3({
           s3: s3,
           bucket: 'codestoryimagecontainor',
@@ -142,11 +142,11 @@ module.exports = {
             cb(null, {fieldName: file.fieldname}); 
           },
           key: function (req, file, cb) {
-            cb(null, moment().format('YYYYMMDDHHmmss') + "_" + file.originalname) 
+            cb(null, moment().format('YYYYMMDDHHmmss') + '_' + file.originalname);
           }
-        })
+        });
         
-        const upload = multer({ storage: storage }).single("file");
+        const upload = multer({ storage: storage }).single('file');
 
         upload(req, res, function(err) {
           if (err instanceof multer.MulterError) {
@@ -154,7 +154,11 @@ module.exports = {
           } else if (err) {
             return next(err);
           }
+<<<<<<< HEAD
           models.users.update({pictureurl:req.file.location},{where:{id:jwt.id}})
+=======
+          models.users.update({pictureurl:req.file.location},{where:{id:jwt.id}});
+>>>>>>> aa2b396b870be34546b1eb0197fceff615dc58bb
           return res.status(200).json(req.file.location);
         });
       }else if(oauth){

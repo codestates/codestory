@@ -26,9 +26,6 @@ function App() {
   const [ranking, setRanking] = useState({ data: [] });
   const [followingList, setFollowingList] = useState({ data: [] });
 
-  ranking;
-  followingList;
-
   useEffect(() => {
     if (isLogin === false) {
       (async () => {
@@ -98,7 +95,7 @@ function App() {
               <Profile userInfo={userInfo} userView={userView} followingList={followingList}/>
             </Route>
             <Route path="/game">
-              <Game />
+              <Game userInfo={userInfo} userView={userView} rankingHandler={rankingHandler}/>
             </Route>
           </Switch>
         </BrowserView>

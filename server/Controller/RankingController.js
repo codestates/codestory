@@ -7,7 +7,6 @@ module.exports = {
     try {
       const jwt = await isAuthorizedJwt(req);
       const oauth = await isAuthorizedOauth(req);
-      console.log('ranking page작동');
       if (jwt) {
         const rankingArr = await db.users.findAll({ order: [['coin', 'DESC'], ['id', 'ASC']] });
         const followedArr = await db.follower_followeds.findAll({ where: { followerId: jwt.id } });

@@ -5,7 +5,7 @@ import axios from 'axios';
 function GameCli({ stage, handleStageChange, isWaiting, handleWaiting, wd, handleWdChange, handleFinish }) {
 
   const [command, setCommand] = useState('');
-  const [cli, setCli] = useState(['Last login: Fri Jul 23 18:06:34 on ttys004']);
+  const [cli, setCli] = useState([`Last login: ${new Date().toUTCString()}`]);
   const [enterCount, setEnterCount] = useState(0);
   const [isPassword, setIsPassword] = useState(false);
   const serverUrl='https://api.codestory.academy';

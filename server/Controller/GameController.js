@@ -30,19 +30,16 @@ module.exports = {
       const oauth=await isAuthorizedOauth(req);
 
       if (accessTokenData) {
-        const result = db.user.update(
+        await db.users.update(
           {
             coin:req.body.newCoin
           },
           {
             where : { id : accessTokenData.id}
-          })
-        
-          if(result){
-            res.status(200).json({"message":"ok"});
-          }
+        });
+        res.status(200).json({message:'ok'});
       }else if(oauth){
-        res.status(200).json({"message":"ok"});
+        res.status(200).json({message:'ok'});
       }else {
         res.status(400).json({ message: 'InvalidToken' });
       }
