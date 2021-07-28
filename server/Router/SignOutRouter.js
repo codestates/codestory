@@ -1,8 +1,7 @@
-const {signOut} = require('../Controller/SignOutController');
-const exress = require('express');
-const router = exress.Router();
+const { signOut } = require('../Controller/SignOutController');
+const express = require('express');
+const router = express.Router();
 
-router.get('/',signOut);
-
+router.get('/', signOut);
 
 module.exports = router; 

@@ -1,7 +1,9 @@
 const { isAuthorizedJwt } = require('./JsonToken.js');
 const {isAuthorizedOauth} = require('./OauthToken.js');
 const db = require('../models');
+
 module.exports = {
+
   follow: async (req, res) => {
     try {
       const jwt = await isAuthorizedJwt(req);
@@ -25,6 +27,7 @@ module.exports = {
       throw error;
     }
   },
+
   unFollow: async (req, res) => {
     try {
       const jwt = await isAuthorizedJwt(req);
@@ -36,10 +39,9 @@ module.exports = {
           followedId: followed.dataValues.id
         } });
         res.json({ message: 'ok' });
-      }else if(oauth){
+      } else if (oauth) {
         res.json({message:'ok'});
-      }
-      else {
+      } else {
         res.status(400).json({ message: 'InvalidToken' });
       }
     }
@@ -48,6 +50,7 @@ module.exports = {
       throw error;
     }
   },
+
   sendFollowingList: async (req, res) => {
     try {
       const jwt = await isAuthorizedJwt(req);
@@ -60,10 +63,9 @@ module.exports = {
           userinfoArr[record.dataValues.id] = { username: record.dataValues.userId, photourl: record.dataValues.pictureurl };
         }
         res.json({ data: followingArr.map((record) => userinfoArr[record.dataValues.followedId]) });
-      }else if(oauth){
-        res.json({data : [{username : '회원가입 하시면', photourl :'../?'},{username : '이용하실 수 있습니다', photourl : '../?'}]});
-      }
-      else {
+      } else if (oauth) {
+        res.json({ data: [{ username: '회원가입 하시면', photourl: '../?' }, { username: '이용하실 수 있습니다', photourl: '../?' }] });
+      } else {
         res.status(400).json({ message: 'InvalidToken' });
       }
     }

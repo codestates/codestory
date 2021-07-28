@@ -1,6 +1,7 @@
 import React from 'react';
 
 function MobileError() {
+  
   return (
     <div id="MobileError-container">
       <object id="MobileError-logo" className="wow pulse animate__slower" type="image/svg+xml" data="logo.svg" aria-label="logo"></object>

@@ -8,6 +8,18 @@ function Landing({loginClick, setIsLogin}) {
   const [isVisible, setIsVisible] = useState(false);
   const [y, setY] = useState(null);
 
+  useEffect(() => {
+    window.addEventListener('scroll', (e) => handleNavigation(e));
+    return () => { 
+      window.removeEventListener('scroll', (e) => handleNavigation(e));
+    };
+  }, [y]);
+  
+  useEffect(() => {
+    setIsLogin(false);
+    new WOW.WOW({ live: false }).init();
+  }, []);
+  
   const handleNavigation = (e) => {
     const window = e.currentTarget.scrollY;
     if (window >= 650 && window < 2000) {
@@ -18,25 +30,31 @@ function Landing({loginClick, setIsLogin}) {
     setY(window.scrollY);
   };
 
-  useEffect(() => {
-    setIsLogin(false);
-  });
-
-  useEffect(() => {
-    window.addEventListener('scroll', (e) => handleNavigation(e));
-    return () => { 
-      window.removeEventListener('scroll', (e) => handleNavigation(e));
-    };
-  }, [y]);
-
-  useEffect(() => {
-    new WOW.WOW({ live: false }).init();
-  }, []);
-
   const scrollToBottom = () => {
     document.getElementById('root').scrollIntoView({ behavior: 'smooth', block: 'end' });
   };
-
+  
+  const move1 = () => {
+    window.scrollTo({
+      top: document.getElementById('landing-page-2').offsetHeight,
+      behavior: 'smooth'
+    });
+  };
+  
+  const move2 = () => {
+    window.scrollTo({
+      top: (document.getElementById('landing-page-3').offsetHeight) * 2,
+      behavior: 'smooth'
+    });
+  };
+  
+  const move3 = () => {
+    window.scrollTo({
+      top: document.getElementById('landing-page-4').offsetHeight * 3,
+      behavior: 'smooth'
+    });
+  };
+  
   const fadeIn = {
     opacity: 1,
     transition: '.5s'
@@ -45,27 +63,6 @@ function Landing({loginClick, setIsLogin}) {
   const fadeOut = {
     opacity: 0,
     transition: '.5s'
-  };
-
-  const move1 = () => {
-    window.scrollTo({
-      top: document.getElementById('landing-page-2').offsetHeight,
-      behavior: 'smooth'
-    });
-  };
-
-  const move2 = () => {
-    window.scrollTo({
-      top: (document.getElementById('landing-page-3').offsetHeight) * 2,
-      behavior: 'smooth'
-    });
-  };
-
-  const move3 = () => {
-    window.scrollTo({
-      top: document.getElementById('landing-page-4').offsetHeight * 3,
-      behavior: 'smooth'
-    });
   };
 
   return (
@@ -77,7 +74,13 @@ function Landing({loginClick, setIsLogin}) {
       </div>
       <div id="landing-page-2">
         <div id="landing-word" className="wow pulse" onClick={move2}>아직도 코딩을 공부하고 계신가요?</div>
-        <button className='landing-btn' style={isVisible ? fadeIn : fadeOut} onClick={()=>scrollToBottom()}>
+        <button
+          className='landing-btn'
+          style={isVisible
+            ? fadeIn
+            : fadeOut}
+          onClick={() => scrollToBottom()}
+        >
           로그인 하러가기
           <span className="material-icons" id="landing-btn-arrow">expand_more</span>
         </button>

@@ -3,7 +3,9 @@ import { useHistory } from 'react-router-dom';
 import '../css/signup.css';
 import axios from 'axios';
 
-function SignUp( { signupHandler,loginClick } ) {
+function SignUp({ signupHandler, loginClick }) {
+  
+  const serverUrl = 'https://api.codestory.academy';
   const [currentId, setCurrentId] = useState({ value: '', valid: false });
   const [currentPassword, setCurrentPassword] = useState({ value: '', valid: false });
   const [currentPassword2, setCurrentPassword2] = useState({ value: '', valid: false });
@@ -54,16 +56,15 @@ function SignUp( { signupHandler,loginClick } ) {
   
   const createUser = async () => {
     const { username, password } = validUser;
-    await axios.post('https://api.codestory.academy/user', {
+    await axios.post(serverUrl+'/user', {
       username: username,
       password: password
     }, {
       'content-type': 'application/json',
       withCredentials: true
-    }).then((result) => {
-      console.log(result.data);
+    }).then(() => {
       loginClick();
-      history.push('https://api.codestory.academy/gamestart');
+      history.push('/gamestart');
     }).catch((err) => {
       console.log(err);
     });
@@ -74,18 +75,50 @@ function SignUp( { signupHandler,loginClick } ) {
       <object id="signup-logo" type="image/svg+xml" data="logo.svg" aria-label="logo"></object>
       <div id="signup-container">
         <div id="signup-wrapper">
-          <input id="signup-input-id" value={currentId.value} placeholder="아이디 (3자리 이상)" onChange={(e) => inputId(e)}></input>
-          { currentId.valid ? <div id="signup-valid">사용할 수 있는 아이디입니다</div> : <div id="signup-invalid">아이디를 확인해 주세요</div>}
-          <input className="signup-input-password" type='password' value={currentPassword.value} placeholder="비밀번호 (8자리 이상)" onChange={(e)=>inputPassword(e)}></input>
-          { currentPassword.valid ? <div id="signup-valid">비밀번호가 유효합니다</div> : <div id="signup-invalid">비밀번호를 확인해 주세요</div>}
-          <input className="signup-input-password" type='password' value={currentPassword2.value} placeholder="비밀번호 확인" onChange={(e)=>inputPassword2(e)}></input>
-          { currentPassword2.valid ? <div id="signup-valid">비밀번호가 유효합니다</div> : <div id="signup-invalid">비밀번호를 확인해 주세요</div>}
+          <input
+            id="signup-input-id"
+            value={currentId.value}
+            placeholder="아이디 (3자리 이상)"
+            onChange={(e) => inputId(e)}
+          />
+          {
+            currentId.valid
+              ? <div id="signup-valid">사용할 수 있는 아이디입니다</div>
+              : <div id="signup-invalid">아이디를 확인해 주세요</div>
+          }
+          <input
+            className="signup-input-password"
+            type='password'
+            value={currentPassword.value}
+            placeholder="비밀번호 (8자리 이상)"
+            onChange={(e) => inputPassword(e)}
+          />
+          {
+            currentPassword.valid
+              ? <div id="signup-valid">비밀번호가 유효합니다</div>
+              : <div id="signup-invalid">비밀번호를 확인해 주세요</div>
+          }
+          <input
+            className="signup-input-password"
+            type='password'
+            value={currentPassword2.value}
+            placeholder="비밀번호 확인"
+            onChange={(e) => inputPassword2(e)}
+          />
+          {
+            currentPassword2.valid
+              ? <div id="signup-valid">비밀번호가 유효합니다</div>
+              : <div id="signup-invalid">비밀번호를 확인해 주세요</div>
+          }
           <button id="signup-btn" onClick={() => userValidator()}>
             회원가입
           </button>
-          {errorMessage === '' ? null :
-            <div className="warn-box">{errorMessage}</div>}
-          <a id="signup-signin" style={{ cursor: 'pointer' }} onClick={() => signupHandler()}>이미 아이디가 있으신가요?</a>
+          {
+            errorMessage === ''
+              ? null
+              : <div className="warn-box">{errorMessage}</div>
+          }
+          <a id="signup-signin" onClick={() => signupHandler()}>이미 아이디가 있으신가요?</a>
         </div>  
       </div>
     </div>
