@@ -113,7 +113,11 @@ function App() {
               />
             </Route>
             <Route path="/game">
-              <Game />
+              <Game 
+                userInfo={userInfo} 
+                userView={userView} 
+                rankingHandler={rankingHandler}
+              />
             </Route>
           </Switch>
         </BrowserView>
