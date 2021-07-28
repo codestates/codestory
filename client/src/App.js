@@ -112,7 +112,6 @@ function App() {
                 followingList={followingList}
                 ranking={ranking}
                 rankingHandler={rankingHandler}
-
               />
             </Route>
             <Route path="/game">
