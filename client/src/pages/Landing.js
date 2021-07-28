@@ -49,21 +49,21 @@ function Landing({loginClick, setIsLogin}) {
 
   const move1 = () => {
     window.scrollTo({
-      top: 670,
+      top: document.getElementById('landing-page-2').offsetHeight,
       behavior: 'smooth'
     });
   };
 
   const move2 = () => {
     window.scrollTo({
-      top: 1350,
+      top: (document.getElementById('landing-page-3').offsetHeight) * 2,
       behavior: 'smooth'
     });
   };
 
   const move3 = () => {
     window.scrollTo({
-      top: 2030,
+      top: document.getElementById('landing-page-4').offsetHeight * 3,
       behavior: 'smooth'
     });
   };
