@@ -92,7 +92,7 @@ function App() {
               <Ranking ranking={ranking} rankingHandler={rankingHandler}/>
             </Route>
             <Route path="/profile">
-              <Profile userInfo={userInfo} userView={userView} followingList={followingList}/>
+              <Profile userInfo={userInfo} userView={userView} followingList={followingList} ranking={ranking} rankingHandler={rankingHandler}/>
             </Route>
             <Route path="/game">
               <Game userInfo={userInfo} userView={userView} rankingHandler={rankingHandler}/>

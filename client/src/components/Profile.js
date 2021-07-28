@@ -32,6 +32,7 @@ function Profile( {userInfo, userView, followingList, ranking, rankingHandler} )
       if(person.username===userInfo.username){
         person.photourl=res.data;
       }
+      return person;
     });
 
     await userView(user);
