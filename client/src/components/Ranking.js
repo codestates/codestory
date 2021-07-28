@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../css/ranking.css';
+import Footer from '../components/Footer';
 
 function Ranking({ ranking, rankingHandler }) {
 
@@ -116,6 +117,7 @@ function Ranking({ ranking, rankingHandler }) {
           </div>
         </div>
       }
+      <Footer />
     </>
   );
 }

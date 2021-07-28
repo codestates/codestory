@@ -85,7 +85,7 @@ function Login({loginClick}) {
             <div id="login-wrapper">
               <input id="login-input-id" placeholder="아이디" onChange={inputValueHandler('username')}></input>
               <p id="login-valid">아이디를 입력해 주세요</p>
-              <input id="login-input-password" placeholder="비밀번호" onChange={inputValueHandler('password')}></input>
+              <input id="login-input-password" placeholder="비밀번호" type="password" onChange={inputValueHandler('password')}></input>
               <p id="login-valid">비밀번호를 입력해 주세요</p>
               <button id="login-btn" onClick={loginHandler}>
                   로그인
