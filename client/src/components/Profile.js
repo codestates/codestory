@@ -39,7 +39,6 @@ function Profile( {userInfo, userView, followingList} ) {
       following : userInfo.following
     };
 
-    console.log(user);
     await userView(user);
     await setEditmode(false);
   };

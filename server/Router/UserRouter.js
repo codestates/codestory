@@ -2,11 +2,11 @@ const {signUp,sendUserInfo,updateWord,unRegister,imageUpload} = require('../Cont
 const exress = require('express');
 const router = exress.Router();
 
-router.post('/',signUp)
-router.post('/image',imageUpload)
+router.post('/',signUp);
+router.post('/image',imageUpload);
 router.get('/',sendUserInfo);
-router.patch('/',updateWord)
-router.delete('/',unRegister)
+router.patch('/',updateWord);
+router.delete('/',unRegister);
 
 
 module.exports = router;

@@ -37,7 +37,7 @@ module.exports = {
         } });
         res.json({ message: 'ok' });
       }else if(oauth){
-        res.json({message:'ok'})
+        res.json({message:'ok'});
       }
       else {
         res.status(400).json({ message: 'InvalidToken' });

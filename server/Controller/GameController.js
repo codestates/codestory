@@ -36,10 +36,10 @@ module.exports = {
           },
           {
             where : { id : accessTokenData.id}
-        })
-        res.status(200).json({"message":"ok"});
+        });
+        res.status(200).json({message:'ok'});
       }else if(oauth){
-        res.status(200).json({"message":"ok"});
+        res.status(200).json({message:'ok'});
       }else {
         res.status(400).json({ message: 'InvalidToken' });
       }
