@@ -6,7 +6,6 @@ const kakaoClientId = process.env.KAKAO_CLIENTID;
 const kakaoClientSecret = process.env.KAKAO_CLIENT_SECRET;
 const googleClientId = process.env.GOOGLE_CLIENTID;
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
-
 const redirectUri = 'https://www.codestory.academy/gamestart';
 
 module.exports = {
