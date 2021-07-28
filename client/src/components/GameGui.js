@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../css/gamegui.css';
 
 function GameGui({ stage, wd }) {
-  // const [input, setInput] = useState('');
+
   const guiHash = {
     '0': [],
     '1': [['', 'folder'], ['', 'folder'], ['', 'folder'], ['', 'folder'], ['', 'folder'], ['', 'folder'], ['', 'folder'], ['open_me', 'folder'], ['read_me', 'file']],
@@ -21,37 +21,12 @@ function GameGui({ stage, wd }) {
     undefined: []
   };
 
-  // GUI에 생성할 파일 이름 state에 보관
-  // const inputFile = (e) => {
-  //   setInput(e.target.value);
-  // };
-
-  // Enter 키 입력 시 GUI 화면에 input 이름으로 파일 생성
-  // const setter = (e) => {
-  //   if (e.charCode === 13) {
-  //     setFiles([...files, input]);
-  //   }
-  // };
-
-  // GUI 화면 마지막 파일 1개 삭제
-  // const deleteFile = () => {
-  //   let newFiles = [...files].slice(0, -1);
-  //   setFiles(newFiles);
-  // };
-
   return (
     <div id="gamegui-container">
       <div id="gamegui-box">
         <div id="gamegui-titlebar">
           <span id="gamegui-titlebar-title">Stage {stage}</span>
           <span id="gamegui-titlebar-workingdirectory">{wd}</span>
-          {/* <input id="gamegui-test-add" 
-            placeholder={'put file name & ENTER'}
-            value={input} 
-            onChange={(e)=>inputFile(e)}
-            onKeyPress={(e)=>setter(e)}>
-          </input>
-          <button id="gamegui-test-delete" onClick={()=>deleteFile()}>delete</button> */}
           <Link to="/gamestart">
             <div id="gamegui-close">&times;</div>
           </Link>

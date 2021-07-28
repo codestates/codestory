@@ -7,17 +7,20 @@ function FollowingList({ showProfile, followingList, userInfo }) {
 	
   return (
     <>
-      {!followingLists ?
-        <h1 id="followinglist-loading">loading...</h1>
-        : 
-        <div id="followinglist-background">
+      {!followingLists
+        ? <h1 id="followinglist-loading">loading...</h1>
+        : <div id="followinglist-background">
           <div id="followinglist-container">
             <div id="followinglist-out-btn" onClick={showProfile}>&times;</div>
             <div id="followinglist-title">
               Following List
             </div>
             <div className="followinglist-userinfo">
-              <img className="profile-picture" src={userInfo.photourl ? userInfo.photourl : 'profile-img.png'} />
+              <img className="profile-picture"
+                src={userInfo.photourl
+                  ? userInfo.photourl
+                  : 'profile-img.png'}
+              />
               <span className="followinglist-username">{userInfo.username}</span>
             </div>
             <div className="followinglist-wrapper">

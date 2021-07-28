@@ -8,14 +8,15 @@ import '../css/game.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-function Game({userInfo, userView, rankingHandler}) {
-  const [script, setScript] = useState('Now loading...');
-  const [isWaiting, setIsWaiting] = useState(true);
-  const [isFinish, setIsFinish] = useState(false);
-  const [wd, setWd] = useState('Desktop');
-  const [stageIndex, setStageIndex] = useState(0);
+function Game({ userInfo, userView, rankingHandler }) {
+  
   const serverUrl = 'https://api.codestory.academy';
   const stageArr = ['0', '1', '2', '3', '4-1', '4-2', '5', '6-1', '6-2', '6-3', '7-1', '7-2', '8'];
+  const [stageIndex, setStageIndex] = useState(0);
+  const [script, setScript] = useState('Now loading...');
+  const [wd, setWd] = useState('Desktop');
+  const [isWaiting, setIsWaiting] = useState(true);
+  const [isFinish, setIsFinish] = useState(false);
   const [curcoin, setCoin] = useState(0);
 
   useEffect(() => {
@@ -28,15 +29,15 @@ function Game({userInfo, userView, rankingHandler}) {
     })();
   }, []);
 
+  const handleWaiting = () => {
+    setIsWaiting(!isWaiting);
+  };
+  
   const handleStageChange = (script, isSuccess) => {
     setStageIndex(stageIndex + (isSuccess ? 1 : -1));
     if (script) {
       setScript(script);
     }
-  };
-
-  const handleWaiting = () => {
-    setIsWaiting(!isWaiting);
   };
 
   const handleWdChange = (wd) => {
@@ -50,12 +51,12 @@ function Game({userInfo, userView, rankingHandler}) {
   
   const handleCoin = async () => {
     let sumcoin = userInfo.coin + curcoin;
-    await axios.patch(`${serverUrl}/game/coin`, {
+    await axios.patch(serverUrl+'/game/coin', {
       newCoin: sumcoin
     }, {
       withCredentials: true
     });
-    await axios.get(`${serverUrl}/ranking`, {
+    await axios.get(serverUrl+'/ranking', {
       withCredentials: true
     }).then((rankinglist) => {
       rankingHandler(rankinglist.data.data);
@@ -75,8 +76,8 @@ function Game({userInfo, userView, rankingHandler}) {
   return (
     <>
       <div id="game-background">
-        { isFinish ? 
-          <div id="game-finish-background">
+        {isFinish
+          ? <div id="game-finish-background">
             <div id="game-finish">
               <img id="game-congrats-img-left" src="congrats_icon_left.png" alt="congrats icon"/>
               <div id="game-finish-wordbox">
@@ -108,7 +109,10 @@ function Game({userInfo, userView, rankingHandler}) {
           </div>
           <span className="material-icons" id="game-arrow">double_arrow</span>
           <div id="game-rightside">
-            <GameGui stage={stageArr[stageIndex]} wd={wd} />
+            <GameGui
+              stage={stageArr[stageIndex]}
+              wd={wd}
+            />
           </div>
         </div>
       </div>

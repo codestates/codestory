@@ -1,3 +1,5 @@
+/* Ranking */
+
 body {
 	box-sizing: border-box;
 }
@@ -39,7 +41,6 @@ body {
   width: 2rem;
   height: 2rem;
   background-color: #ffffff;
-  /* align-self: flex-end; */
   border-radius: 2rem;
   text-align: center;
   font-size: 40px;
@@ -50,7 +51,6 @@ body {
 .ranking-podium {
 	margin-bottom: 10px;
 	position: relative;
-	/* border: 1px solid black; */
 }
 
 .ranking-mvp {
@@ -156,22 +156,18 @@ body {
 	top: 75%;
 }
 
-
 #podium {
 	width: 100%;
 }
 
-
 /* list */
 
 #userlist-container {
-	/* background-color: white; */
 	padding: 5px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 1px solid black;
-	
 }
 
 .userlist-number {

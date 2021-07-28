@@ -1,7 +1,7 @@
-const {oauthLogin} = require('../Controller/OauthController');
-const exress = require('express');
-const router = exress.Router();
+const { oauthLogin } = require('../Controller/OauthController');
+const express = require('express');
+const router = express.Router();
 
-router.post('/',oauthLogin);
+router.post('/', oauthLogin);
 
 module.exports = router;

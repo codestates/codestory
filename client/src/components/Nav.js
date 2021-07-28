@@ -5,10 +5,7 @@ function Nav({ isLogin, userInfo, logoutClick }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
-  const scrollToBottom = () => {
-    document.getElementById('root').scrollIntoView({ block: 'end' });
-  };
-
+  
   useEffect(() => {
     if (location.pathname === '/gamestart') {
       if (isLogin === false) {
@@ -20,10 +17,14 @@ function Nav({ isLogin, userInfo, logoutClick }) {
     }
   }, [isLogin]);
 
+  const scrollToBottom = () => {
+    document.getElementById('root').scrollIntoView({ block: 'end' });
+  };
+
   return (
     <div id="nav-container">
-      { isLogin ? (
-        <>
+      { isLogin
+        ? <>
           <span id="title">
             <span id="name">{`반갑습니다 ${userInfo.username}님!`}</span>
           </span>
@@ -41,9 +42,8 @@ function Nav({ isLogin, userInfo, logoutClick }) {
             </Link>
           </div>
         </>
-      ) : (
-        isLoading ? 
-          <>
+        : isLoading
+          ? <>
             <span id="title">
               <span id="name">로딩중입니다</span>
               <div id="nav-loading">
@@ -59,16 +59,15 @@ function Nav({ isLogin, userInfo, logoutClick }) {
               <div className="btn-loading"></div>
             </div>
           </>
-          : 
-          <>
+          : <>
             <span id="title"></span>
             <div id="menu">  
               <div className="btn">
-                <div onClick={()=>scrollToBottom()}>로그인</div>
+                <div onClick={() => scrollToBottom()}>로그인</div>
               </div> 
             </div>
           </>
-      )}
+      }
     </div> 
   );
 }
