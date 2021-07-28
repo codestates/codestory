@@ -26,8 +26,6 @@ function GameStart({loginClick, setIsLogin}) {
   },[]);
   
 
-  
-
   const onMouseOver = () => {
     setIsHover(true);
   };
