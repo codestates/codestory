@@ -73,11 +73,24 @@ a {
   background-color: #232321;
 }
 
-.btn:nth-child(4):hover {
+#btn-login {
+  margin: 0 7px;
+  width: 90px;
+  height: 33px;
+  border-radius: 1rem;
+  font-size: 19px;
+  font-weight: 700;
+  color: #232321;
+  background-color: #ffffff;
+  text-align: center;
+  line-height: 33px;
+  cursor: pointer;
+}
+
+#btn-login:hover {
   color: #ffffff;
   background-color: rgb(254, 52, 52);
 }
-
 
 #nav-loading {
   width: 10rem;
