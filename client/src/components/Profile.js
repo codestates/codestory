@@ -58,7 +58,7 @@ function Profile({ userInfo, userView, followingList, ranking, rankingHandler })
       };
       
       const rankingList = ranking.data.map(person => {
-        if ( person.username === userInfo.username ) {
+        if (person.username === userInfo.username) {
           person.photourl = res.data;
         }
         return person;
