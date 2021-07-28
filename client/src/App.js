@@ -98,7 +98,7 @@ function App() {
               <Profile userInfo={userInfo} userView={userView} followingList={followingList}/>
             </Route>
             <Route path="/game">
-              <Game />
+              <Game userInfo={userInfo} userView={userView} rankingHandler={rankingHandler}/>
             </Route>
           </Switch>
         </BrowserView>
