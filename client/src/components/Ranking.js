@@ -6,13 +6,15 @@ import Footer from '../components/Footer';
 
 function Ranking({ ranking, rankingHandler }) {
 
+  const serverUrl = 'https://api.codestory.academy';
+
   let rankingList = [...ranking.data];
 
   const followHandler = async (e) => {
     if (e.following === 'me') {
       return;
     } else if (e.following === false) {
-      await axios.post('http://localhost:4000/follower', {
+      await axios.post(serverUrl+'/follower', {
         username: e.username
       }, {
         'content-type': 'application/json',
@@ -28,7 +30,7 @@ function Ranking({ ranking, rankingHandler }) {
         rankingHandler(rankingList);
       });
     } else if (e.following === true) {
-      await axios.delete('http://localhost:4000/follower', {
+      await axios.delete(serverUrl+'/follower', {
         data: {
           username: e.username
         },'content-type': 'application/json',
@@ -48,9 +50,9 @@ function Ranking({ ranking, rankingHandler }) {
 
   return (
     <>
-      {ranking.data.length === 0 ?
-        <h1 id="ranking-loading">Loading ...</h1> :
-        <div id="ranking-background">
+      {ranking.data.length === 0
+        ? <h1 id="ranking-loading">Loading ...</h1>
+        : <div id="ranking-background">
           <img id="crown" src="crown.png" />
           <div id="ranking-container">
             <div className="ranking-wrapper">
@@ -62,21 +64,28 @@ function Ranking({ ranking, rankingHandler }) {
                   return (
                     <div className="ranking-mvp" key={rank.username}>
                       <div className={`userlist-username number${index + 1}`}>
-                        {rank.username ? rank.username : ''}
+                        { rank.username || '' }
                       </div>
-                      <img id={`no${index + 1}`} src={rank.photourl === '../?' || rank.photourl === 'img.com' ? 'profile-img.png' : rank.photourl} alt={`${index + 1}등`} />
+                      <img
+                        id={`no${index + 1}`}
+                        src={rank.photourl === '../?'
+                          ? 'profile-img.png'
+                          : rank.photourl}
+                        alt={`${index + 1}등`}
+                      />
                       <span id={`number${index + 1}`}>{index + 1}</span>
-                      { rank.following === 'me' ?
-                        <button className={`userlist-follow-btn btn${index + 1} me`} onClick={() => followHandler(rank)}>
-                          <span className="following-state">Me</span>
-                        </button>
-                        : rank.following === true ?
-                          <button className={`userlist-follow-btn btn${index + 1} unfollow`} onClick={() => followHandler(rank)}>
-                            <span className="following-state">Following</span>
+                      {
+                        rank.following === 'me'
+                          ? <button className={`userlist-follow-btn btn${index + 1} me`} onClick={() => followHandler(rank)}>
+                            <span className="following-state">Me</span>
                           </button>
-                          : <button className={`userlist-follow-btn btn${index + 1} follow`} onClick={() => followHandler(rank)}>
-                            <span className="following-state">Follow</span>
-                          </button>
+                          : rank.following === true
+                            ? <button className={`userlist-follow-btn btn${index + 1} unfollow`} onClick={() => followHandler(rank)}>
+                              <span className="following-state">Following</span>
+                            </button>
+                            : <button className={`userlist-follow-btn btn${index + 1} follow`} onClick={() => followHandler(rank)}>
+                              <span className="following-state">Follow</span>
+                            </button>
                       }
                     </div>
                   );
@@ -90,24 +99,21 @@ function Ranking({ ranking, rankingHandler }) {
                   return (
                     <div id="userlist-container" key={rank.username}>
                       <div className="userlist-left">
-                        <span className="userlist-number">
-                          {index + 4}
-                        </span>
-                        <span className="userlist-username">
-                          {rank.username}
-                        </span>
+                        <span className="userlist-number">{index + 4}</span>
+                        <span className="userlist-username">{rank.username}</span>
                       </div>
-                      { rank.following === 'me' ?
-                        <button className='userlist-follow-btn me' onClick={() => followHandler(rank)}>
-                          <span className="following-state">Me</span>
-                        </button>
-                        : rank.following === true ?
-                          <button className='userlist-follow-btn unfollow' onClick={() => followHandler(rank)}>
-                            <span className="following-state">Following</span>
+                      {
+                        rank.following === 'me'
+                          ? <button className='userlist-follow-btn me' onClick={() => followHandler(rank)}>
+                            <span className="following-state">Me</span>
                           </button>
-                          : <button className='userlist-follow-btn follow' onClick={() => followHandler(rank)}>
-                            <span className="following-state">Follow</span>
-                          </button>
+                          : rank.following === true
+                            ? <button className='userlist-follow-btn unfollow' onClick={() => followHandler(rank)}>
+                              <span className="following-state">Following</span>
+                            </button>
+                            : <button className='userlist-follow-btn follow' onClick={() => followHandler(rank)}>
+                              <span className="following-state">Follow</span>
+                            </button>
                       }
                     </div>
                   );

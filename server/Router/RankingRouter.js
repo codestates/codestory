@@ -1,8 +1,7 @@
-const {sendRanking} = require('../Controller/RankingController');
-const exress = require('express');
-const router = exress.Router();
+const { sendRanking } = require('../Controller/RankingController');
+const express = require('express');
+const router = express.Router();
 
-router.get('/',sendRanking);
-
+router.get('/', sendRanking);
 
 module.exports = router;

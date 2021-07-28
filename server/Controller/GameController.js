@@ -1,7 +1,9 @@
 const { isAuthorizedJwt } = require('./JsonToken');
 const {isAuthorizedOauth} = require('./OauthToken.js');
 const db = require('../models');
+
 module.exports = {
+
   checkAnswer: async (req, res) => {
     try {
       const jwt = await isAuthorizedJwt(req);
@@ -14,8 +16,7 @@ module.exports = {
           result: isCorrect,
           script: isCorrect ? content : undefined
         });
-      }
-      else {
+      } else {
         res.status(400).json({ message: 'InvalidToken' });
       }
     }
@@ -24,23 +25,17 @@ module.exports = {
       throw error;
     }
   },
-  updateCoin: async (req,res)=>{
-    try {
-      const accessTokenData=await isAuthorizedJwt(req);
-      const oauth=await isAuthorizedOauth(req);
 
+  updateCoin: async (req, res) => {
+    try {
+      const accessTokenData = await isAuthorizedJwt(req);
+      const oauth = await isAuthorizedOauth(req);
       if (accessTokenData) {
-        await db.users.update(
-          {
-            coin:req.body.newCoin
-          },
-          {
-            where : { id : accessTokenData.id}
-        });
-        res.status(200).json({message:'ok'});
-      }else if(oauth){
-        res.status(200).json({message:'ok'});
-      }else {
+        await db.users.update({ coin:req.body.newCoin }, { where : { id : accessTokenData.id } });
+        res.status(200).json({ message:'ok' });
+      } else if (oauth) {
+        res.status(200).json({ message:'ok' });
+      } else {
         res.status(400).json({ message: 'InvalidToken' });
       }
     }

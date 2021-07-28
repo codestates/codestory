@@ -5,13 +5,14 @@ import '../css/login.css';
 import axios from 'axios';
 
 function Login({loginClick}) {
-  const kakaoClientId='ce992090812c730f2178949e1baac586';
-  const googleClientId='308904347249-t3ilrgtua2unljo0jgfv50iqihm4buja.apps.googleusercontent.com';
-  const redirectUri='http://localhost:3000/gamestart' ;
+  
+  const serverUrl = 'https://api.codestory.academy';
+  const kakaoClientId = 'ce992090812c730f2178949e1baac586';
+  const googleClientId = '308904347249-t3ilrgtua2unljo0jgfv50iqihm4buja.apps.googleusercontent.com';
+  const redirectUri = 'https://www.codestory.academy/gamestart';
   const kakaoLoginUrl = `https://Kauth.kakao.com/oauth/authorize?client_id=${kakaoClientId}&redirect_uri=${redirectUri}&response_type=code`;
-  const googleLoginUrl=`https://accounts.google.com/o/oauth2/auth?client_id=${googleClientId}&redirect_uri=${redirectUri}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile`;
-  const serverUrl='http://localhost:4000';
-  const history = useHistory();
+  const googleLoginUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${googleClientId}&redirect_uri=${redirectUri}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile`;
+
   const [isSignup, setIsSignup] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -19,6 +20,16 @@ function Login({loginClick}) {
     username: '',
     password: ''
   });
+  const history = useHistory();
+  
+  const kakaoLoginHandler = async () => {
+    window.location.assign(`${kakaoLoginUrl}`);
+  };
+  
+  const googleLoginHandler = async () => {
+    window.location.assign(`${googleLoginUrl}`);
+  };
+  
   const { username, password } = loginInfo;
 
   const inputValueHandler = (key) => (e) => {
@@ -28,14 +39,6 @@ function Login({loginClick}) {
     }
   };
   
-  const kakaoLoginHandler= async ()=>{
-    window.location.assign(`${kakaoLoginUrl}`);
-  };
-
-  const googleLoginHandler= async ()=>{
-    window.location.assign(`${googleLoginUrl}`);
-  };
-
   const loginHandler = async () => {
     if (username === '' || password === '') {
       setErrorMessage('아이디와 비밀번호 모두 입력해주세요');
@@ -69,10 +72,9 @@ function Login({loginClick}) {
 
   return (
     <>
-      { isSignup ? (
-        <SignUp signupHandler={signupHandler} loginClick={loginClick}/>
-      ) : (
-        <div id="login-background">
+      { isSignup
+        ? <SignUp signupHandler={signupHandler} loginClick={loginClick}/>
+        : <div id="login-background">
           <object id="login-logo" type="image/svg+xml" data="logo.svg" aria-label="logo"></object>
           <div id="login-container">
             <div id="login-wrapper">
@@ -80,13 +82,11 @@ function Login({loginClick}) {
               <p id="login-valid">아이디를 입력해 주세요</p>
               <input id="login-input-password" placeholder="비밀번호" type="password" onChange={inputValueHandler('password')}></input>
               <p id="login-valid">비밀번호를 입력해 주세요</p>
-              <button id="login-btn" onClick={loginHandler}>
-                  로그인
-              </button>
+              <button id="login-btn" onClick={loginHandler}>로그인</button>
               {
-                errorMessage === '' ? null :
-                  <div className="warn-box">{errorMessage}
-                  </div>
+                errorMessage === ''
+                  ? null
+                  : <div className="warn-box">{errorMessage}</div>
               }
               <div id="login-social">
                 <a className="login-social-btn" onClick={googleLoginHandler}>
@@ -96,18 +96,20 @@ function Login({loginClick}) {
                   <img className="login-social-image" src="login-kakao.png" alt="kakao"/>
                 </a>
               </div>
-
               <a id="login-signin" 
-                onMouseOver={()=>onMouseOver()}
-                onMouseOut={()=>onMouseOut()}
+                onMouseOver={() => onMouseOver()}
+                onMouseOut={() => onMouseOut()}
                 onClick={signupHandler}>
-                {isHover ? '회원가입 하러가기' : '아직 아이디가 없으신가요?'}
+                {
+                  isHover
+                    ? '회원가입 하러가기'
+                    : '아직 아이디가 없으신가요?'
+                }
               </a>
-
             </div>  
           </div>
         </div>
-      )}
+      }
     </>
   );
 }

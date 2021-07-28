@@ -4,11 +4,11 @@ import axios from 'axios';
 
 function GameCli({ stage, handleStageChange, isWaiting, handleWaiting, wd, handleWdChange, handleFinish }) {
 
-  const [command, setCommand] = useState('');
+  const serverUrl = 'https://api.codestory.academy';
   const [cli, setCli] = useState([`Last login: ${new Date().toUTCString()}`]);
+  const [command, setCommand] = useState('');
   const [enterCount, setEnterCount] = useState(0);
   const [isPassword, setIsPassword] = useState(false);
-  const serverUrl='http://localhost:4000';
 
   useEffect(() => {
     (async () => {
@@ -80,7 +80,7 @@ function GameCli({ stage, handleStageChange, isWaiting, handleWaiting, wd, handl
                     onChange={inputText}
                     onKeyPress={onKeyPress}
                     autoFocus
-                  ></input>
+                  />
                 </div>}
             </div>
             <div className="GameCli-scroll"></div>

@@ -13,6 +13,10 @@ import MobileError from './pages/MobileError';
 import axios from 'axios';
 
 function App() {
+  
+  const serverUrl = 'https://api.codestory.academy';
+  const [ranking, setRanking] = useState({ data: [] });
+  const [followingList, setFollowingList] = useState({ data: [] });
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({
     username: '',
@@ -23,16 +27,14 @@ function App() {
     follower: 0,
     following: 0
   });
-  const [ranking, setRanking] = useState({ data: [] });
-  const [followingList, setFollowingList] = useState({ data: [] });
 
   useEffect(() => {
     if (isLogin === false) {
       (async () => {
         try {
-          const userInfo = await axios.get('http://localhost:4000/user', { withCredentials: true });
-          const ranking = await axios.get('http://localhost:4000/ranking', { withCredentials: true });
-          const followingList = await axios.get('http://localhost:4000/follower', { withCredentials: true });
+          const userInfo = await axios.get(serverUrl+'/user', { withCredentials: true });
+          const ranking = await axios.get(serverUrl+'/ranking', { withCredentials: true });
+          const followingList = await axios.get(serverUrl+'/follower', { withCredentials: true });
           setUserInfo(userInfo.data);
           setRanking(ranking.data);
           setFollowingList(followingList.data);
@@ -43,14 +45,14 @@ function App() {
         }
       })();
     }
-  },[isLogin]);
+  }, [isLogin]);
 
   const loginClick = () => {
     setIsLogin(true);
   };
 
   const logoutClick = () => {
-    axios.get('http://localhost:4000/signout', { withCredentials: true });
+    axios.get(serverUrl+'/signout', { withCredentials: true });
     setIsLogin(false);
   };
 
@@ -78,23 +80,48 @@ function App() {
       </MobileView>
       <BrowserRouter>
         <BrowserView>
-          <Nav isLogin={isLogin} userInfo={userInfo} logoutClick={logoutClick}/>
+          <Nav
+            isLogin={isLogin}
+            userInfo={userInfo}
+            logoutClick={logoutClick}
+          />
           <Switch>
             <Route exact={true} path="/">
-              <Landing loginClick={loginClick} setIsLogin={setIsLogin}/>
+              <Landing
+                loginClick={loginClick}
+                setIsLogin={setIsLogin}
+              />
               <Footer />
             </Route>
             <Route path="/gamestart">
-              <GameStart loginClick={loginClick} setIsLogin={setIsLogin}/>
+              <GameStart
+                loginClick={loginClick}
+                setIsLogin={setIsLogin}
+              />
             </Route>
             <Route path="/ranking">
-              <Ranking ranking={ranking} rankingHandler={rankingHandler}/>
+              <Ranking
+                ranking={ranking}
+                rankingHandler={rankingHandler}
+              />
             </Route>
             <Route path="/profile">
+<<<<<<< HEAD
               <Profile userInfo={userInfo} userView={userView} followingList={followingList} ranking={ranking} rankingHandler={rankingHandler}/>
+=======
+              <Profile
+                userInfo={userInfo}
+                userView={userView}
+                followingList={followingList}
+              />
+>>>>>>> cb45cb9a84b6ae5705cc576ed6d279daae024272
             </Route>
             <Route path="/game">
-              <Game userInfo={userInfo} userView={userView} rankingHandler={rankingHandler}/>
+              <Game 
+                userInfo={userInfo} 
+                userView={userView} 
+                rankingHandler={rankingHandler}
+              />
             </Route>
           </Switch>
         </BrowserView>

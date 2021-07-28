@@ -4,21 +4,21 @@ import axios from 'axios';
 import Footer from '../components/Footer';
 import '../css/gamestart.css';
 
-
 function GameStart({loginClick, setIsLogin}) {
   
+  const serverUrl = 'https://api.codestory.academy';
   const url = new URL(window.location.href);
   const authorizationCode = url.searchParams.get('code'); 
   const [isHover, setIsHover] = useState(false);
 
-  useEffect(async ()=>{
-    if(authorizationCode){
-      const res= await axios.post('http://localhost:4000/oauth',
-        { authorizationCode: authorizationCode}, {
+  useEffect(async () => {
+    if (authorizationCode) {
+      const res = await axios.post(serverUrl+'/oauth',
+        { authorizationCode: authorizationCode }, {
           'content-type': 'application/json',
           withCredentials: true
         });
-      if(res.data.message==='ok'){
+      if (res.data.message === 'ok') {
         loginClick();
         setIsLogin(false);
       }
@@ -39,21 +39,23 @@ function GameStart({loginClick, setIsLogin}) {
       <div id="gamestart-container">
         <Link to="/game">
           <div className="gamestart-btn" 
-            onMouseOver={()=>onMouseOver()}
-            onMouseOut={()=>onMouseOut()}>
+            onMouseOver={() => onMouseOver()}
+            onMouseOut={() => onMouseOut()}>
             {
-              isHover ? 
-                <object id="gamestart-cli-img-hover" type="image/svg+xml" data="cli_icon_hover.svg" aria-label="cli hover icon"></object>
+              isHover
+                ? <object id="gamestart-cli-img-hover" type="image/svg+xml" data="cli_icon_hover.svg" aria-label="cli hover icon"></object>
                 : <object id="gamestart-cli-img" type="image/svg+xml" data="cli_icon.svg" aria-label="cli icon"></object>
             }
             <span className="gamestart-btn-word">GUI로 배우는 <br />  리눅스 CLI</span>
           </div>
         </Link>
         <div className="gamestart-btn">
-          <span className="gamestart-btn-word2">그리면서 배우는 <br /> 모던 CSS</span> <span className="hidden">오픈예정</span>
+          <span className="gamestart-btn-word2">그리면서 배우는 <br /> 모던 CSS</span>
+          <span className="hidden">오픈예정</span>
         </div>
         <div className="gamestart-btn">
-          <span className="gamestart-btn-word2">보면서 확인하는 <br /> ES6+ JS <br /></span><span className="hidden">오픈예정</span>
+          <span className="gamestart-btn-word2">보면서 확인하는 <br /> ES6+ JS <br /></span>
+          <span className="hidden">오픈예정</span>
         </div>
       </div>
       <Footer />
