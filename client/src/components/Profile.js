@@ -29,6 +29,13 @@ function Profile({ userInfo, userView, followingList, ranking, rankingHandler })
       follower: userInfo.follower,
       following: userInfo.following
     };
+    const rankingList = ranking.data.map(person => {
+      if (person.username === userInfo.username) {
+        person.photourl = res.data;
+      }
+      return person;
+    });
+    await rankingHandler([...rankingList]);
     await userView(user);
     await setEditmode(false);
   };
@@ -56,13 +63,6 @@ function Profile({ userInfo, userView, followingList, ranking, rankingHandler })
         follower: userInfo.follower,
         following: userInfo.following
       };
-      const rankingList = ranking.data.map(person => {
-        if (person.username === userInfo.username) {
-          person.photourl = res.data;
-        }
-        return person;
-      });
-      await rankingHandler([...rankingList]);
       await userView(user);
     }
     setEditmode(false);
