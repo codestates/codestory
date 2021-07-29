@@ -29,5 +29,5 @@ CodeStory입니다 :)
 
 ## System Architecture
 <br>
-(https://raw.githubusercontent.com/seoyong-lee/images/main/Web%20App%20Reference%20Architecture.png)
+![](https://raw.githubusercontent.com/seoyong-lee/images/main/Web%20App%20Reference%20Architecture.png)
 
