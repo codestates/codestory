@@ -20,8 +20,6 @@ CodeStory입니다 :)
 
 ## 팀원 소개
 
-<br>
-
 |이름|역할|Github 주소|
 |------|---|---|
 |이서용|Front-end|[seoyong-lee](https://github.com/seoyong-lee)|
@@ -31,13 +29,9 @@ CodeStory입니다 :)
 
 ## System Architecture
 
-<br>
-
 <img src="https://raw.githubusercontent.com/seoyong-lee/images/main/Web%20App%20Reference%20Architecture.png">
 
 ## 배포 링크
-
-<br>
 
 [codestory.academy](https://www.codestory.academy/)
 
