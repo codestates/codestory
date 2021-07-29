@@ -19,7 +19,9 @@ CodeStory입니다 :)
 <br>
 
 ### 팀원 소개
+
 <br>
+
 |이름|역할|Github 주소|
 |------|---|---|
 |이서용|Front-end|[seoyong-lee](https://github.com/seoyong-lee)|
@@ -28,6 +30,8 @@ CodeStory입니다 :)
 |김정빈|Back-end|[candyroom136](https://github.com/Candyroom136/)|
 
 ## System Architecture
+
 <br>
+
 <img src="https://raw.githubusercontent.com/seoyong-lee/images/main/Web%20App%20Reference%20Architecture.png">
 
