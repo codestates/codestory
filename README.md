@@ -31,7 +31,7 @@ CodeStory입니다 :)
 
 ## System Architecture
 
-<img src="https://raw.githubusercontent.com/seoyong-lee/images/main/Web%20App%20Reference%20Architecture.png">
+<img src="https://raw.githubusercontent.com/seoyong-lee/images/main/Codestory%20Architecture.png">
 
 ## 배포 링크
 
