@@ -27,6 +27,8 @@ CodeStory입니다 :)
 |강래준|Back-end|[ruleBased848](https://github.com/ruleBased848/)|
 |김정빈|Back-end|[candyroom136](https://github.com/Candyroom136/)|
 
+<br>
+
 ## System Architecture
 
 <img src="https://raw.githubusercontent.com/seoyong-lee/images/main/Web%20App%20Reference%20Architecture.png">
