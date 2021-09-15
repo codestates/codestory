@@ -5,7 +5,7 @@ module.exports={
   development: {
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
-    database: "codestory_development",
+    database: "codestory_prev_development",
     host: process.env.DATABASE_URL,
     dialect: "mysql"
   },

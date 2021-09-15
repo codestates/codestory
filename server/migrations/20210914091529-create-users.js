@@ -17,6 +17,9 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      word: {
+        type: Sequelize.STRING
+      },
       coin: {
         type: Sequelize.INTEGER
       },
